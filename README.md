@@ -1,5 +1,4 @@
-General Information
---------------------
+##General Information
 
 AGILE (Environment for Linear and non-linear Image reconstruction using Gpu
 Acceleration) is an open source library for GPU accelerated reconstruction
@@ -14,8 +13,7 @@ Reson. Med. 19:2554 (2011)
 For any questions, comments or contributions, please contact
 Florian Knoll (florian.knoll@tugraz.at).
 
-Build & Installation
---------------------
+##Build & Installation
 
 AGILE was developed and tested on Linux (OpenSUSE and Ubuntu) systems. It uses
 CMake in order to generate the Makefiles in a flexible manner. You also need
@@ -32,12 +30,19 @@ be the current directory) as argument. Afterwards 'make' can be executed
 in the build directory to generate the library.
 
 Copy/paste instructions for the lazy to be executed right in this directory:
-# mkdir build
-# cd build
-# cmake ..
+``` 
+ mkdir build
+ cd build
+ cmake ..
+``` 
+
 
 At this step you need to set the path where you installed the CUDA SDK:
-# ccmake .
+``` 
+ ccmake .
+``` 
+
+
 Toggle to advanced mode (press 't') and enter the path where you installed the
 CUDA SDK in the variable "CUDA_SDK_ROOT_DIR". At this point, you can also
 specify to enable double-precision floating point support on the GPU. This
@@ -46,7 +51,10 @@ is a requirement to build the TGV-MRI example which will be skipped if the flag
 is not set.
 
 Then compile the library using
-# make
+``` 
+make
+``` 
+
 
 Note: AGILE was tested on 64 bit platforms. If you want to compile it on a
 32 bit system, you have to change two entries in
@@ -62,25 +70,34 @@ directory of the CUDA toolkit. Normally this is the parent directory
 of the directory in which nvcc, the CUDA compiler, resides in. The following
 commands can be used on a system where the full path to the CUDA compiler
 is /opt/cuda/bin/nvcc:
-# mkdir build
-# cd build
-# cmake -DCUDA_TOOLKIT_ROOT_DIR=/opt/cuda ..
-# make
+``` 
+mkdir build
+cd build
+cmake -DCUDA_TOOLKIT_ROOT_DIR=/opt/cuda ..
+make
+``` 
+
 
 To install the compiled library, simply call
-# make install
+``` 
+make install
+``` 
+
+
 On Linux machines the directory defaults to /usr/local/.
 
 You can specify a different directory for installation by compiling and
 installing the library with
-# cmake -DCMAKE_INSTALL_PREFIX=/prefix/for/the/library ..
-# make install
+``` 
+cmake -DCMAKE_INSTALL_PREFIX=/prefix/for/the/library ..
+make install
+``` 
+
+
 The commands above will install the files into the directory
 /prefix/for/the/library/.
 
-First steps
------------
-
+##First steps
 If you are new to the AGILE library, the tutorials are a good place to start.
 Run 'make doc' in the build directory. Afterwards open the file
 'doc/html/index.html' in your favourite browser and proceed to the tutorials.
@@ -89,7 +106,6 @@ If you are especially interested in iterative TGV based MR image
 reconstruction, there is an additional readme file and testdata in the
 directory apps/tgv_radial_image_recon.
 
-Version history
------------
+##Version history
 1.1: 16.01.2012: Included CPU reference implementation for TGV.
 1.0: 28.07.2011: First release of AGILE.
