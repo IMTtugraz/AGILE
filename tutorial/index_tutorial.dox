@@ -1,0 +1,47 @@
+//! @page index_tutorial Index of tutorials
+//!
+//!
+//! \subpage tutorial01 "Tutorial 1: A simple vector example"
+//!
+//! This tutorial describes how to initialize the GPU. A vector will be transfered
+//! from the host to the graphics card and basic vector-vector operations are
+//! performed then.
+//!
+//! \subpage tutorial02 "Tutorial 2: Basic matrix-vector operations"
+//!
+//! In this step a dense matrix will be generated and basic matrix-vector products
+//! are demonstrated.
+//!
+//! \subpage tutorial03 "Tutorial 3: Using sparse matrices on the GPU"
+//!
+//! This tutorial will introduce a sparse compressed row storage matrix. It shows
+//! how to create such a matrix from coordinate storage and how to get it onto the
+//! GPU. Further, the common matrix-vector products are demonstrated.
+//!
+//! \subpage tutorial04 "Tutorial 4: Reference solutions"
+//!
+//! This tutorial shows how to make the computations that were done on the GPU
+//! before on the host machine, too, which can be helpful to calculate reference
+//! solutions.
+//!
+//! \subpage tutorial05 "Tutorial 5: Parallel communication"
+//!
+//! This is a somehow lengthy tutorial explaining the parallelization strategy
+//! using the message passing interface. It will show how to generate a vector that
+//! is distributed to different processes (possibly on different machines) and how
+//! to make computations with it.
+//!
+//! \subpage tutorial06 "Tutorial 6: MPI goes GPU"
+//!
+//! In this tutorial we want to show how to combine the message
+//! passing interface (MPI) together with the GPU.
+//!
+//! \subpage tutorial07 "Tutorial 7: Hiding everything in operators"
+//!
+//! Now, the operator concept is introduces. The operators hide very much
+//! implementation from the user and can called in a quite intuitive manner.
+//!
+//! \subpage tutorial08 "Tutorial 8: Conjugate gradient method"
+//!
+//! In this step the setup of operators for a conjugate gradient method is
+//! explained.

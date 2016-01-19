@@ -1,0 +1,67 @@
+//================================ dcmtk and dicom3tools ==============================
+/*
+  std::ostringstream dcm_command;
+  dcm_command << "rawftodc -if bild.dat -of bild.dcm -rows "<<num_rows<<" -columns "<<num_columns<<" -l -offset 8";
+//  dcm_command << "rawftodc -if bild.dat -of bild.dcm -rows "<<num_rows<<" -columns "<<num_columns<<" -scale 65535 -l -offset 8";
+
+  if (!system(&dcm_command.str().c_str()[0]))
+    std::cout<<"\ndcm-file generated";
+  else
+    std::cout<<"\ndcm-file NOT generated";
+
+  if(!system("dcmodify -i '(0008,0008)=DERIVED' bild.dcm"))
+    std::cout<<"\n dicom-Modify insert ok";
+  else
+    std::cout<<"\n dicom-Modify insert did NOT work";
+
+  if(!system("dcmodify -i '(0008,0060)=MR' bild.dcm"))
+    std::cout<<"\n dicom-Modify insert ok";
+  else
+    std::cout<<"\n dicom-Modify insert did NOT work";
+
+  if(!system("dcmodify -i '(0008,0064)=WSD' bild.dcm"))
+    std::cout<<"\n dicom-Modify insert ok";
+  else
+    std::cout<<"\n dicom-Modify insert did NOT work";
+
+  if(!system("dcmodify -i '(0018,1016)=IMT TUGRAZ' bild.dcm"))
+    std::cout<<"\n dicom-Modify insert ok";
+  else
+    std::cout<<"\n dicom-Modify insert did NOT work";
+
+  if(!system("dcmodify -i '(0018,1018)=IMT Cuda Workstation' bild.dcm"))
+    std::cout<<"\n dicom-Modify insert ok";
+  else
+    std::cout<<"\n dicom-Modify insert did NOT work";
+
+  if(!system("dcmodify -i '(0008,2111)=IRGN Processed MR Reconstruction' bild.dcm"))
+    std::cout<<"\n dicom-Modify insert ok";
+  else
+    std::cout<<"\n dicom-Modify insert did NOT work";
+
+  dcm_command.str("");
+  dcm_command << "dcmodify -i '(0028,0106)="<<int(min_val)<<"' bild.dcm";
+  if (!system(&dcm_command.str().c_str()[0]))
+    std::cout<<"\n dicom-Modify insert ok";
+  else
+    std::cout<<"\n dicom-Modify insert did NOT work";
+
+  dcm_command.str("");
+  dcm_command << "dcmodify -i '(0028,0107)="<<int(max_val)<<"' bild.dcm";
+  if (!system(&dcm_command.str().c_str()[0]))
+    std::cout<<"\n dicom-Modify insert ok";
+  else
+    std::cout<<"\n dicom-Modify insert did NOT work";
+
+  if(!system("dcmodify -gin bild.dcm") )            //This command generates a new value for the SOPInstanceUID
+    std::cout<<"\n dicom-Modify -gin ok";     // and MediaStorageSOPInstanceUID
+  else
+    std::cout<<"\n dicom-Modify -gin did NOT work";
+
+  if(!system("dcmodify -gse bild.dcm") )            //This generates a new value for the SeriesInstanceUID
+    std::cout<<"\n dicom-Modify -gse ok";
+  else
+    std::cout<<"\n dicom-Modify -gse did NOT work";
+*/
+//================================ DCMTK ==============================
+

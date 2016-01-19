@@ -1,0 +1,13 @@
+$Id: intro.txt 99 2009-03-18 11:49:11Z freiberger $
+\page tutorial07 Tutorial 7: Hiding everything in operators
+
+<abstract>
+Now, the operator concept is introduces. The operators hide very much
+implementation from the user and can called in a quite intuitive manner.
+</abstract>
+
+\section intro Introduction
+
+TODO
+
+End of $Id: intro.txt 99 2009-03-18 11:49:11Z freiberger $.

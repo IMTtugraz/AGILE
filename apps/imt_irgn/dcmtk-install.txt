@@ -1,0 +1,2 @@
+DCMDICTPATH=$DCMDICTPATH:/usr/local/share/dcmtk/dicom.dic:/usr/local/share/dcmtk/private.dic
+export DCMDICTPATH

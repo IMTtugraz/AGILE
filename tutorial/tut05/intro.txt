@@ -1,0 +1,82 @@
+$Id: intro.txt 456 2011-05-31 14:39:58Z freiberger $
+\page tutorial05 Tutorial 5: Parallel communication
+
+<abstract>
+This is a somehow lengthy tutorial explaining the parallelization strategy
+using the message passing interface. It will show how to generate a vector that
+is distributed to different processes (possibly on different machines) and how
+to make computations with it.
+</abstract>
+
+\section intro Introduction
+
+When a global value \f$ x \f$ is shared by two or more processes, there are
+various possibilities to store this value locally. One option is to store on
+each process the full value. So if \f$ x_i \f$ denotes the value on the \p i-th
+process we could choose to set \f$ x_i := x \f$. We call this value
+\p accumulated.
+
+Another option is to store the value in such a way that the sum of the values
+on all processes is equal to the global value, i.e. \f$ \sum_i x_i = x \f$.
+Now there are many ways to distribute this value to the processes but one of
+the most obvious is to divide the value by the number of processes it belongs
+to. Let \f$ P \f$ be the number of processes sharing the value \f$ x \f$. We
+choose to set the local values to \f$ x_i := \frac{x}{P} \f$ and we call this
+a distributed value.
+
+Note that if a process does not share the value \f$ x \f$, it is set to zero
+on that process no matter whether we store the value in the \p accumulated or
+in the \p distributed form. This is especially important for vectors later on
+because a vector may have elements that belong to a single process only or
+that are shared by two or more processes.
+
+Now, the concept is extended to vectors. We denote by \f$ P(k) \f$ the number
+of processes the \p k-th vector entry belongs to. If a vector entry \f$ k \f$
+does not belong to the \p i-th process, it won't be stored on that process.
+For our considerations this is equivalent to the consideration that the vector
+entry is zero (\f$ v_i(k) := 0 \f$).
+
+A vector is \p accumulated if every process knows its full vector entries. That
+means on the \p i-th process the \p k-th entry has the value
+\f$ v_i(k) := v(k) \f$ if that entry belongs to process \p i and it is zero
+otherwise. A vector is \p distributed if we can get the full vector by summing
+the individual vectors: \f$ \sum_i v_i = v \f$. So the \p k-th element on the
+\p i-th process has to be \f$ v_i(k) := \frac{v(k)}{P(k)} \f$ if that
+element belongs to the process and zero otherwise.
+
+A simple example for illustration: We want to store the vector
+\f$ v := [10, 20, 30, 40, 50, 60, 70, 80, 90] \f$ on two processes. Process 1
+shall belong to the entries \f$ \lbrace 1, 2, 3, 4, 5, 6 \rbrace \f$ and
+process 2 shall belong to \f$ \lbrace 4, 5, 6, 7, 8, 9 \rbrace \f$ so that
+the elements \f$ \lbrace 4, 5, 6 \rbrace \f$ are shared by both processes.
+In the \p accumulated form, the vector would be
+\f$ a_1 := [10, 20, 30, 40, 50, 60, 0, 0, 0] \f$ on the first process and
+\f$ a_2 := [ 0,  0,  0, 40, 50, 60, 70, 80, 90] \f$ on the second one and both
+processes know the full value of the shared elements.
+In the \p distributed form, the vector woudl be
+\f$ d_1 := [10, 20, 30, 20, 25, 30, 0, 0, 0] \f$ on the first process and
+\f$ d_2 := [ 0,  0,  0, 20, 25, 30, 70, 80, 90] \f$ on the second one. Both
+processes store only \b half of the shared elements (because the element belongs
+to \b two processes). By summing the shared elements one can obtain the full
+vector.
+
+If one has to compute the inner product of the global vector \f$ v \f$, the
+straight forward approach of computing a local inner product and summing it,
+will fail. If the vector was stored as \p accumulated vector, the local inner
+products would be \f$ a_1 a_1^T = 9100 \f$ and \f$ a_2 a_2^T = 27100 \f$
+giving a sum of 36200.
+In the \p distributed form, the inner products are \f$ d_1 d_1^T = 3325 \f$
+and \f$ d_2 d_2^T = 21325 \f$ giving 24650.
+However, the true inner product is \f$ v v^T = 28500 \f$, which is different
+from both.
+
+The reason is that in the \p accumulated case the shared elements are counted
+twice while in the \p distributed case that are weighted by \f$ 1/4 \f$
+(two times \f$ 1/2 \f$). The correct way of calculating the inner product is
+by taking a combination of an \p accumulated and a \p distributed vector:
+\f$ a_1 d_1^T + a_2 d_2^T = 28500 = v v^T \f$.
+
+This tutorial will show how to implement such parallel inner products using
+the AGILE framework.
+
+End of $Id: intro.txt 456 2011-05-31 14:39:58Z freiberger $.

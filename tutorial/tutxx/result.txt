@@ -1,0 +1,7 @@
+$Id: result.txt 314 2009-09-22 10:18:41Z freiberger $
+
+\section result Result
+
+TODO: Describe the outcome of the tutorial.
+
+End of $Id: result.txt 314 2009-09-22 10:18:41Z freiberger $

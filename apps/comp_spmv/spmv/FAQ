@@ -1,0 +1,13 @@
+FAQs:
+
+1. What is the format of the input sparse matrix file?
+
+The sparse matrix input is expected to be in MatrixMarket file format. Please see http://math.nist.gov/MatrixMarket/formats.html#MMformat for details on the format.
+
+2. Is there any source for obtaining sparse matrices?
+
+Yes. You can visit http://www.cise.ufl.edu/research/sparse/matrices/ to get sparse matrices pertaining to many real-time applications.
+
+3. How can user specify the input vector to SpMV?
+
+User can create an input file with the input vector values. Each line of the file is expected to have only one element of the vector. It should be noted that only values have to be entered in the file and no other extra character. If user does not specify a file, the input vector will be initialized with random values.

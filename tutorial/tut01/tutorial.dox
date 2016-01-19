@@ -1,0 +1,229 @@
+//! \page tutorial01 Tutorial 1: A simple vector example
+//! \htmlonly
+<div id='TOC'></div>
+\endhtmlonly
+//! 
+//! 
+//! \section intro Introduction
+//! 
+//! This tutorial describes how to generate two vectors on the GPU and perform
+//! some very basic operations with them.
+//! 
+//! @section code Code
+//! 
+//!  \subsection headers Headers
+//! 
+//!  In the most basic version we need only two include files: one for the
+//!  environment and another one for the GPU vector.
+//! \code
+//! #include "agile/gpu_environment.hpp"
+//! #include "agile/gpu_vector.hpp"
+//! 
+//! \endcode
+//!  \p iostream is no bad idea to have some output possibility.
+//! \code
+//! #include <iostream>
+//! 
+//! \endcode
+//!  \subsection printing Printing function
+//! 
+//!  Define a small function that prints a vector to \p std::cout.
+//! \code
+//! void output(const char* string, const std::vector<float>& x)
+//! {
+//!   std::cout << string;
+//!   for (unsigned counter = 0; counter < x.size(); ++counter)
+//!     std::cout << x[counter] << " ";
+//!   std::cout << std::endl;
+//! }
+//! 
+//! \endcode
+//!  \subsection main Main program.
+//! \code
+//! int main()
+//! {
+//! \endcode
+//!  \subsubsection init GPU initialization
+//! 
+//!  The GPU is initialized using the singleton \p GPUEnvironment. This object
+//!  holds basic GPU information like the maximum number of threads, for
+//!  example. It is vital to initialize the environment before calling other
+//!  functions of the AGILE library. The allocation/initialization of the
+//!  GPU is achieved by calling \p allocateGPU(). We allocate GPU no. 0. If
+//!  you have more GPU's in your PC, try another number here.
+//! \code
+//!   agile::GPUEnvironment::allocateGPU(0);
+//! 
+//! \endcode
+//!  Now, we can print some information about our GPU to std::out.
+//! \code
+//!   agile::GPUEnvironment::printInformation(std::cout);
+//!   std::cout << std::endl;
+//! 
+//! \endcode
+//!  \subsubsection creation Creation of GPU vectors
+//! 
+//!  The GPU is initialized now and we can start using it. First we create two
+//!  vectors on the host which will be transfered to the GPU later on.
+//! \code
+//!   std::vector<float> x_host, y_host;
+//!   for (unsigned counter = 0; counter < 10; ++counter)
+//!   {
+//!     x_host.push_back(counter * 2 + 1);
+//!     y_host.push_back(counter * 2 + 2);
+//!   }
+//! 
+//! \endcode
+//!  We print the vectors to \p std::cout:
+//! \code
+//!   output("x: ", x_host);
+//!   output("y: ", y_host);
+//! 
+//! \endcode
+//!  Now transfer these vectors to the GPU. You can use the \p assignFromHost
+//!  method to do so. This method takes two iterators \p begin and \p end
+//!  to a host vector and copies the elements in the range [\p begin, \p end).
+//! \code
+//!   agile::GPUVector<float> x, y;
+//!   x.assignFromHost(x_host.begin(), x_host.end());
+//!   y.assignFromHost(y_host.begin(), y_host.end());
+//! 
+//! \endcode
+//!  \subsubsection computations Basic vector operations
+//! 
+//!  Now we can use the GPU vectors for calculations. Let's start by adding
+//!  them. The result shall be stored in another GPU vector \p z. \b NOTE: It
+//!  is really important to make sure that all the vectors have the correct
+//!  size because the library does not perform sanity checks!
+//! \code
+//!   agile::GPUVector<float> z(x.size());
+//!   addVector(x, y, z);
+//! 
+//! \endcode
+//!  We want to print the result of \p z. As it is not possible to access
+//!  the GPU memory directly, we copy the whole vector back to the host.
+//!  You can use the \p copyToHost method for this task.
+//! \code
+//!   std::vector<float> z_host;
+//!   z.copyToHost(z_host);
+//! 
+//! \endcode
+//!  Output the result.
+//! \code
+//!   output("x + y: ", z_host);
+//! 
+//! \endcode
+//!  We can also subtract two vectors.
+//! \code
+//!   subVector(x, y, z);
+//!   z.copyToHost(z_host);
+//!   output("x - y: ", z_host);
+//! 
+//! \endcode
+//!  Or we can add half of y to x:
+//! \code
+//!   addScaledVector(x, float(0.5), y, z);
+//!   z.copyToHost(z_host);
+//!   output("x + 0.5 * y: ", z_host);
+//! 
+//! \endcode
+//!  Also the scalar product is implemented. Its definition reads
+//!  \f$ \left ( x, y \right ) := \bar x^T y \f$.
+//! \code
+//!   float scalar_product = getScalarProduct(x, y);
+//!   std::cout << "(x, y) = " << scalar_product << std::endl;
+//! 
+//! \endcode
+//!  Well, that concludes the first example.
+//! \code
+//!   return 0;
+//! }
+//! 
+//! \endcode
+//! 
+//! \section result Result
+//! 
+//! The program will generate output similar to the following:
+//! 
+//! <code>
+//! Device name:                  GeForce 9600 GT<BR>
+//! Compute capability:           1.1<BR>
+//! Clock frequency (MHz):        1600<BR>
+//! 32-bit registers per block:   8192<BR>
+//! Total global memory (MB):     511<BR>
+//! Shared memory per block (kB): 16<BR>
+//! Total const memory (kB):      64<BR>
+//! Number of multiprocessors:    8<BR>
+//! Max threads per block:        512<BR>
+//! <BR>
+//! x: 1 3 5 7 9 11 13 15 17 19<BR>
+//! y: 2 4 6 8 10 12 14 16 18 20<BR>
+//! x + y: 3 7 11 15 19 23 27 31 35 39<BR>
+//! x - y: -1 -1 -1 -1 -1 -1 -1 -1 -1 -1<BR>
+//! x + 0.5 * y: 2 5 8 11 14 17 20 23 26 29<BR>
+//! (x, y) = 1430<BR>
+//! </code>
+//! 
+//! @section plain_code Plain code
+//! \code
+//! #include "agile/gpu_environment.hpp"
+//! #include "agile/gpu_vector.hpp"
+//! 
+//! #include <iostream>
+//! 
+//! 
+//! void output(const char* string, const std::vector<float>& x)
+//! {
+//!   std::cout << string;
+//!   for (unsigned counter = 0; counter < x.size(); ++counter)
+//!     std::cout << x[counter] << " ";
+//!   std::cout << std::endl;
+//! }
+//! 
+//! int main()
+//! {
+//! 
+//!   agile::GPUEnvironment::allocateGPU(0);
+//! 
+//!   agile::GPUEnvironment::printInformation(std::cout);
+//!   std::cout << std::endl;
+//! 
+//! 
+//!   std::vector<float> x_host, y_host;
+//!   for (unsigned counter = 0; counter < 10; ++counter)
+//!   {
+//!     x_host.push_back(counter * 2 + 1);
+//!     y_host.push_back(counter * 2 + 2);
+//!   }
+//! 
+//!   output("x: ", x_host);
+//!   output("y: ", y_host);
+//! 
+//!   agile::GPUVector<float> x, y;
+//!   x.assignFromHost(x_host.begin(), x_host.end());
+//!   y.assignFromHost(y_host.begin(), y_host.end());
+//! 
+//! 
+//!   agile::GPUVector<float> z(x.size());
+//!   addVector(x, y, z);
+//! 
+//!   std::vector<float> z_host;
+//!   z.copyToHost(z_host);
+//! 
+//!   output("x + y: ", z_host);
+//! 
+//!   subVector(x, y, z);
+//!   z.copyToHost(z_host);
+//!   output("x - y: ", z_host);
+//! 
+//!   addScaledVector(x, float(0.5), y, z);
+//!   z.copyToHost(z_host);
+//!   output("x + 0.5 * y: ", z_host);
+//! 
+//!   float scalar_product = getScalarProduct(x, y);
+//!   std::cout << "(x, y) = " << scalar_product << std::endl;
+//! 
+//!   return 0;
+//! }
+//! 
+//! \endcode

@@ -1,0 +1,36 @@
+Comparison of computation times: Matlab vs. CUDA GTX 480
+
+System: Intel Core 2 Duo 6600 @ 2.4 GHz
+	2 GB RAM
+	Linux 2.6.32-23-generic (Ubuntu 10.04 64bit, GNOME 2.30.2)
+	Matlab R2009b, 64bit
+	NVIDIA GTX 480, 1536 MB
+	nvcc release 3.0
+
+500 iterations, 100 iterationens to estimate sensitivities
+
+------------------
+96 Spokes
+------------------
+Matlab: 245.43 sec
+CUDA:	15.90 sec
+
+------------------
+48 Spokes
+------------------
+Matlab: 228.68 sec
+CUDA:	8.76 sec
+
+------------------
+32 Spokes
+------------------
+Matlab: 217.05 sec
+CUDA:	6.36 sec
+
+------------------
+24 Spokes
+------------------
+Matlab: 213.75 sec
+CUDA: 5.11 sec
+
+

@@ -1,0 +1,35 @@
+body { background-color:#FFFFFF; 
+       color:#000000; 
+       font-family: Arial, Verdana, sans-serif; 
+       font-size: 12pt; 
+}
+h1 { background-color:#DDDDDD; 
+     color: #000000;
+}
+.pass { background-color:#77FF77; 
+        color:#000000; 
+}
+.fail { background-color:#FF7777; 
+        color:#000000; 
+}
+table { border:2px solid black;
+        border-collapse:collapse;
+        table-layout:fixed;
+        border-spacing:0;
+}
+th { border-style:solid;
+     border-color:black gray black gray;
+     border-width:0 1px 2px 1px;
+     text-align:center;
+     padding: 0 1em 0 1em
+}
+td { border-style:solid;
+     border-color: gray;
+     border-width:1px;
+     text-align:center;
+     padding: 0 1em 0 1em
+}
+th.left { text-align:left;
+}
+td.left { text-align:left;
+}

@@ -1,0 +1,918 @@
+Determining if the Q_WS_WIN exist failed with the following output:
+Change Dir: /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec1921926046/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec1921926046.dir/build.make CMakeFiles/cmTryCompileExec1921926046.dir/build
+gmake[1]: Entering directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec1921926046.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++     -o CMakeFiles/cmTryCompileExec1921926046.dir/CheckSymbolExists.cxx.o -c /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_WIN’ was not declared in this scope
+   return ((int*)(&Q_WS_WIN))[argc];
+                   ^
+CMakeFiles/cmTryCompileExec1921926046.dir/build.make:57: recipe for target 'CMakeFiles/cmTryCompileExec1921926046.dir/CheckSymbolExists.cxx.o' failed
+gmake[1]: *** [CMakeFiles/cmTryCompileExec1921926046.dir/CheckSymbolExists.cxx.o] Error 1
+gmake[1]: Leaving directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+Makefile:118: recipe for target 'cmTryCompileExec1921926046/fast' failed
+gmake: *** [cmTryCompileExec1921926046/fast] Error 2
+
+File /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_WIN
+  return ((int*)(&Q_WS_WIN))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the Q_WS_QWS exist failed with the following output:
+Change Dir: /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec1514934114/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec1514934114.dir/build.make CMakeFiles/cmTryCompileExec1514934114.dir/build
+gmake[1]: Entering directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec1514934114.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++     -o CMakeFiles/cmTryCompileExec1514934114.dir/CheckSymbolExists.cxx.o -c /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_QWS’ was not declared in this scope
+   return ((int*)(&Q_WS_QWS))[argc];
+                   ^
+CMakeFiles/cmTryCompileExec1514934114.dir/build.make:57: recipe for target 'CMakeFiles/cmTryCompileExec1514934114.dir/CheckSymbolExists.cxx.o' failed
+gmake[1]: *** [CMakeFiles/cmTryCompileExec1514934114.dir/CheckSymbolExists.cxx.o] Error 1
+gmake[1]: Leaving directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+Makefile:118: recipe for target 'cmTryCompileExec1514934114/fast' failed
+gmake: *** [cmTryCompileExec1514934114/fast] Error 2
+
+File /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_QWS
+  return ((int*)(&Q_WS_QWS))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the Q_WS_MAC exist failed with the following output:
+Change Dir: /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec414695800/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec414695800.dir/build.make CMakeFiles/cmTryCompileExec414695800.dir/build
+gmake[1]: Entering directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec414695800.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++     -o CMakeFiles/cmTryCompileExec414695800.dir/CheckSymbolExists.cxx.o -c /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_MAC’ was not declared in this scope
+   return ((int*)(&Q_WS_MAC))[argc];
+                   ^
+CMakeFiles/cmTryCompileExec414695800.dir/build.make:57: recipe for target 'CMakeFiles/cmTryCompileExec414695800.dir/CheckSymbolExists.cxx.o' failed
+gmake[1]: Leaving directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+gmake[1]: *** [CMakeFiles/cmTryCompileExec414695800.dir/CheckSymbolExists.cxx.o] Error 1
+Makefile:118: recipe for target 'cmTryCompileExec414695800/fast' failed
+gmake: *** [cmTryCompileExec414695800/fast] Error 2
+
+File /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_MAC
+  return ((int*)(&Q_WS_MAC))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the Q_WS_WIN exist failed with the following output:
+Change Dir: /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec2554568161/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec2554568161.dir/build.make CMakeFiles/cmTryCompileExec2554568161.dir/build
+gmake[1]: Entering directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec2554568161.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++     -o CMakeFiles/cmTryCompileExec2554568161.dir/CheckSymbolExists.cxx.o -c /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_WIN’ was not declared in this scope
+   return ((int*)(&Q_WS_WIN))[argc];
+                   ^
+CMakeFiles/cmTryCompileExec2554568161.dir/build.make:57: recipe for target 'CMakeFiles/cmTryCompileExec2554568161.dir/CheckSymbolExists.cxx.o' failed
+gmake[1]: *** [CMakeFiles/cmTryCompileExec2554568161.dir/CheckSymbolExists.cxx.o] Error 1
+gmake[1]: Leaving directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+Makefile:118: recipe for target 'cmTryCompileExec2554568161/fast' failed
+gmake: *** [cmTryCompileExec2554568161/fast] Error 2
+
+File /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_WIN
+  return ((int*)(&Q_WS_WIN))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the Q_WS_QWS exist failed with the following output:
+Change Dir: /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec3132284135/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3132284135.dir/build.make CMakeFiles/cmTryCompileExec3132284135.dir/build
+gmake[1]: Entering directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec3132284135.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++     -o CMakeFiles/cmTryCompileExec3132284135.dir/CheckSymbolExists.cxx.o -c /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_QWS’ was not declared in this scope
+   return ((int*)(&Q_WS_QWS))[argc];
+                   ^
+CMakeFiles/cmTryCompileExec3132284135.dir/build.make:57: recipe for target 'CMakeFiles/cmTryCompileExec3132284135.dir/CheckSymbolExists.cxx.o' failed
+gmake[1]: *** [CMakeFiles/cmTryCompileExec3132284135.dir/CheckSymbolExists.cxx.o] Error 1
+gmake[1]: Leaving directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+Makefile:118: recipe for target 'cmTryCompileExec3132284135/fast' failed
+gmake: *** [cmTryCompileExec3132284135/fast] Error 2
+
+File /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_QWS
+  return ((int*)(&Q_WS_QWS))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the Q_WS_MAC exist failed with the following output:
+Change Dir: /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec3869309276/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3869309276.dir/build.make CMakeFiles/cmTryCompileExec3869309276.dir/build
+gmake[1]: Entering directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec3869309276.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++     -o CMakeFiles/cmTryCompileExec3869309276.dir/CheckSymbolExists.cxx.o -c /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_MAC’ was not declared in this scope
+   return ((int*)(&Q_WS_MAC))[argc];
+                   ^
+CMakeFiles/cmTryCompileExec3869309276.dir/build.make:57: recipe for target 'CMakeFiles/cmTryCompileExec3869309276.dir/CheckSymbolExists.cxx.o' failed
+gmake[1]: *** [CMakeFiles/cmTryCompileExec3869309276.dir/CheckSymbolExists.cxx.o] Error 1
+gmake[1]: Leaving directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+Makefile:118: recipe for target 'cmTryCompileExec3869309276/fast' failed
+gmake: *** [cmTryCompileExec3869309276/fast] Error 2
+
+File /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_MAC
+  return ((int*)(&Q_WS_MAC))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the Q_WS_WIN exist failed with the following output:
+Change Dir: /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec1750739193/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec1750739193.dir/build.make CMakeFiles/cmTryCompileExec1750739193.dir/build
+gmake[1]: Entering directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec1750739193.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++     -o CMakeFiles/cmTryCompileExec1750739193.dir/CheckSymbolExists.cxx.o -c /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_WIN’ was not declared in this scope
+   return ((int*)(&Q_WS_WIN))[argc];
+                   ^
+CMakeFiles/cmTryCompileExec1750739193.dir/build.make:57: recipe for target 'CMakeFiles/cmTryCompileExec1750739193.dir/CheckSymbolExists.cxx.o' failed
+gmake[1]: *** [CMakeFiles/cmTryCompileExec1750739193.dir/CheckSymbolExists.cxx.o] Error 1
+gmake[1]: Leaving directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+Makefile:118: recipe for target 'cmTryCompileExec1750739193/fast' failed
+gmake: *** [cmTryCompileExec1750739193/fast] Error 2
+
+File /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_WIN
+  return ((int*)(&Q_WS_WIN))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the Q_WS_QWS exist failed with the following output:
+Change Dir: /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec2222744252/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec2222744252.dir/build.make CMakeFiles/cmTryCompileExec2222744252.dir/build
+gmake[1]: Entering directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec2222744252.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++     -o CMakeFiles/cmTryCompileExec2222744252.dir/CheckSymbolExists.cxx.o -c /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_QWS’ was not declared in this scope
+   return ((int*)(&Q_WS_QWS))[argc];
+                   ^
+CMakeFiles/cmTryCompileExec2222744252.dir/build.make:57: recipe for target 'CMakeFiles/cmTryCompileExec2222744252.dir/CheckSymbolExists.cxx.o' failed
+gmake[1]: Leaving directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+gmake[1]: *** [CMakeFiles/cmTryCompileExec2222744252.dir/CheckSymbolExists.cxx.o] Error 1
+Makefile:118: recipe for target 'cmTryCompileExec2222744252/fast' failed
+gmake: *** [cmTryCompileExec2222744252/fast] Error 2
+
+File /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_QWS
+  return ((int*)(&Q_WS_QWS))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the Q_WS_MAC exist failed with the following output:
+Change Dir: /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec2437032628/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec2437032628.dir/build.make CMakeFiles/cmTryCompileExec2437032628.dir/build
+gmake[1]: Entering directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec2437032628.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++     -o CMakeFiles/cmTryCompileExec2437032628.dir/CheckSymbolExists.cxx.o -c /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_MAC’ was not declared in this scope
+   return ((int*)(&Q_WS_MAC))[argc];
+                   ^
+CMakeFiles/cmTryCompileExec2437032628.dir/build.make:57: recipe for target 'CMakeFiles/cmTryCompileExec2437032628.dir/CheckSymbolExists.cxx.o' failed
+gmake[1]: *** [CMakeFiles/cmTryCompileExec2437032628.dir/CheckSymbolExists.cxx.o] Error 1
+gmake[1]: Leaving directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+Makefile:118: recipe for target 'cmTryCompileExec2437032628/fast' failed
+gmake: *** [cmTryCompileExec2437032628/fast] Error 2
+
+File /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_MAC
+  return ((int*)(&Q_WS_MAC))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the Q_WS_WIN exist failed with the following output:
+Change Dir: /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec1405747651/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec1405747651.dir/build.make CMakeFiles/cmTryCompileExec1405747651.dir/build
+gmake[1]: Entering directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec1405747651.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++     -o CMakeFiles/cmTryCompileExec1405747651.dir/CheckSymbolExists.cxx.o -c /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_WIN’ was not declared in this scope
+   return ((int*)(&Q_WS_WIN))[argc];
+                   ^
+CMakeFiles/cmTryCompileExec1405747651.dir/build.make:57: recipe for target 'CMakeFiles/cmTryCompileExec1405747651.dir/CheckSymbolExists.cxx.o' failed
+gmake[1]: Leaving directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+gmake[1]: *** [CMakeFiles/cmTryCompileExec1405747651.dir/CheckSymbolExists.cxx.o] Error 1
+Makefile:118: recipe for target 'cmTryCompileExec1405747651/fast' failed
+gmake: *** [cmTryCompileExec1405747651/fast] Error 2
+
+File /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_WIN
+  return ((int*)(&Q_WS_WIN))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the Q_WS_QWS exist failed with the following output:
+Change Dir: /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec2862702704/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec2862702704.dir/build.make CMakeFiles/cmTryCompileExec2862702704.dir/build
+gmake[1]: Entering directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec2862702704.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++     -o CMakeFiles/cmTryCompileExec2862702704.dir/CheckSymbolExists.cxx.o -c /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_QWS’ was not declared in this scope
+   return ((int*)(&Q_WS_QWS))[argc];
+                   ^
+CMakeFiles/cmTryCompileExec2862702704.dir/build.make:57: recipe for target 'CMakeFiles/cmTryCompileExec2862702704.dir/CheckSymbolExists.cxx.o' failed
+gmake[1]: Leaving directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+gmake[1]: *** [CMakeFiles/cmTryCompileExec2862702704.dir/CheckSymbolExists.cxx.o] Error 1
+Makefile:118: recipe for target 'cmTryCompileExec2862702704/fast' failed
+gmake: *** [cmTryCompileExec2862702704/fast] Error 2
+
+File /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_QWS
+  return ((int*)(&Q_WS_QWS))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the Q_WS_MAC exist failed with the following output:
+Change Dir: /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec2702611088/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec2702611088.dir/build.make CMakeFiles/cmTryCompileExec2702611088.dir/build
+gmake[1]: Entering directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec2702611088.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++     -o CMakeFiles/cmTryCompileExec2702611088.dir/CheckSymbolExists.cxx.o -c /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_MAC’ was not declared in this scope
+   return ((int*)(&Q_WS_MAC))[argc];
+                   ^
+CMakeFiles/cmTryCompileExec2702611088.dir/build.make:57: recipe for target 'CMakeFiles/cmTryCompileExec2702611088.dir/CheckSymbolExists.cxx.o' failed
+gmake[1]: *** [CMakeFiles/cmTryCompileExec2702611088.dir/CheckSymbolExists.cxx.o] Error 1
+gmake[1]: Leaving directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+Makefile:118: recipe for target 'cmTryCompileExec2702611088/fast' failed
+gmake: *** [cmTryCompileExec2702611088/fast] Error 2
+
+File /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_MAC
+  return ((int*)(&Q_WS_MAC))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the Q_WS_WIN exist failed with the following output:
+Change Dir: /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec626701884/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec626701884.dir/build.make CMakeFiles/cmTryCompileExec626701884.dir/build
+gmake[1]: Entering directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec626701884.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++     -o CMakeFiles/cmTryCompileExec626701884.dir/CheckSymbolExists.cxx.o -c /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_WIN’ was not declared in this scope
+   return ((int*)(&Q_WS_WIN))[argc];
+                   ^
+CMakeFiles/cmTryCompileExec626701884.dir/build.make:57: recipe for target 'CMakeFiles/cmTryCompileExec626701884.dir/CheckSymbolExists.cxx.o' failed
+gmake[1]: *** [CMakeFiles/cmTryCompileExec626701884.dir/CheckSymbolExists.cxx.o] Error 1
+gmake[1]: Leaving directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+Makefile:118: recipe for target 'cmTryCompileExec626701884/fast' failed
+gmake: *** [cmTryCompileExec626701884/fast] Error 2
+
+File /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_WIN
+  return ((int*)(&Q_WS_WIN))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the Q_WS_QWS exist failed with the following output:
+Change Dir: /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec998088529/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec998088529.dir/build.make CMakeFiles/cmTryCompileExec998088529.dir/build
+gmake[1]: Entering directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec998088529.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++     -o CMakeFiles/cmTryCompileExec998088529.dir/CheckSymbolExists.cxx.o -c /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_QWS’ was not declared in this scope
+   return ((int*)(&Q_WS_QWS))[argc];
+                   ^
+CMakeFiles/cmTryCompileExec998088529.dir/build.make:57: recipe for target 'CMakeFiles/cmTryCompileExec998088529.dir/CheckSymbolExists.cxx.o' failed
+gmake[1]: *** [CMakeFiles/cmTryCompileExec998088529.dir/CheckSymbolExists.cxx.o] Error 1
+gmake[1]: Leaving directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+Makefile:118: recipe for target 'cmTryCompileExec998088529/fast' failed
+gmake: *** [cmTryCompileExec998088529/fast] Error 2
+
+File /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_QWS
+  return ((int*)(&Q_WS_QWS))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the Q_WS_MAC exist failed with the following output:
+Change Dir: /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec3531491847/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3531491847.dir/build.make CMakeFiles/cmTryCompileExec3531491847.dir/build
+gmake[1]: Entering directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec3531491847.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++     -o CMakeFiles/cmTryCompileExec3531491847.dir/CheckSymbolExists.cxx.o -c /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_MAC’ was not declared in this scope
+   return ((int*)(&Q_WS_MAC))[argc];
+                   ^
+CMakeFiles/cmTryCompileExec3531491847.dir/build.make:57: recipe for target 'CMakeFiles/cmTryCompileExec3531491847.dir/CheckSymbolExists.cxx.o' failed
+gmake[1]: *** [CMakeFiles/cmTryCompileExec3531491847.dir/CheckSymbolExists.cxx.o] Error 1
+gmake[1]: Leaving directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+Makefile:118: recipe for target 'cmTryCompileExec3531491847/fast' failed
+gmake: *** [cmTryCompileExec3531491847/fast] Error 2
+
+File /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_MAC
+  return ((int*)(&Q_WS_MAC))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the Q_WS_WIN exist failed with the following output:
+Change Dir: /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec980287035/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec980287035.dir/build.make CMakeFiles/cmTryCompileExec980287035.dir/build
+gmake[1]: Entering directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec980287035.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++     -o CMakeFiles/cmTryCompileExec980287035.dir/CheckSymbolExists.cxx.o -c /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_WIN’ was not declared in this scope
+   return ((int*)(&Q_WS_WIN))[argc];
+                   ^
+CMakeFiles/cmTryCompileExec980287035.dir/build.make:57: recipe for target 'CMakeFiles/cmTryCompileExec980287035.dir/CheckSymbolExists.cxx.o' failed
+gmake[1]: *** [CMakeFiles/cmTryCompileExec980287035.dir/CheckSymbolExists.cxx.o] Error 1
+gmake[1]: Leaving directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+Makefile:118: recipe for target 'cmTryCompileExec980287035/fast' failed
+gmake: *** [cmTryCompileExec980287035/fast] Error 2
+
+File /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_WIN
+  return ((int*)(&Q_WS_WIN))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the Q_WS_QWS exist failed with the following output:
+Change Dir: /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec467949541/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec467949541.dir/build.make CMakeFiles/cmTryCompileExec467949541.dir/build
+gmake[1]: Entering directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec467949541.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++     -o CMakeFiles/cmTryCompileExec467949541.dir/CheckSymbolExists.cxx.o -c /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_QWS’ was not declared in this scope
+   return ((int*)(&Q_WS_QWS))[argc];
+                   ^
+CMakeFiles/cmTryCompileExec467949541.dir/build.make:57: recipe for target 'CMakeFiles/cmTryCompileExec467949541.dir/CheckSymbolExists.cxx.o' failed
+gmake[1]: *** [CMakeFiles/cmTryCompileExec467949541.dir/CheckSymbolExists.cxx.o] Error 1
+gmake[1]: Leaving directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+Makefile:118: recipe for target 'cmTryCompileExec467949541/fast' failed
+gmake: *** [cmTryCompileExec467949541/fast] Error 2
+
+File /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_QWS
+  return ((int*)(&Q_WS_QWS))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the Q_WS_MAC exist failed with the following output:
+Change Dir: /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec401763979/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec401763979.dir/build.make CMakeFiles/cmTryCompileExec401763979.dir/build
+gmake[1]: Entering directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec401763979.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++     -o CMakeFiles/cmTryCompileExec401763979.dir/CheckSymbolExists.cxx.o -c /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_MAC’ was not declared in this scope
+   return ((int*)(&Q_WS_MAC))[argc];
+                   ^
+CMakeFiles/cmTryCompileExec401763979.dir/build.make:57: recipe for target 'CMakeFiles/cmTryCompileExec401763979.dir/CheckSymbolExists.cxx.o' failed
+gmake[1]: *** [CMakeFiles/cmTryCompileExec401763979.dir/CheckSymbolExists.cxx.o] Error 1
+gmake[1]: Leaving directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+Makefile:118: recipe for target 'cmTryCompileExec401763979/fast' failed
+gmake: *** [cmTryCompileExec401763979/fast] Error 2
+
+File /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_MAC
+  return ((int*)(&Q_WS_MAC))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the Q_WS_WIN exist failed with the following output:
+Change Dir: /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec2957123557/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec2957123557.dir/build.make CMakeFiles/cmTryCompileExec2957123557.dir/build
+gmake[1]: Entering directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec2957123557.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++     -o CMakeFiles/cmTryCompileExec2957123557.dir/CheckSymbolExists.cxx.o -c /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_WIN’ was not declared in this scope
+   return ((int*)(&Q_WS_WIN))[argc];
+                   ^
+CMakeFiles/cmTryCompileExec2957123557.dir/build.make:57: recipe for target 'CMakeFiles/cmTryCompileExec2957123557.dir/CheckSymbolExists.cxx.o' failed
+gmake[1]: *** [CMakeFiles/cmTryCompileExec2957123557.dir/CheckSymbolExists.cxx.o] Error 1
+gmake[1]: Leaving directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+Makefile:118: recipe for target 'cmTryCompileExec2957123557/fast' failed
+gmake: *** [cmTryCompileExec2957123557/fast] Error 2
+
+File /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_WIN
+  return ((int*)(&Q_WS_WIN))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the Q_WS_QWS exist failed with the following output:
+Change Dir: /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec2980698272/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec2980698272.dir/build.make CMakeFiles/cmTryCompileExec2980698272.dir/build
+gmake[1]: Entering directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec2980698272.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++     -o CMakeFiles/cmTryCompileExec2980698272.dir/CheckSymbolExists.cxx.o -c /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_QWS’ was not declared in this scope
+   return ((int*)(&Q_WS_QWS))[argc];
+                   ^
+CMakeFiles/cmTryCompileExec2980698272.dir/build.make:57: recipe for target 'CMakeFiles/cmTryCompileExec2980698272.dir/CheckSymbolExists.cxx.o' failed
+gmake[1]: *** [CMakeFiles/cmTryCompileExec2980698272.dir/CheckSymbolExists.cxx.o] Error 1
+gmake[1]: Leaving directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+Makefile:118: recipe for target 'cmTryCompileExec2980698272/fast' failed
+gmake: *** [cmTryCompileExec2980698272/fast] Error 2
+
+File /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_QWS
+  return ((int*)(&Q_WS_QWS))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the Q_WS_MAC exist failed with the following output:
+Change Dir: /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec1284571610/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec1284571610.dir/build.make CMakeFiles/cmTryCompileExec1284571610.dir/build
+gmake[1]: Entering directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec1284571610.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++     -o CMakeFiles/cmTryCompileExec1284571610.dir/CheckSymbolExists.cxx.o -c /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_MAC’ was not declared in this scope
+   return ((int*)(&Q_WS_MAC))[argc];
+                   ^
+CMakeFiles/cmTryCompileExec1284571610.dir/build.make:57: recipe for target 'CMakeFiles/cmTryCompileExec1284571610.dir/CheckSymbolExists.cxx.o' failed
+gmake[1]: *** [CMakeFiles/cmTryCompileExec1284571610.dir/CheckSymbolExists.cxx.o] Error 1
+gmake[1]: Leaving directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+Makefile:118: recipe for target 'cmTryCompileExec1284571610/fast' failed
+gmake: *** [cmTryCompileExec1284571610/fast] Error 2
+
+File /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_MAC
+  return ((int*)(&Q_WS_MAC))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the Q_WS_WIN exist failed with the following output:
+Change Dir: /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec2306979573/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec2306979573.dir/build.make CMakeFiles/cmTryCompileExec2306979573.dir/build
+gmake[1]: Entering directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec2306979573.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++     -o CMakeFiles/cmTryCompileExec2306979573.dir/CheckSymbolExists.cxx.o -c /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_WIN’ was not declared in this scope
+   return ((int*)(&Q_WS_WIN))[argc];
+                   ^
+CMakeFiles/cmTryCompileExec2306979573.dir/build.make:57: recipe for target 'CMakeFiles/cmTryCompileExec2306979573.dir/CheckSymbolExists.cxx.o' failed
+gmake[1]: *** [CMakeFiles/cmTryCompileExec2306979573.dir/CheckSymbolExists.cxx.o] Error 1
+gmake[1]: Leaving directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+Makefile:118: recipe for target 'cmTryCompileExec2306979573/fast' failed
+gmake: *** [cmTryCompileExec2306979573/fast] Error 2
+
+File /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_WIN
+  return ((int*)(&Q_WS_WIN))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the Q_WS_QWS exist failed with the following output:
+Change Dir: /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec2661001224/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec2661001224.dir/build.make CMakeFiles/cmTryCompileExec2661001224.dir/build
+gmake[1]: Entering directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec2661001224.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++     -o CMakeFiles/cmTryCompileExec2661001224.dir/CheckSymbolExists.cxx.o -c /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_QWS’ was not declared in this scope
+   return ((int*)(&Q_WS_QWS))[argc];
+                   ^
+CMakeFiles/cmTryCompileExec2661001224.dir/build.make:57: recipe for target 'CMakeFiles/cmTryCompileExec2661001224.dir/CheckSymbolExists.cxx.o' failed
+gmake[1]: *** [CMakeFiles/cmTryCompileExec2661001224.dir/CheckSymbolExists.cxx.o] Error 1
+gmake[1]: Leaving directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+Makefile:118: recipe for target 'cmTryCompileExec2661001224/fast' failed
+gmake: *** [cmTryCompileExec2661001224/fast] Error 2
+
+File /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_QWS
+  return ((int*)(&Q_WS_QWS))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the Q_WS_MAC exist failed with the following output:
+Change Dir: /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec3655730497/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3655730497.dir/build.make CMakeFiles/cmTryCompileExec3655730497.dir/build
+gmake[1]: Entering directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec3655730497.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++     -o CMakeFiles/cmTryCompileExec3655730497.dir/CheckSymbolExists.cxx.o -c /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_MAC’ was not declared in this scope
+   return ((int*)(&Q_WS_MAC))[argc];
+                   ^
+CMakeFiles/cmTryCompileExec3655730497.dir/build.make:57: recipe for target 'CMakeFiles/cmTryCompileExec3655730497.dir/CheckSymbolExists.cxx.o' failed
+gmake[1]: *** [CMakeFiles/cmTryCompileExec3655730497.dir/CheckSymbolExists.cxx.o] Error 1
+gmake[1]: Leaving directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+Makefile:118: recipe for target 'cmTryCompileExec3655730497/fast' failed
+gmake: *** [cmTryCompileExec3655730497/fast] Error 2
+
+File /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_MAC
+  return ((int*)(&Q_WS_MAC))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the Q_WS_WIN exist failed with the following output:
+Change Dir: /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec3699621152/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3699621152.dir/build.make CMakeFiles/cmTryCompileExec3699621152.dir/build
+gmake[1]: Entering directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec3699621152.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++     -o CMakeFiles/cmTryCompileExec3699621152.dir/CheckSymbolExists.cxx.o -c /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_WIN’ was not declared in this scope
+   return ((int*)(&Q_WS_WIN))[argc];
+                   ^
+CMakeFiles/cmTryCompileExec3699621152.dir/build.make:57: recipe for target 'CMakeFiles/cmTryCompileExec3699621152.dir/CheckSymbolExists.cxx.o' failed
+gmake[1]: *** [CMakeFiles/cmTryCompileExec3699621152.dir/CheckSymbolExists.cxx.o] Error 1
+gmake[1]: Leaving directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+Makefile:118: recipe for target 'cmTryCompileExec3699621152/fast' failed
+gmake: *** [cmTryCompileExec3699621152/fast] Error 2
+
+File /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_WIN
+  return ((int*)(&Q_WS_WIN))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the Q_WS_QWS exist failed with the following output:
+Change Dir: /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec3475314799/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3475314799.dir/build.make CMakeFiles/cmTryCompileExec3475314799.dir/build
+gmake[1]: Entering directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec3475314799.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++     -o CMakeFiles/cmTryCompileExec3475314799.dir/CheckSymbolExists.cxx.o -c /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_QWS’ was not declared in this scope
+   return ((int*)(&Q_WS_QWS))[argc];
+                   ^
+CMakeFiles/cmTryCompileExec3475314799.dir/build.make:57: recipe for target 'CMakeFiles/cmTryCompileExec3475314799.dir/CheckSymbolExists.cxx.o' failed
+gmake[1]: Leaving directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+gmake[1]: *** [CMakeFiles/cmTryCompileExec3475314799.dir/CheckSymbolExists.cxx.o] Error 1
+Makefile:118: recipe for target 'cmTryCompileExec3475314799/fast' failed
+gmake: *** [cmTryCompileExec3475314799/fast] Error 2
+
+File /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_QWS
+  return ((int*)(&Q_WS_QWS))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the Q_WS_MAC exist failed with the following output:
+Change Dir: /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec361024406/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec361024406.dir/build.make CMakeFiles/cmTryCompileExec361024406.dir/build
+gmake[1]: Entering directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec361024406.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++     -o CMakeFiles/cmTryCompileExec361024406.dir/CheckSymbolExists.cxx.o -c /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_MAC’ was not declared in this scope
+   return ((int*)(&Q_WS_MAC))[argc];
+                   ^
+CMakeFiles/cmTryCompileExec361024406.dir/build.make:57: recipe for target 'CMakeFiles/cmTryCompileExec361024406.dir/CheckSymbolExists.cxx.o' failed
+gmake[1]: Leaving directory '/home2/GIT/AGILE/build/CMakeFiles/CMakeTmp'
+gmake[1]: *** [CMakeFiles/cmTryCompileExec361024406.dir/CheckSymbolExists.cxx.o] Error 1
+Makefile:118: recipe for target 'cmTryCompileExec361024406/fast' failed
+gmake: *** [cmTryCompileExec361024406/fast] Error 2
+
+File /home2/GIT/AGILE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_MAC
+  return ((int*)(&Q_WS_MAC))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+

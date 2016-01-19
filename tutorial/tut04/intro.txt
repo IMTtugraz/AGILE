@@ -1,0 +1,15 @@
+$Id: intro.txt 99 2009-03-18 11:49:11Z freiberger $
+\page tutorial04 Tutorial 4: Reference solutions
+
+<abstract>
+This tutorial shows how to make the computations that were done on the GPU
+before on the host machine, too, which can be helpful to calculate reference
+solutions.
+</abstract>
+
+\section intro Introduction
+
+This tutorial demonstrates how to make reference solutions on the CPU to
+compare the GPU results.
+
+End of $Id: intro.txt 99 2009-03-18 11:49:11Z freiberger $.

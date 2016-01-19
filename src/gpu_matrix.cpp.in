@@ -1,0 +1,60 @@
+// $Id: gpu_matrix.cpp.in 450 2011-05-31 11:22:00Z freiberger $
+
+@AutoWarning@
+
+#define TType1IsComplex @TType1IsComplex@
+#define TType2IsComplex @TType2IsComplex@
+
+#include "agile/gpu_config.hpp"
+#include "agile/gpu_type_traits.hpp"
+#include <cuda.h>
+
+
+
+#include "gpu_matrix.ipp"
+
+namespace agile
+{
+
+
+  template void multiply<@TType1@ >(
+    const GPUMatrix<@TType1@ >& A, const GPUVector<@TType1@ >& x,
+    GPUVector<@TType1@ >& y);
+
+  template void multiply<@TType1@ >(
+    const GPUVector<@TType1@ >& x, const GPUMatrix<@TType1@ >& A,
+    GPUVector<@TType1@ >& y);
+
+  template void multiplyElementwise<@TType1@ >(
+    const GPUMatrix<@TType1@ >& A, const GPUMatrix<@TType1@ >& B,
+    GPUMatrix<@TType1@ >& Z);
+
+  template to_real_type<@TType1@ >::type norm2(
+    const GPUMatrix<@TType1@ >& A);
+
+  template void copy<@TType1@ >(const GPUMatrix<@TType1@ >& A,
+                                      GPUMatrix<@TType1@ >& Z);
+  //template void copy<@TType1@ >(const GPUMatrix<@TType1@ >& A,
+  //                                    GPUMatrix<@TType1@ >* Z);
+
+  template void multiplyTransMatrixMatrix<@TType1@ >(const GPUMatrix<@TType1@ >& X, const GPUMatrix<@TType1@ >& Y,
+                GPUMatrix<@TType1@ >& Z);
+
+  template void dotProduct<@TType1@ >(const GPUMatrix<@TType1@ >& X, const GPUMatrix<@TType1@ >& Y,
+                                      @TType1@ & val);
+
+//#if !TType1IsComplex
+//#if !TType2IsComplex
+
+  template void scale<@TType1@ >(
+     const to_real_type<@TType1@ >::type& alpha, const GPUMatrix<@TType1@ >& A,
+    GPUMatrix<@TType1@ >& B);
+
+
+//#endif  // !TType2IsComplex
+//#endif  // !TType1IsComplex
+
+
+} // namespace agile
+
+// End of $Id: gpu_matrix.cpp.in 450 2011-05-31 11:22:00Z freiberger $.

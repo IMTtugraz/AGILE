@@ -1,0 +1,12 @@
+$Id: intro.txt 314 2009-09-22 10:18:41Z freiberger $
+\page tutorialXX Tutorial XX: A title for a new tutorial
+
+<abstract>
+TODO: Write the abstract here.
+</abstract>
+
+\section intro Introduction
+
+TODO: Write some introductory text here.
+
+End of $Id: intro.txt 314 2009-09-22 10:18:41Z freiberger $.

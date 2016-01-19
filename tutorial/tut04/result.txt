@@ -1,0 +1,42 @@
+$Id: result.txt 99 2009-03-18 11:49:11Z freiberger $
+
+\section result Result
+
+The output of the program will look like the one below.
+
+<code>
+Device name:                  GeForce 9600 GT<BR>
+Compute capability:           1.1<BR>
+Clock frequency (MHz):        1600<BR>
+32-bit registers per block:   8192<BR>
+Total global memory (MB):     511<BR>
+Shared memory per block (kB): 16<BR>
+Total const memory (kB):      64<BR>
+Number of multiprocessors:    8<BR>
+Max threads per block:        512<BR>
+<BR>
+x: 1 3 5 7 9 11 13 15 17 19<BR>
+y: 2 4 6 8 10 12 14 16 18 20<BR>
+GPU - x + y: 3 7 11 15 19 23 27 31 35 39<BR>
+CPU - x + y: 3 7 11 15 19 23 27 31 35 39<BR>
+GPU - (x, y) = 1430<BR>
+CPU - (x, y) = 1430<BR>
+A:<BR>
+     1   3   5   7   9  11  13  15  17  19<BR>
+     2   6  10  14  18  22  26  30  34  38<BR>
+     3   9  15  21  27  33  39  45  51  57<BR>
+     4  12  20  28  36  44  52  60  68  76<BR>
+     5  15  25  35  45  55  65  75  85  95<BR>
+     6  18  30  42  54  66  78  90 102 114<BR>
+     7  21  35  49  63  77  91 105 119 133<BR>
+     8  24  40  56  72  88 104 120 136 152<BR>
+     9  27  45  63  81  99 117 135 153 171<BR>
+    10  30  50  70  90 110 130 150 170 190<BR>
+<BR>
+GPU - A * x: 1330 2660 3990 5320 6650 7980 9310 10640 11970 13300<BR>
+CPU - A * x: 1330 2660 3990 5320 6650 7980 9310 10640 11970 13300<BR>
+GPU - A^H * x: 715 2145 3575 5005 6435 7865 9295 10725 12155 13585<BR>
+CPU - A^H * x: 715 2145 3575 5005 6435 7865 9295 10725 12155 13585<BR>
+</code>
+
+End of $Id: result.txt 99 2009-03-18 11:49:11Z freiberger $

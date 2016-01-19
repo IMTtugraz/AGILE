@@ -1,0 +1,23 @@
+# image specs
+ImageDimensionX = 256
+ImageDimensionY = 256
+ImageFile = "recon_24_result.dat"
+
+# data specs
+DataNodes = 6144
+DataCoils = 4
+DataFile =       "recon_24.dat"
+CoordinateFile = "recon_24.crd"
+WeightFile =     "recon_24.wgt"
+
+# sensitivity estimate parameters
+SensAlpha = 1e1              # H1-regularization parameter
+SensRegspan = 1.0              # regularization parameter reduction
+SensIterations = 100	       # number of iterations
+SensSmoothing = 40             # number of smoothing steps
+
+# tgv minimization algorithm parameters
+TGVAlpha = 2e-6                # regularization parameter 1
+TGVAlphaFac = 2.0              # factor for regularization parameter 0
+TGVRegspan = 25.0               # regularization parameter reduction
+TGVIterations = 500           # number of iterations

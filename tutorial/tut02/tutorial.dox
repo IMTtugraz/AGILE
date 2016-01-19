@@ -1,0 +1,240 @@
+//! \page tutorial02 Tutorial 2: Basic matrix-vector operations
+//! \htmlonly
+<div id='TOC'></div>
+\endhtmlonly
+//! 
+//! 
+//! \section intro Introduction
+//! 
+//! In the next step we are looking into basic matrix-vector operations on the GPU.
+//! 
+//! @section code Code
+//! 
+//!  We have to include the headers for the environment, for the GPU vector and
+//!  for the GPU matrix.
+//! \code
+//! #include "agile/gpu_environment.hpp"
+//! #include "agile/gpu_vector.hpp"
+//! #include "agile/gpu_matrix.hpp"
+//! 
+//! #include <iostream>
+//! #include <iomanip>
+//! 
+//! \endcode
+//!  Define a small function that prints a vector to \p std::cout.
+//! \code
+//! void output(const char* string, std::vector<float> x)
+//! {
+//!   std::cout << string;
+//!   for (unsigned counter = 0; counter < x.size(); ++counter)
+//!     std::cout << x[counter] << " ";
+//!   std::cout << std::endl;
+//! }
+//! 
+//! \endcode
+//!  Another function to print a matrix.
+//! \code
+//! void output(const char* string, unsigned num_rows, unsigned num_columns,
+//!             std::vector<float> data)
+//! {
+//!   std::vector<float>::iterator iter = data.begin();
+//!   std::cout << string << std::endl;
+//!   for (unsigned row = 0; row < num_rows; ++row)
+//!   {
+//!     std::cout << "  ";
+//!     for (unsigned column = 0; column < num_columns; ++column)
+//!       std::cout << std::setw(4) << *iter++;
+//!     std::cout << std::endl;
+//!   }
+//!   std::cout << std::endl;
+//! }
+//! 
+//! \endcode
+//!  Here starts the main program.
+//! \code
+//! int main()
+//! {
+//! \endcode
+//!  Initialize the first GPU and print information as done in the first step.
+//! \code
+//!   agile::GPUEnvironment::allocateGPU(0);
+//!   agile::GPUEnvironment::printInformation(std::cout);
+//!   std::cout << std::endl;
+//! 
+//! \endcode
+//!  Create a vector first on the CPU and transfer it to the GPU.
+//! \code
+//!   std::vector<float> x_host;
+//!   for (unsigned counter = 0; counter < 10; ++counter)
+//!     x_host.push_back(counter * 2 + 1);
+//!   output("x: ", x_host);
+//!   agile::GPUVector<float> x;
+//!   x.assignFromHost(x_host.begin(), x_host.end());
+//! 
+//! \endcode
+//!  Now we create a dense matrix. The elements are stored in row-major order.
+//! \code
+//!   std::vector<float> matrix_data;
+//!   for (unsigned row = 0; row < x.size(); ++row)
+//!     for (unsigned column = 0; column < x.size(); ++column)
+//!       matrix_data.push_back(float(row + 1) * float(2 * column + 1));
+//! 
+//! \endcode
+//!  Print the matrix to \p std::cout.
+//! \code
+//!   output("A: ", x.size(), x.size(), matrix_data);
+//! 
+//! \endcode
+//!  We transfer the matrix to the GPU. This can be done using the constructor
+//!  of \p GPUMatrix, which takes the number of rows, the number of columns
+//!  and a pointer to an array of size (rows * columns) holding the matrix
+//!  elements.
+//! \code
+//!   agile::GPUMatrix<float> A(x.size(), x.size(), &matrix_data[0]);
+//! 
+//! \endcode
+//!  We need another vector to store the result of our matrix vector
+//!  multiplications. NOTE: This matrix has to have the correct dimensions
+//!  because the library is too lazy to check this!
+//! \code
+//!   agile::GPUVector<float> y(x.size());
+//! 
+//! \endcode
+//!  The hard stuff is done. Now we can use our matrix. Perform the product
+//!  \f$ y \leftarrow Ax \f$.
+//! \code
+//!   multiply(A, x, y);
+//! 
+//! \endcode
+//!  Transfer the result back to the host and print it.
+//! \code
+//!   std::vector<float> y_host;
+//!   y.copyToHost(y_host);
+//!   output("A * x: ", y_host);
+//! 
+//! \endcode
+//!  Also the multiplication with the hermitian matrix \f$ A^H = \bar A^T \f$
+//!  is implemented. It can be evaluated by changing the order of arguments
+//!  to the \p multiply function (i.e. vector-in, matrix-in, vector-out).
+//! \code
+//!   multiply(x, A, y);
+//! 
+//! \endcode
+//!  Output this result, too.
+//! \code
+//!   y.copyToHost(y_host);
+//!   output("A^H * x: ", y_host);
+//! 
+//! \endcode
+//!  Hopefully this tutorial made clear how to use GPU vectors together with
+//!  GPU matrices.
+//! \code
+//!   return 0;
+//! }
+//! 
+//! \endcode
+//! 
+//! \section result Result
+//! 
+//! The output of the program will look something like this:
+//! 
+//! <code>
+//! Device name:                  GeForce 9600 GT<BR>
+//! Compute capability:           1.1<BR>
+//! Clock frequency (MHz):        1600<BR>
+//! 32-bit registers per block:   8192<BR>
+//! Total global memory (MB):     511<BR>
+//! Shared memory per block (kB): 16<BR>
+//! Total const memory (kB):      64<BR>
+//! Number of multiprocessors:    8<BR>
+//! Max threads per block:        512<BR>
+//! <BR>
+//! x: 1 3 5 7 9 11 13 15 17 19<BR>
+//! A:<BR>
+//!      1   3   5   7   9  11  13  15  17  19<BR>
+//!      2   6  10  14  18  22  26  30  34  38<BR>
+//!      3   9  15  21  27  33  39  45  51  57<BR>
+//!      4  12  20  28  36  44  52  60  68  76<BR>
+//!      5  15  25  35  45  55  65  75  85  95<BR>
+//!      6  18  30  42  54  66  78  90 102 114<BR>
+//!      7  21  35  49  63  77  91 105 119 133<BR>
+//!      8  24  40  56  72  88 104 120 136 152<BR>
+//!      9  27  45  63  81  99 117 135 153 171<BR>
+//!     10  30  50  70  90 110 130 150 170 190<BR>
+//! <BR>
+//! A * x: 1330 2660 3990 5320 6650 7980 9310 10640 11970 13300<BR>
+//! A^H * x: 715 2145 3575 5005 6435 7865 9295 10725 12155 13585<BR>
+//! <BR>
+//! </code>
+//! 
+//! @section plain_code Plain code
+//! \code
+//! #include "agile/gpu_environment.hpp"
+//! #include "agile/gpu_vector.hpp"
+//! #include "agile/gpu_matrix.hpp"
+//! 
+//! #include <iostream>
+//! #include <iomanip>
+//! 
+//! void output(const char* string, std::vector<float> x)
+//! {
+//!   std::cout << string;
+//!   for (unsigned counter = 0; counter < x.size(); ++counter)
+//!     std::cout << x[counter] << " ";
+//!   std::cout << std::endl;
+//! }
+//! 
+//! void output(const char* string, unsigned num_rows, unsigned num_columns,
+//!             std::vector<float> data)
+//! {
+//!   std::vector<float>::iterator iter = data.begin();
+//!   std::cout << string << std::endl;
+//!   for (unsigned row = 0; row < num_rows; ++row)
+//!   {
+//!     std::cout << "  ";
+//!     for (unsigned column = 0; column < num_columns; ++column)
+//!       std::cout << std::setw(4) << *iter++;
+//!     std::cout << std::endl;
+//!   }
+//!   std::cout << std::endl;
+//! }
+//! 
+//! int main()
+//! {
+//!   agile::GPUEnvironment::allocateGPU(0);
+//!   agile::GPUEnvironment::printInformation(std::cout);
+//!   std::cout << std::endl;
+//! 
+//!   std::vector<float> x_host;
+//!   for (unsigned counter = 0; counter < 10; ++counter)
+//!     x_host.push_back(counter * 2 + 1);
+//!   output("x: ", x_host);
+//!   agile::GPUVector<float> x;
+//!   x.assignFromHost(x_host.begin(), x_host.end());
+//! 
+//!   std::vector<float> matrix_data;
+//!   for (unsigned row = 0; row < x.size(); ++row)
+//!     for (unsigned column = 0; column < x.size(); ++column)
+//!       matrix_data.push_back(float(row + 1) * float(2 * column + 1));
+//! 
+//!   output("A: ", x.size(), x.size(), matrix_data);
+//! 
+//!   agile::GPUMatrix<float> A(x.size(), x.size(), &matrix_data[0]);
+//! 
+//!   agile::GPUVector<float> y(x.size());
+//! 
+//!   multiply(A, x, y);
+//! 
+//!   std::vector<float> y_host;
+//!   y.copyToHost(y_host);
+//!   output("A * x: ", y_host);
+//! 
+//!   multiply(x, A, y);
+//! 
+//!   y.copyToHost(y_host);
+//!   output("A^H * x: ", y_host);
+//! 
+//!   return 0;
+//! }
+//! 
+//! \endcode

@@ -1,0 +1,16 @@
+$Id: intro.txt 99 2009-03-18 11:49:11Z freiberger $
+
+\page tutorial08 Tutorial 8: Conjugate gradient method
+
+<abstract>
+In this step the setup of operators for a conjugate gradient method is
+explained.
+</abstract>
+
+\section intro Introduction
+
+The conjugated gradient method is an iterative method for solving a linear
+system \f$ Ax = b \f$ given a symmetric positive-definite (SPD) matrix
+\f$ A \f$ and a right-hand side vector \f$ b \f$.
+
+End of $Id: intro.txt 99 2009-03-18 11:49:11Z freiberger $.

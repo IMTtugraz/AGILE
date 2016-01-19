@@ -1,0 +1,53 @@
+$Id: result.txt 99 2009-03-18 11:49:11Z freiberger $
+
+\section result Result
+
+The program will produce output that is similar to the one printed below. Note
+that even though the \p barrier methods are used, the order of the statements
+might be confused. This shall be a hint that parallel output it not too
+trivial to implement. The program ran on two processes on the same PC. Output
+of the first run:
+
+<code>
+Process 0 of 2 is running on fbmtpc31<BR>
+Process 1 of 2 is running on fbmtpc31<BR>
+Process 0 has got the local value 1<BR>
+Process 1 has got the local value 2<BR>
+Process 0 has got the global value 3<BR>
+Process 1 has got the global value 3<BR>
+Process 1: accumulated v_i: 6 8 10 12 14 16 18<BR>
+Process 0: accumulated v_i: 0 2 4 6 8 10 12<BR>
+Process 0: distributed v_i: 0 2 4 3 4 5 6<BR>
+Process 1: distributed v_i: 3 4 5 6 14 16 18<BR>
+Process 0: accumulated v_i: 0 2 4 6 8 10 12<BR>
+Process 1: accumulated v_i: 6 8 10 12 14 16 18<BR>
+Process 0: local scalar product = 192<BR>
+Process 1: local scalar product = 948<BR>
+Process 0: global scalar product = 1140<BR>
+Process 1: global scalar product = 1140<BR>
+Reference solution = 1140<BR>
+</code>
+
+Output of the second run:
+
+<code>
+Process 1 of 2 is running on fbmtpc31<BR>
+Process 0 of 2 is running on fbmtpc31<BR>
+Process 0 has got the local value 1<BR>
+Process 0 has got the global value 3<BR>
+Process 0: accumulated v_i: 0 2 4 6 8 10 12<BR>
+Process 0: distributed v_i: 0 2 4 3 4 5 6<BR>
+Process 0: accumulated v_i: 0 2 4 6 8 10 12<BR>
+Process 0: local scalar product = 192<BR>
+Process 0: global scalar product = 1140<BR>
+Reference solution = 1140<BR>
+Process 1 has got the local value 2<BR>
+Process 1 has got the global value 3<BR>
+Process 1: accumulated v_i: 6 8 10 12 14 16 18<BR>
+Process 1: distributed v_i: 3 4 5 6 14 16 18<BR>
+Process 1: accumulated v_i: 6 8 10 12 14 16 18<BR>
+Process 1: local scalar product = 948<BR>
+Process 1: global scalar product = 1140<BR>
+</code>
+
+End of $Id: result.txt 99 2009-03-18 11:49:11Z freiberger $

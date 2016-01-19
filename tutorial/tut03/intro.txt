@@ -1,0 +1,15 @@
+$Id: intro.txt 100 2009-03-18 17:37:48Z freiberger $
+\page tutorial03 Tutorial 3: Using sparse matrices on the GPU
+
+<abstract>
+This tutorial will introduce a sparse compressed row storage matrix. It shows
+how to create such a matrix from coordinate storage and how to get it onto the
+GPU. Further, the common matrix-vector products are demonstrated.
+</abstract>
+
+\section intro Introduction
+
+We have learned how to create a GPU vector and a dense GPU matrix in the
+previous tutorials. Now it is time to create a sparse matrix on the GPU.
+
+End of $Id: intro.txt 100 2009-03-18 17:37:48Z freiberger $.

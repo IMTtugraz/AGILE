@@ -1,0 +1,9 @@
+Device name:                  GeForce 8800 GTX
+Compute capability:           1.0
+Clock frequency (MHz):        1350
+32-bit registers per block:   8192
+Total global memory (MB):     767
+Shared memory per block (kB): 16
+Total const memory (kB):      64
+Number of multiprocessors:    16
+Max threads per block:        512

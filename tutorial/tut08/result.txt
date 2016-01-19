@@ -1,0 +1,7 @@
+$Id: result.txt 99 2009-03-18 11:49:11Z freiberger $
+
+\section result Result
+
+The program will solve the linear system and output the result.
+
+End of $Id: result.txt 99 2009-03-18 11:49:11Z freiberger $.

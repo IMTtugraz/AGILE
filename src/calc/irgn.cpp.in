@@ -1,0 +1,65 @@
+
+@AutoWarning@
+
+#define TType1IsComplex @TType1IsComplex@
+#define TType2IsComplex @TType2IsComplex@
+
+#include "agile/gpu_config.hpp"
+#include "agile/gpu_type_traits.hpp"
+#include <cuda.h>
+
+#include "calc/irgn.cpp"
+
+namespace agile
+{
+    template void IRGN<@TType1@, @TType2@ >::Init();
+
+    template void IRGN<@TType1@ ,@TType2@ >::HighFreqPenalty();
+    template void IRGN<@TType1@ ,@TType2@ >::Normalize();
+    template void IRGN<@TType1@ ,@TType2@ >::Iteration();
+    template void IRGN<@TType1@ ,@TType2@ >::Postprocess();
+
+    template void IRGN<@TType1@ ,@TType2@ >::CenterdIFFT(
+    const GPUMatrix<@TType1@ >* in_mat, GPUMatrix<@TType1@ >* out_mat, unsigned int num_z);
+
+    template void IRGN<@TType1@ ,@TType2@ >::CenterdFFT(
+    const GPUMatrix<@TType1@ >* in_mat, GPUMatrix<@TType1@ >* out_mat, unsigned int num_z);
+
+    template void IRGN<@TType1@ ,@TType2@ >::CenterdIFFTpattern(
+    const GPUMatrix<@TType1@ >* in_mat, GPUMatrix<@TType1@ >* out_mat, unsigned int num_z);
+
+    template void IRGN<@TType1@ ,@TType2@ >::CenterdFFTpattern(
+    const GPUMatrix<@TType1@ >* in_mat, GPUMatrix<@TType1@ >* out_mat, unsigned int num_z);
+
+    template void IRGN<@TType1@ ,@TType2@ >::ApplyW(
+    const GPUMatrix<@TType1@ >* in_mat, GPUMatrix<@TType1@ >* out_mat, unsigned int num_z);
+
+    template void IRGN<@TType1@ ,@TType2@ >::ApplyWH(
+    const GPUMatrix<@TType1@ >* in_mat, GPUMatrix<@TType1@ >* out_mat, unsigned int num_z);
+
+    template void IRGN<@TType1@ ,@TType2@ >::ApplyDFH(
+    GPUMatrix<@TType1@ >* rhs_mat, const GPUMatrix<@TType1@ >* dx);
+
+    template void IRGN<@TType1@ ,@TType2@ >::ApplyM(GPUMatrix<@TType1@ >* gu, GPUMatrix<@TType1@ >* gc,
+    const GPUMatrix<@TType1@ >* du, const GPUMatrix<@TType1@ >* dc);
+
+    template void IRGN<@TType1@ ,@TType2@ >::CopyMatrixZ(const GPUMatrix<@TType1@ >* in_mat,
+    GPUMatrix<@TType1@ >* out_mat, unsigned int num_z);
+
+    template @TType2@ IRGN<@TType1@ ,@TType2@ >::calcLipschitz();
+
+/*
+    //Pure Virtual Solve-Methode
+    template virtual void  IRGN<@TType1@ ,@TType2@ >::Solve(const GPUMatrix<@TType1@ >* u, const GPUMatrix<@TType1@ >* c,
+      const GPUMatrix<@TType1@ >* rhs, const GPUMatrix<@TType1@ >* u0,
+      unsigned maxits, @TType2@ alpha, @TType2@ beta,
+      GPUMatrix<@TType1@ >* du, GPUMatrix<@TType1@ >* dc) = 0;
+*/
+
+    template @TType2@ IRGN<@TType1@ ,@TType2@ >::randomcalc(int i);
+
+    template bool IRGN<@TType1@ ,@TType2@ >::irgn_param_test(IRGN_Params &param);
+
+
+} // namespace agile
+

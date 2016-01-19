@@ -1,0 +1,226 @@
+// Copyright (C) 2010-2011 Institute of Medical Engineering,
+// Graz University of Technology
+//
+// This program is free software; you can redistribute it and/or modify it under
+// the terms of the GNU General Public License as published by the Free Software
+// Foundation; either version 3 of the License, or (at your option) any later
+// version.
+//
+// This program is distributed in the hope that it will be useful, but
+// WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+// or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+// more details.
+//
+// You should have received a copy of the GNU General Public License along with
+// this program; if not, see <http://www.gnu.org/licenses>.
+
+// $Id: gpu_vector.cu.in 452 2011-05-31 12:00:18Z freiberger $
+
+@AutoWarning@
+
+#define TType2EqualTType3 @TType2EqualTType3@
+#define TType1IsComplex @TType1IsComplex@
+#define TType2IsComplex @TType2IsComplex@
+
+#include "agile/gpu_config.hpp"
+#include "agile/gpu_type_traits.hpp"
+#include <cuda.h>
+
+// Unfortunately, textures have to have file scope, which is why we have to
+// use this ugly preprocessor definitions.
+#define AGILE_TEXTURE agile_matrix_texture_@FType1@@FType2@
+texture<agile::to_tuple_type<@TType1@ >::texture_type> AGILE_TEXTURE;
+
+#define AGILE_TEXTURE_2D agile_matrix_texture_2d_@FType1@@FType2@
+texture<agile::to_tuple_type<@TType1@ >::texture_type, 2> AGILE_TEXTURE_2D;
+
+
+#include "gpu_vector.ipp"
+
+namespace agile
+{
+  
+  template 
+  void copy<@TType1@ >(const GPUVector<@TType1@ >& x, GPUVector<@TType1@ >& y);
+  
+  template 
+  void maxElement<@TType1@ >(const GPUVector<@TType1@ >& x, int* maxVal);
+
+namespace lowlevel
+{
+  // **************************************************************************
+  // functions that depend on one type only
+  // **************************************************************************
+
+
+#if TType2EqualTType3
+#if !TType2IsComplex
+
+
+  template void interpolate2d<@TType1@, @TType2@ >(
+    const @TType1@* src, unsigned numColumns, unsigned numRows,
+    bool reshapeRowMajor, const std::complex<@TType2@>* pos,
+    @TType1@* res, unsigned size);
+
+
+  template void fftshift<@TType1@ >(@TType1@* x, unsigned size1,
+                                    unsigned size2);
+
+  template void ifftshift<@TType1@ >(@TType1@* x, unsigned size1,
+                                    unsigned size2);
+
+
+  template void absVector<@TType1@ >(
+      const @TType1@* x,
+      typename to_real_type<@TType1@ >::type* y, unsigned size);
+
+  template void meshgrid<@TType1@ >(
+      @TType1@* mesh_x, @TType1@* mesh_y,
+      const @TType1@* x, unsigned x_size, const @TType1@* y, unsigned y_size);
+
+
+  template void imag<@TType1@ >(
+    const @TType1@* x,
+    typename to_real_type<@TType1@ >::type* y, unsigned size);
+
+  template typename to_real_type<@TType1@ >::type norm1(
+    const @TType1@* x, unsigned size);
+  
+  template typename to_real_type<@TType1@ >::type norm2(
+    const @TType1@* x, unsigned size);
+
+  template void real<@TType1@ >(
+    const @TType1@* x,
+    typename to_real_type<@TType1@ >::type* y, unsigned size);
+
+  template void setVectorConstant<@TType1@ >(
+    const @TType1@& value, @TType1@* x, unsigned size);
+
+  template void pattern<@TType1@ >(
+      const @TType1@* x, typename to_real_type<@TType1@ >::type* z, unsigned size);
+
+  template void diff<@TType1@ >(
+    const unsigned dim, const unsigned x_size, const @TType1@* x, @TType1@* y, unsigned size);
+  
+  template void difftrans<@TType1@ >(
+    const unsigned dim, const unsigned x_size, const @TType1@* x, @TType1@* y, unsigned size);
+
+  template void diff3<@TType1@ >(
+    const unsigned dim, const unsigned x_size, const unsigned y_size, const @TType1@* x, @TType1@* y, unsigned size, bool borderWrap);
+  
+  template void diff3trans<@TType1@ >(
+    const unsigned dim, const unsigned x_size, const unsigned y_size, const @TType1@* x, @TType1@* y, unsigned size, bool borderWrap);
+  
+  template void bdiff3<@TType1@ >(
+    const unsigned dim, const unsigned x_size, const unsigned y_size, const @TType1@* x, @TType1@* y, unsigned size, bool borderWrap);
+  
+  template void bdiff3trans<@TType1@ >(
+    const unsigned dim, const unsigned x_size, const unsigned y_size, const @TType1@* x, @TType1@* y, unsigned size, bool borderWrap);
+
+  template void sqrt<@TType1@ >(const @TType1@* x, @TType1@* y, unsigned size);
+
+  template void expand_rowdim<@TType1@ >(const @TType1@* x_data, const @TType1@* delta_o, const @TType1@* delta_u,
+                                        unsigned rows, unsigned cols, unsigned row_o, unsigned row_u,
+                                        @TType1@* z);
+
+  template void expand_coldim<@TType1@ >(const @TType1@* x_data, const @TType1@* delta_o, const @TType1@* delta_u,
+                                        unsigned rows, unsigned cols, unsigned col_o, unsigned col_u,
+                                        @TType1@* z);
+
+  template void get_content<@TType1@ >(const @TType1@* x_data, unsigned rows, unsigned cols,
+                     unsigned row_offset, unsigned col_offset, @TType1@* z, unsigned z_rows, unsigned z_cols);
+
+#if !TType1IsComplex
+
+  template void linspace<@TType1@ >(@TType1@* x, unsigned size,
+                                    float a, float b);
+
+  template void pow<@TType1@, @TType2@>(const @TType1@& alpha,
+                              const @TType2@* x,
+                              @TType2@* y, unsigned size);
+
+#endif  // !TType1IsComplex
+#endif  // !TType2IsComplex
+#endif  // TType2EqualTType3
+
+
+  // **************************************************************************
+  // functions that depend on two types
+  // **************************************************************************
+#if TType2EqualTType3
+
+  template void addVector<@TType1@, @TType2@ >(
+    const @TType1@* x, const @TType2@* y,
+    typename promote<@TType1@, @TType2@ >::type* z, unsigned size);
+
+  template void divideVector<@TType1@, @TType2@ >(
+    const @TType1@& alpha, const @TType2@* x,
+    typename promote<@TType1@, @TType2@ >::type* y, unsigned size);
+
+  template typename promote<@TType1@, @TType2@ >::type getScalarProduct(
+    const @TType1@* x, const @TType2@* y, unsigned size);
+
+  template void multiplyConjElementwise<@TType1@, @TType2@ >(
+    const @TType1@* x, const @TType2@* y,
+    typename promote<@TType1@, @TType2@ >::type* z, unsigned size);
+
+  template void multiplyElementwise<@TType1@, @TType2@ >(
+    const @TType1@* x, const @TType2@* y,
+    typename promote<@TType1@, @TType2@ >::type* z, unsigned size);
+
+  template void divideElementwise<@TType1@, @TType2@ >(
+    const @TType1@* x, const @TType2@* y,
+    typename promote<@TType1@, @TType2@ >::type* z, unsigned size);
+
+  template void scale<@TType1@, @TType2@ >(
+    const @TType1@& alpha, const @TType2@* x,
+    typename promote<@TType1@, @TType2@ >::type* y, unsigned size);
+    
+  template void subVector<@TType1@, @TType2@ >(
+    const @TType1@* x, const @TType2@* y,
+    typename promote<@TType1@, @TType2@ >::type* z, unsigned size);
+
+  template void conjVector<@TType1@ >(
+      const @TType1@* x,  @TType1@* z, unsigned size);
+  
+  template void expVector<@TType1@ >(
+      const @TType1@* x,  @TType1@* z, unsigned size);
+
+  template void max<@TType1@, @TType2@ >(
+      const @TType1@* x1, const @TType2@* x2, typename promote<@TType1@, @TType2@ >::type* y, unsigned size);
+
+  template void max<@TType1@, @TType2@ >(
+      const @TType1@* x1, const @TType2@ & x2, typename promote<@TType1@, @TType2@ >::type* y, unsigned size);
+
+#if TType1IsComplex
+#if !TType2IsComplex
+template void phaseVector<@TType1@, @TType2@ >(
+    const @TType1@* x,
+    @TType2@* y, unsigned size);
+#endif  // TType1IsComplex
+#endif  // !TType2IsComplex
+
+
+#endif  // TType2EqualTType3
+
+
+  // **************************************************************************
+  // functions that depend on three types
+  // **************************************************************************
+
+  template void addScaledVector<@TType1@, @TType2@, @TType3@ >(
+    const @TType1@* x, const @TType2@& scale, const @TType3@* y,
+    typename promote<typename promote<@TType1@, @TType2@ >::type,
+                     @TType3@ >::type* z,
+    unsigned size);
+
+  template void subScaledVector<@TType1@, @TType2@, @TType3@ >(
+    const @TType1@* x, const @TType2@& scale, const @TType3@* y,
+    typename promote<typename promote<@TType1@, @TType2@ >::type,
+                     @TType3@ >::type* z,
+    unsigned size);
+
+} // namespace lowlevel
+} // namespace agile
+
+// End of $Id: gpu_vector.cu.in 452 2011-05-31 12:00:18Z freiberger $.

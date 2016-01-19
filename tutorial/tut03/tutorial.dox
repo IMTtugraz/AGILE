@@ -1,0 +1,385 @@
+//! \page tutorial03 Tutorial 3: Using sparse matrices on the GPU
+//! \htmlonly
+<div id='TOC'></div>
+\endhtmlonly
+//! 
+//! 
+//! \section intro Introduction
+//! 
+//! We have learned how to create a GPU vector and a dense GPU matrix in the
+//! previous tutorials. Now it is time to create a sparse matrix on the GPU.
+//! 
+//! @section code Code
+//! 
+//! \code
+//! #include "agile/gpu_environment.hpp"
+//! #include "agile/gpu_vector.hpp"
+//! 
+//! \endcode
+//!  Instead of including the header for the dense matrices (which was called
+//!  \p gpu_matrix.hpp), we include one for a matrix using compressed row/column
+//!  storage (CRS/CCS). As both are contained in one single class, the class is
+//!  found in the header \p gpu_cs_matrix.hpp
+//! \code
+//! #include "agile/gpu_cs_matrix.hpp"
+//! 
+//! #include <iostream>
+//! #include <iomanip>
+//! \endcode
+//!  for \p std::max_element
+//! \code
+//! #include <algorithm>  
+//! 
+//! \endcode
+//!  \subsection printing Printing functions
+//! 
+//!  Define a small function that prints a vector to \p std::cout.
+//! \code
+//! void output(const char* string, const std::vector<float>& x)
+//! {
+//!   std::cout << string;
+//!   for (unsigned counter = 0; counter < x.size(); ++counter)
+//!     std::cout << x[counter] << " ";
+//!   std::cout << std::endl;
+//! }
+//! 
+//! \endcode
+//!  Another function to print a CRS matrix.
+//! \code
+//! void output(const char* string, const std::vector<unsigned>& row_nnz,
+//!             const std::vector<unsigned>& column_index,
+//!             const std::vector<float>& data)
+//! {
+//!   unsigned num_columns = 1 + *std::max_element(column_index.begin(),
+//!                                                column_index.end());
+//! \endcode
+//!  An iterator to the current entry in the current row:
+//! \code
+//!   std::vector<unsigned>::const_iterator row_iter = column_index.begin();
+//!   std::vector<float>::const_iterator data_iter = data.begin();
+//!   std::cout << string << std::endl;
+//!   for (unsigned row = 0; row < row_nnz.size(); ++row)
+//!   {
+//! \endcode
+//!  An iterator past the last entry of this row
+//! \code
+//!     std::vector<unsigned>::const_iterator row_end = row_iter + row_nnz[row];
+//! 
+//!     std::cout << "  ";
+//!     for (unsigned column = 0; column < num_columns; ++column)
+//!       if (column < *row_iter || row_iter == row_end)
+//!         std::cout << std::setw(4) << 0;
+//!       else
+//!       {
+//!         std::cout << std::setw(4) << *data_iter;
+//!         ++data_iter;
+//!         ++row_iter;
+//!       }
+//!     std::cout << std::endl;
+//!   }
+//!   std::cout << std::endl;
+//! }
+//! 
+//! \endcode
+//!  \subsection main Main program
+//! \code
+//! int main()
+//! {
+//! \endcode
+//!  Initialize the first GPU and print information as done in the first step.
+//! \code
+//!   agile::GPUEnvironment::allocateGPU(0);
+//!   agile::GPUEnvironment::printInformation(std::cout);
+//!   std::cout << std::endl;
+//! 
+//! \endcode
+//!  Create a vector first on the CPU and transfer it to the GPU.
+//! \code
+//!   std::vector<float> x_host;
+//!   for (unsigned counter = 0; counter < 10; ++counter)
+//!     x_host.push_back(counter * 2 + 1);
+//!   output("x: ", x_host);
+//!   agile::GPUVector<float> x;
+//!   x.assignFromHost(x_host.begin(), x_host.end());
+//! 
+//! \endcode
+//!  \subsubsection compressed Creation from compressed row storage
+//! 
+//!  Compressed row storage uses three vectors to describe a matrix.
+//!  \p row_nnz is a vector containing the number of non-zero (nnz) entries
+//!  per row (the \p i-th element holds the number of non-zeros in the \p i-th
+//!  row). This vector also defines the amount of rows the matrix has by its
+//!  length.
+//!  \p data is a vector containing the value of the non-zero entries. They
+//!  are sorted by the row index: First all elements of row 0 are stored,
+//!  followed by the elements of row 1 and so on. It is not necessary to sort
+//!  the elements by the column indices. However, this is recommended because
+//!  mulitplications should be faster then as the number of cache misses is
+//!  reduced.
+//!  Finally, \p column_index is a vector containing the column index of each
+//!  non-zero entry which has the same layout as \p data.
+//! 
+//!  We set up these three vectors for a "checkerboard" matrix.
+//! \code
+//!   std::vector<unsigned> row_nnz(x.size(), 0);
+//!   std::vector<unsigned> column_index;
+//!   std::vector<float> data;
+//!   for (unsigned row = 0; row < x.size(); ++row)
+//!     for (unsigned column = 0; column < x.size(); ++column)
+//!       if ((row + column) % 2 == 0)
+//!       {
+//!         ++row_nnz[row];
+//!         column_index.push_back(column);
+//!         data.push_back(float(row + 1) * float(2 * column + 1));
+//!       }
+//! 
+//! \endcode
+//!  Print the matrix to \p std::cout.
+//! \code
+//!   output("A: ", row_nnz, column_index, data);
+//! 
+//! \endcode
+//!  The vectors have to be aligned correctly such that access is efficient
+//!  for the GPU. This alignment happens automatically when transfering the
+//!  matrix to the GPU by the constructor of \p GPUCSMatrix. Note: The second
+//!  template parameter of this class defaults to \p false, which constructs
+//!  a CRS matrix. If you use \p GPUCSMatrix<float, true>, you will get a
+//!  compressed column storage (CCS) matrix of type \p float.
+//! \code
+//!   agile::GPUCSMatrix<float> A(row_nnz, column_index, data);
+//! 
+//! \endcode
+//!  A vector for the result of the product.
+//! \code
+//!   agile::GPUVector<float> y(x.size());
+//! 
+//! \endcode
+//!  No we can use the matrix in the same fashion as the dense matrix.
+//!  For example, computing the product \f$ y \leftarrow Ax \f$ is done with
+//!  \p multiply.
+//! \code
+//!   multiply(A, x, y);
+//! 
+//!   std::vector<float> y_host;
+//!   y.copyToHost(y_host);
+//!   output("A * x: ", y_host);
+//! 
+//! \endcode
+//!  Also the multiplication with the hermitian matrix \f$ A^H = \bar A^T \f$
+//!  is implemented. However, CRS is optimized for traversal along rows, so
+//!  this operation requires the usage of temporary memory and is usually highly
+//!  inefficient.
+//! \code
+//!   multiply(x, A, y);
+//! 
+//! \endcode
+//!  Output this result, too.
+//! \code
+//!   y.copyToHost(y_host);
+//!   output("A^H * x: ", y_host);
+//! 
+//! \endcode
+//!  \subsubsection coord Creation from coordinate storage
+//! 
+//!  Sometimes it can be practical to generate a CRS matrix from coordinate
+//!  storage which uses two vectors for the row and column indices and a
+//!  third one for the data. The same matrix as above in coordinate storage
+//!  is created now. Note that the order of elements in the coordinate storage
+//!  will be different due to the switch of the inner and outer loop. This is
+//!  intentional to test if the CRS matrix will still be generated correctly.
+//! \code
+//!   std::vector<unsigned> coordinate_row;
+//!   std::vector<unsigned> coordinate_column;
+//!   std::vector<float> coordinate_data;
+//!   for (unsigned column = 0; column < x.size(); ++column)
+//!     for (unsigned row = 0; row < x.size(); ++row)
+//!       if ((row + column) % 2 == 0)
+//!       {
+//!         coordinate_row.push_back(row);
+//!         coordinate_column.push_back(column);
+//!         coordinate_data.push_back(float(row + 1) * float(2 * column + 1));
+//!       }
+//! 
+//! \endcode
+//!  This storage format can be converted into a CRS matrix using the
+//!  method \p createFromCoordinateStorage(). There is no requirement on the
+//!  layout of the three vectors except that they are of the same size. The
+//!  function will sort the elements and align them for the GPU automatically.
+//! \code
+//!   agile::GPUCSMatrix<float> A2;
+//!   A2.createFromCoordinateStorage(coordinate_row, coordinate_column,
+//!                                  coordinate_data);
+//! 
+//! \endcode
+//!  We perform the same operations as above to make sure, the coordinate
+//!  storage works.
+//! \code
+//!   multiply(A2, x, y);
+//!   y.copyToHost(y_host);
+//!   output("A2 * x: ", y_host);
+//! 
+//!   multiply(x, A2, y);
+//!   y.copyToHost(y_host);
+//!   output("A2^H * x: ", y_host);
+//! 
+//!   return 0;
+//! }
+//! 
+//! \endcode
+//! 
+//! \section result Result
+//! 
+//! The output of the program will look something like this:
+//! 
+//! <code>
+//! Device name:                  GeForce 9600 GT<BR>
+//! Compute capability:           1.1<BR>
+//! Clock frequency (MHz):        1600<BR>
+//! 32-bit registers per block:   8192<BR>
+//! Total global memory (MB):     511<BR>
+//! Shared memory per block (kB): 16<BR>
+//! Total const memory (kB):      64<BR>
+//! Number of multiprocessors:    8<BR>
+//! Max threads per block:        512<BR>
+//! <BR>
+//! x: 1 3 5 7 9 11 13 15 17 19<BR>
+//! A:<BR>
+//!      1   0   5   0   9   0  13   0  17   0<BR>
+//!      0   6   0  14   0  22   0  30   0  38<BR>
+//!      3   0  15   0  27   0  39   0  51   0<BR>
+//!      0  12   0  28   0  44   0  60   0  76<BR>
+//!      5   0  25   0  45   0  65   0  85   0<BR>
+//!      0  18   0  42   0  66   0  90   0 114<BR>
+//!      7   0  35   0  63   0  91   0 119   0<BR>
+//!      0  24   0  56   0  88   0 120   0 152<BR>
+//!      9   0  45   0  81   0 117   0 153   0<BR>
+//!      0  30   0  70   0 110   0 150   0 190<BR>
+//! <BR>
+//! A * x: 565 1530 1695 3060 2825 4590 3955 6120 5085 7650<BR>
+//! A^H * x: 305 1230 1525 2870 2745 4510 3965 6150 5185 7790<BR>
+//! A2 * x: 565 1530 1695 3060 2825 4590 3955 6120 5085 7650<BR>
+//! A2^H * x: 305 1230 1525 2870 2745 4510 3965 6150 5185 7790<BR>
+//! <BR>
+//! </code>
+//! 
+//! @section plain_code Plain code
+//! \code
+//! #include "agile/gpu_environment.hpp"
+//! #include "agile/gpu_vector.hpp"
+//! 
+//! #include "agile/gpu_cs_matrix.hpp"
+//! 
+//! #include <iostream>
+//! #include <iomanip>
+//! #include <algorithm>  
+//! 
+//! 
+//! void output(const char* string, const std::vector<float>& x)
+//! {
+//!   std::cout << string;
+//!   for (unsigned counter = 0; counter < x.size(); ++counter)
+//!     std::cout << x[counter] << " ";
+//!   std::cout << std::endl;
+//! }
+//! 
+//! void output(const char* string, const std::vector<unsigned>& row_nnz,
+//!             const std::vector<unsigned>& column_index,
+//!             const std::vector<float>& data)
+//! {
+//!   unsigned num_columns = 1 + *std::max_element(column_index.begin(),
+//!                                                column_index.end());
+//!   std::vector<unsigned>::const_iterator row_iter = column_index.begin();
+//!   std::vector<float>::const_iterator data_iter = data.begin();
+//!   std::cout << string << std::endl;
+//!   for (unsigned row = 0; row < row_nnz.size(); ++row)
+//!   {
+//!     std::vector<unsigned>::const_iterator row_end = row_iter + row_nnz[row];
+//! 
+//!     std::cout << "  ";
+//!     for (unsigned column = 0; column < num_columns; ++column)
+//!       if (column < *row_iter || row_iter == row_end)
+//!         std::cout << std::setw(4) << 0;
+//!       else
+//!       {
+//!         std::cout << std::setw(4) << *data_iter;
+//!         ++data_iter;
+//!         ++row_iter;
+//!       }
+//!     std::cout << std::endl;
+//!   }
+//!   std::cout << std::endl;
+//! }
+//! 
+//! int main()
+//! {
+//!   agile::GPUEnvironment::allocateGPU(0);
+//!   agile::GPUEnvironment::printInformation(std::cout);
+//!   std::cout << std::endl;
+//! 
+//!   std::vector<float> x_host;
+//!   for (unsigned counter = 0; counter < 10; ++counter)
+//!     x_host.push_back(counter * 2 + 1);
+//!   output("x: ", x_host);
+//!   agile::GPUVector<float> x;
+//!   x.assignFromHost(x_host.begin(), x_host.end());
+//! 
+//! 
+//! 
+//!   std::vector<unsigned> row_nnz(x.size(), 0);
+//!   std::vector<unsigned> column_index;
+//!   std::vector<float> data;
+//!   for (unsigned row = 0; row < x.size(); ++row)
+//!     for (unsigned column = 0; column < x.size(); ++column)
+//!       if ((row + column) % 2 == 0)
+//!       {
+//!         ++row_nnz[row];
+//!         column_index.push_back(column);
+//!         data.push_back(float(row + 1) * float(2 * column + 1));
+//!       }
+//! 
+//!   output("A: ", row_nnz, column_index, data);
+//! 
+//!   agile::GPUCSMatrix<float> A(row_nnz, column_index, data);
+//! 
+//!   agile::GPUVector<float> y(x.size());
+//! 
+//!   multiply(A, x, y);
+//! 
+//!   std::vector<float> y_host;
+//!   y.copyToHost(y_host);
+//!   output("A * x: ", y_host);
+//! 
+//!   multiply(x, A, y);
+//! 
+//!   y.copyToHost(y_host);
+//!   output("A^H * x: ", y_host);
+//! 
+//! 
+//!   std::vector<unsigned> coordinate_row;
+//!   std::vector<unsigned> coordinate_column;
+//!   std::vector<float> coordinate_data;
+//!   for (unsigned column = 0; column < x.size(); ++column)
+//!     for (unsigned row = 0; row < x.size(); ++row)
+//!       if ((row + column) % 2 == 0)
+//!       {
+//!         coordinate_row.push_back(row);
+//!         coordinate_column.push_back(column);
+//!         coordinate_data.push_back(float(row + 1) * float(2 * column + 1));
+//!       }
+//! 
+//!   agile::GPUCSMatrix<float> A2;
+//!   A2.createFromCoordinateStorage(coordinate_row, coordinate_column,
+//!                                  coordinate_data);
+//! 
+//!   multiply(A2, x, y);
+//!   y.copyToHost(y_host);
+//!   output("A2 * x: ", y_host);
+//! 
+//!   multiply(x, A2, y);
+//!   y.copyToHost(y_host);
+//!   output("A2^H * x: ", y_host);
+//! 
+//!   return 0;
+//! }
+//! 
+//! \endcode

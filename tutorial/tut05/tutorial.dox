@@ -1,0 +1,493 @@
+//! \page tutorial05 Tutorial 5: Parallel communication
+//! \htmlonly
+<div id='TOC'></div>
+\endhtmlonly
+//! 
+//! 
+//! \section intro Introduction
+//! 
+//! When a global value \f$ x \f$ is shared by two or more processes, there are
+//! various possibilities to store this value locally. One option is to store on
+//! each process the full value. So if \f$ x_i \f$ denotes the value on the \p i-th
+//! process we could choose to set \f$ x_i := x \f$. We call this value
+//! \p accumulated.
+//! 
+//! Another option is to store the value in such a way that the sum of the values
+//! on all processes is equal to the global value, i.e. \f$ \sum_i x_i = x \f$.
+//! Now there are many ways to distribute this value to the processes but one of
+//! the most obvious is to divide the value by the number of processes it belongs
+//! to. Let \f$ P \f$ be the number of processes sharing the value \f$ x \f$. We
+//! choose to set the local values to \f$ x_i := \frac{x}{P} \f$ and we call this
+//! a distributed value.
+//! 
+//! Note that if a process does not share the value \f$ x \f$, it is set to zero
+//! on that process no matter whether we store the value in the \p accumulated or
+//! in the \p distributed form. This is especially important for vectors later on
+//! because a vector may have elements that belong to a single process only or
+//! that are shared by two or more processes.
+//! 
+//! Now, the concept is extended to vectors. We denote by \f$ P(k) \f$ the number
+//! of processes the \p k-th vector entry belongs to. If a vector entry \f$ k \f$
+//! does not belong to the \p i-th process, it won't be stored on that process.
+//! For our considerations this is equivalent to the consideration that the vector
+//! entry is zero (\f$ v_i(k) := 0 \f$).
+//! 
+//! A vector is \p accumulated if every process knows its full vector entries. That
+//! means on the \p i-th process the \p k-th entry has the value
+//! \f$ v_i(k) := v(k) \f$ if that entry belongs to process \p i and it is zero
+//! otherwise. A vector is \p distributed if we can get the full vector by summing
+//! the individual vectors: \f$ \sum_i v_i = v \f$. So the \p k-th element on the
+//! \p i-th process has to be \f$ v_i(k) := \frac{v(k)}{P(k)} \f$ if that
+//! element belongs to the process and zero otherwise.
+//! 
+//! A simple example for illustration: We want to store the vector
+//! \f$ v := [10, 20, 30, 40, 50, 60, 70, 80, 90] \f$ on two processes. Process 1
+//! shall belong to the entries \f$ \lbrace 1, 2, 3, 4, 5, 6 \rbrace \f$ and
+//! process 2 shall belong to \f$ \lbrace 4, 5, 6, 7, 8, 9 \rbrace \f$ so that
+//! the elements \f$ \lbrace 4, 5, 6 \rbrace \f$ are shared by both processes.
+//! In the \p accumulated form, the vector would be
+//! \f$ a_1 := [10, 20, 30, 40, 50, 60, 0, 0, 0] \f$ on the first process and
+//! \f$ a_2 := [ 0,  0,  0, 40, 50, 60, 70, 80, 90] \f$ on the second one and both
+//! processes know the full value of the shared elements.
+//! In the \p distributed form, the vector woudl be
+//! \f$ d_1 := [10, 20, 30, 20, 25, 30, 0, 0, 0] \f$ on the first process and
+//! \f$ d_2 := [ 0,  0,  0, 20, 25, 30, 70, 80, 90] \f$ on the second one. Both
+//! processes store only \b half of the shared elements (because the element belongs
+//! to \b two processes). By summing the shared elements one can obtain the full
+//! vector.
+//! 
+//! If one has to compute the inner product of the global vector \f$ v \f$, the
+//! straight forward approach of computing a local inner product and summing it,
+//! will fail. If the vector was stored as \p accumulated vector, the local inner
+//! products would be \f$ a_1 a_1^T = 9100 \f$ and \f$ a_2 a_2^T = 27100 \f$
+//! giving a sum of 36200.
+//! In the \p distributed form, the inner products are \f$ d_1 d_1^T = 3325 \f$
+//! and \f$ d_2 d_2^T = 21325 \f$ giving 24650.
+//! However, the true inner product is \f$ v v^T = 28500 \f$, which is different
+//! from both.
+//! 
+//! The reason is that in the \p accumulated case the shared elements are counted
+//! twice while in the \p distributed case that are weighted by \f$ 1/4 \f$
+//! (two times \f$ 1/2 \f$). The correct way of calculating the inner product is
+//! by taking a combination of an \p accumulated and a \p distributed vector:
+//! \f$ a_1 d_1^T + a_2 d_2^T = 28500 = v v^T \f$.
+//! 
+//! This tutorial will show how to implement such parallel inner products using
+//! the AGILE framework.
+//! 
+//! @section code Code
+//! 
+//! \code
+//! #include "agile/gpu_environment.hpp"
+//! #include "agile/gpu_vector.hpp"
+//! 
+//! \endcode
+//!  In order to use the message passing interface (MPI), we have to include the
+//!  header for a communicator.
+//! \code
+//! #include "agile/network/communicator.hpp"
+//! 
+//! #include <iostream>
+//! #include <vector>
+//! 
+//! \endcode
+//!  Output a vector to \p std::cout
+//! \code
+//! void output(const char* string, const std::vector<double>& v)
+//! {
+//! \endcode
+//!  We output the vector together with the rank of the process. More on this
+//!  later...
+//! \code
+//!   std::cout << "Process " << agile::Network::rank() << ": " << string;
+//!   for (unsigned counter = 0; counter < v.size(); ++counter)
+//!     std::cout << v[counter] << " ";
+//!   std::cout << std::endl;
+//! }
+//! 
+//! \endcode
+//!  The main routine takes also the command line arguments. These are passed on
+//!  to the MPI later on.
+//! \code
+//! int main(int argc, char* argv[])
+//! {
+//! \endcode
+//!  The first step is to initialize the network communication. If the message
+//!  passing interface is installed, the \p NetworkEnvironment will
+//!  initialize it in the constructor. If MPI is not found, this will just
+//!  create an environment with a single process (the current one) in it.
+//!  You can use the network as long as the network environment object lives.
+//!  The destructor of \p NetworkEnvironment will finalize MPI.
+//! \code
+//!   agile::NetworkEnvironment environment(argc, argv);
+//! 
+//! \endcode
+//!  The singleton \p Network can be used to access very basic properties of
+//!  the parallel network. For example, you can use \p Network::size() to
+//!  get the number of processes that are running this program or you can
+//!  get the rank of this process by calling \p Network::rank().
+//!  We use the \p Network singleton to output some basic process information.
+//! \code
+//!   std::cout << "Process " << agile::Network::rank() << " of "
+//!             << agile::Network::size() << " is running on "
+//!             << agile::Network::processor_name() << std::endl;
+//! 
+//! \endcode
+//!  We introduce a barrier here. This is just a "meeting point" for all the
+//!  threads. The processes will only continue once all processes have reached
+//!  this point. We do this because the threads are not synchronized and the
+//!  output might be horribly disordered otherwise. If you care for speed, it
+//!  is possibly a good idea to remove the barriers.
+//! \code
+//!   agile::Network::barrier();
+//! 
+//! \endcode
+//!  This is a parallel example which is why we need at least two processes.
+//!  If there are less, we print a message to \p std::cout and quit right now.
+//! \code
+//!   if (agile::Network::size() < 2)
+//!   {
+//!     if (agile::Network::rank() == 0)
+//!     {
+//!       std::cout << "Please run more than only a single process!" << std::endl;
+//!       std::cout << "This is usually done using mpirun. ";
+//!       std::cout << "The call should look similar to: " << std::endl;
+//!       std::cout << "  mpirun -np 2 " << argv[0] << std::endl;
+//!     }
+//!     return 0;
+//!   }
+//! 
+//! \endcode
+//!  The next step is to create a communicator. This object is responsible
+//!  for transfering data over the network. Further, it eases the handling of
+//!  vectors that are shared by more than one process and stored in
+//!  distributed memory.
+//!  The communicator takes two template arguments. The first one is the
+//!  type used for vector indices (usually int or unsigned). The second one
+//!  is a floating point type that is compatible to the vectors used later on.
+//!  This type is needed to store the reciprocal (thus, floating point type)
+//!  of the number of nodes that share a vector entry.
+//! \code
+//!   typedef agile::Communicator<unsigned, double> communicator_type;
+//!   communicator_type com;
+//! 
+//! \endcode
+//!  One of the easiest things is to collect a value from all processes and
+//!  to compute its sum. The communicator provides the \p collect() method for
+//!  doing so.
+//!  We generate one value per process and collect it:
+//! \code
+//!   unsigned value = agile::Network::rank() + 1;
+//!   std::cout << "Process " << agile::Network::rank()
+//!             << " has got the local value " << value << std::endl;
+//!   com.collect(value);
+//! \endcode
+//!  Every process has now the sum of all local value as can be seen by
+//!  printing it:
+//! \code
+//!   std::cout << "Process " << agile::Network::rank()
+//!             << " has got the global value " << value << std::endl;
+//! 
+//! \endcode
+//!  Synchronize the threads again.
+//! \code
+//!   agile::Network::barrier();
+//! 
+//! \endcode
+//!  We want to demonstrate the abilities of the communicator by creating a
+//!  vector that lives partly on the first and partly on the second process.
+//!  The first process shall belong to indices \f$ 0 \le i \le 6 \f$ and the
+//!  second one to \f$ 3 \le i \le 9 \f$. Thus, the indices
+//!  \f$ 3 \le i \le 6 \f$ are shared by both processes. If a vector entry
+//!  does not belong to a process we do not store it. Thus, we need a way
+//!  to tell the library which global elements we store locally.
+//! 
+//!  This is achieved using a local->global index map. This is simply a vector
+//!  whose \p i-th element holds the global index. For process 1, this has to
+//!  be the vector [0, 1, 2, 3, 4, 5, 6] and for process 2 the vector
+//!  [3, 4, 5, 6, 7, 8, 9].
+//! \code
+//!   std::vector<unsigned> local_to_global_map;
+//!   if (agile::Network::rank() == 0)
+//!   {
+//!     for (unsigned counter = 0; counter <= 6; ++counter)
+//!       local_to_global_map.push_back(counter);
+//!   }
+//!   else if (agile::Network::rank() == 1)
+//!   {
+//!     for (unsigned counter = 3; counter <= 9; ++counter)
+//!       local_to_global_map.push_back(counter);
+//!   }
+//! \endcode
+//!  This local to global map we pass to the communicator.
+//! \code
+//!   com.setLocal2GlobalMap(local_to_global_map.begin(),
+//!                          local_to_global_map.end());
+//! 
+//! \endcode
+//!  Now we construct a global vector \f$ v(i) = 2*i \f$.
+//! \code
+//!   std::vector<double> global_v;
+//!   for (unsigned counter = 0; counter <= 9; ++counter)
+//!     global_v.push_back(2 * counter);
+//! 
+//! \endcode
+//!  Create the local vectors from the global one and print them. Note that
+//!  these vectors are \p accumulated (because every process knows the full
+//!  value of the shared nodes).
+//! \code
+//!   std::vector<double> local_v;
+//!   for (unsigned counter = 0; counter < local_to_global_map.size(); ++counter)
+//!     local_v.push_back(global_v[local_to_global_map[counter]]);
+//!   if (agile::Network::rank() < 2)
+//!     output("accumulated v_i: ", local_v);
+//! 
+//! \endcode
+//!  Synchronize the threads again.
+//! \code
+//!   agile::Network::barrier();
+//! 
+//! \endcode
+//!  The communicator provides means to convert an \p accumulated vector to a
+//!  \p distributed one (method \p distribute()) and vice versa (method
+//!  \p accumulate()). We distribute the vector and output it:
+//! \code
+//!   com.distribute(local_v);
+//!   if (agile::Network::rank() < 2)
+//!     output("distributed v_i: ", local_v);
+//! 
+//! \endcode
+//!  Synchronize threads again.
+//! \code
+//!   agile::Network::barrier();
+//! 
+//! \endcode
+//!  The \p distributed vector can be accumulated again:
+//! \code
+//!   com.accumulate(local_v);
+//!   if (agile::Network::rank() < 2)
+//!     output("accumulated v_i: ", local_v);
+//!   agile::Network::barrier();
+//! 
+//! \endcode
+//!  To compute the scalar product, we need a \p distributed and an
+//!  \p accumulated vector. \p local_v is still \p accumulated, so we copy and
+//!  distribute it. Note: It is generally more efficient to distribute a
+//!  vector than to accumulate one. The reason is that distribution can be
+//!  done without communicating with other processes because the shared vector
+//!  elements have to be divided only. Accumulation is more expensive because
+//!  the value from the other processes is needed which requires parallel
+//!  communication.
+//! \code
+//!   std::vector<double> local_v_dist(local_v);
+//!   com.distribute(local_v_dist);
+//! 
+//! \endcode
+//!  Compute the local (partial) scalar product and print it to \p std::cout.
+//! \code
+//!   double scalar_product = 0;
+//!   for (unsigned counter = 0; counter < local_v.size(); ++counter)
+//!     scalar_product += local_v[counter] * local_v_dist[counter];
+//!   if (agile::Network::rank() < 2)
+//!     std::cout << "Process " << agile::Network::rank()
+//!               << ": local scalar product = " << scalar_product << std::endl;
+//!   agile::Network::barrier();
+//! 
+//! \endcode
+//!  Now we collect all the local scalar products and print the result.
+//! \code
+//!   com.collect(scalar_product);
+//!   std::cout << "Process " << agile::Network::rank()
+//!             << ": global scalar product = " << scalar_product << std::endl;
+//!   agile::Network::barrier();
+//! 
+//! \endcode
+//!  The process with rank 0 shall compute the reference solution from the
+//!  global vector.
+//! \code
+//!   if (agile::Network::rank() == 0)
+//!   {
+//!     double reference = 0;
+//!     for (unsigned counter = 0; counter < global_v.size(); ++counter)
+//!       reference += global_v[counter] * global_v[counter];
+//!     std::cout << "Reference solution = " << reference << std::endl;
+//!   }
+//! 
+//! \endcode
+//!  This concludes the introduction to parallel programming. Once again we
+//!  want to state, that the \p barrier methods are not needed at all. The
+//!  program will still run as expected without failures.
+//! \code
+//!   return 0;
+//! }
+//! 
+//! \endcode
+//! 
+//! \section result Result
+//! 
+//! The program will produce output that is similar to the one printed below. Note
+//! that even though the \p barrier methods are used, the order of the statements
+//! might be confused. This shall be a hint that parallel output it not too
+//! trivial to implement. The program ran on two processes on the same PC. Output
+//! of the first run:
+//! 
+//! <code>
+//! Process 0 of 2 is running on fbmtpc31<BR>
+//! Process 1 of 2 is running on fbmtpc31<BR>
+//! Process 0 has got the local value 1<BR>
+//! Process 1 has got the local value 2<BR>
+//! Process 0 has got the global value 3<BR>
+//! Process 1 has got the global value 3<BR>
+//! Process 1: accumulated v_i: 6 8 10 12 14 16 18<BR>
+//! Process 0: accumulated v_i: 0 2 4 6 8 10 12<BR>
+//! Process 0: distributed v_i: 0 2 4 3 4 5 6<BR>
+//! Process 1: distributed v_i: 3 4 5 6 14 16 18<BR>
+//! Process 0: accumulated v_i: 0 2 4 6 8 10 12<BR>
+//! Process 1: accumulated v_i: 6 8 10 12 14 16 18<BR>
+//! Process 0: local scalar product = 192<BR>
+//! Process 1: local scalar product = 948<BR>
+//! Process 0: global scalar product = 1140<BR>
+//! Process 1: global scalar product = 1140<BR>
+//! Reference solution = 1140<BR>
+//! </code>
+//! 
+//! Output of the second run:
+//! 
+//! <code>
+//! Process 1 of 2 is running on fbmtpc31<BR>
+//! Process 0 of 2 is running on fbmtpc31<BR>
+//! Process 0 has got the local value 1<BR>
+//! Process 0 has got the global value 3<BR>
+//! Process 0: accumulated v_i: 0 2 4 6 8 10 12<BR>
+//! Process 0: distributed v_i: 0 2 4 3 4 5 6<BR>
+//! Process 0: accumulated v_i: 0 2 4 6 8 10 12<BR>
+//! Process 0: local scalar product = 192<BR>
+//! Process 0: global scalar product = 1140<BR>
+//! Reference solution = 1140<BR>
+//! Process 1 has got the local value 2<BR>
+//! Process 1 has got the global value 3<BR>
+//! Process 1: accumulated v_i: 6 8 10 12 14 16 18<BR>
+//! Process 1: distributed v_i: 3 4 5 6 14 16 18<BR>
+//! Process 1: accumulated v_i: 6 8 10 12 14 16 18<BR>
+//! Process 1: local scalar product = 948<BR>
+//! Process 1: global scalar product = 1140<BR>
+//! </code>
+//! 
+//! @section plain_code Plain code
+//! \code
+//! #include "agile/gpu_environment.hpp"
+//! #include "agile/gpu_vector.hpp"
+//! 
+//! #include "agile/network/communicator.hpp"
+//! 
+//! #include <iostream>
+//! #include <vector>
+//! 
+//! void output(const char* string, const std::vector<double>& v)
+//! {
+//!   std::cout << "Process " << agile::Network::rank() << ": " << string;
+//!   for (unsigned counter = 0; counter < v.size(); ++counter)
+//!     std::cout << v[counter] << " ";
+//!   std::cout << std::endl;
+//! }
+//! 
+//! int main(int argc, char* argv[])
+//! {
+//!   agile::NetworkEnvironment environment(argc, argv);
+//! 
+//!   std::cout << "Process " << agile::Network::rank() << " of "
+//!             << agile::Network::size() << " is running on "
+//!             << agile::Network::processor_name() << std::endl;
+//! 
+//!   agile::Network::barrier();
+//! 
+//!   if (agile::Network::size() < 2)
+//!   {
+//!     if (agile::Network::rank() == 0)
+//!     {
+//!       std::cout << "Please run more than only a single process!" << std::endl;
+//!       std::cout << "This is usually done using mpirun. ";
+//!       std::cout << "The call should look similar to: " << std::endl;
+//!       std::cout << "  mpirun -np 2 " << argv[0] << std::endl;
+//!     }
+//!     return 0;
+//!   }
+//! 
+//!   typedef agile::Communicator<unsigned, double> communicator_type;
+//!   communicator_type com;
+//! 
+//!   unsigned value = agile::Network::rank() + 1;
+//!   std::cout << "Process " << agile::Network::rank()
+//!             << " has got the local value " << value << std::endl;
+//!   com.collect(value);
+//!   std::cout << "Process " << agile::Network::rank()
+//!             << " has got the global value " << value << std::endl;
+//! 
+//!   agile::Network::barrier();
+//! 
+//! 
+//!   std::vector<unsigned> local_to_global_map;
+//!   if (agile::Network::rank() == 0)
+//!   {
+//!     for (unsigned counter = 0; counter <= 6; ++counter)
+//!       local_to_global_map.push_back(counter);
+//!   }
+//!   else if (agile::Network::rank() == 1)
+//!   {
+//!     for (unsigned counter = 3; counter <= 9; ++counter)
+//!       local_to_global_map.push_back(counter);
+//!   }
+//!   com.setLocal2GlobalMap(local_to_global_map.begin(),
+//!                          local_to_global_map.end());
+//! 
+//!   std::vector<double> global_v;
+//!   for (unsigned counter = 0; counter <= 9; ++counter)
+//!     global_v.push_back(2 * counter);
+//! 
+//!   std::vector<double> local_v;
+//!   for (unsigned counter = 0; counter < local_to_global_map.size(); ++counter)
+//!     local_v.push_back(global_v[local_to_global_map[counter]]);
+//!   if (agile::Network::rank() < 2)
+//!     output("accumulated v_i: ", local_v);
+//! 
+//!   agile::Network::barrier();
+//! 
+//!   com.distribute(local_v);
+//!   if (agile::Network::rank() < 2)
+//!     output("distributed v_i: ", local_v);
+//! 
+//!   agile::Network::barrier();
+//! 
+//!   com.accumulate(local_v);
+//!   if (agile::Network::rank() < 2)
+//!     output("accumulated v_i: ", local_v);
+//!   agile::Network::barrier();
+//! 
+//!   std::vector<double> local_v_dist(local_v);
+//!   com.distribute(local_v_dist);
+//! 
+//!   double scalar_product = 0;
+//!   for (unsigned counter = 0; counter < local_v.size(); ++counter)
+//!     scalar_product += local_v[counter] * local_v_dist[counter];
+//!   if (agile::Network::rank() < 2)
+//!     std::cout << "Process " << agile::Network::rank()
+//!               << ": local scalar product = " << scalar_product << std::endl;
+//!   agile::Network::barrier();
+//! 
+//!   com.collect(scalar_product);
+//!   std::cout << "Process " << agile::Network::rank()
+//!             << ": global scalar product = " << scalar_product << std::endl;
+//!   agile::Network::barrier();
+//! 
+//!   if (agile::Network::rank() == 0)
+//!   {
+//!     double reference = 0;
+//!     for (unsigned counter = 0; counter < global_v.size(); ++counter)
+//!       reference += global_v[counter] * global_v[counter];
+//!     std::cout << "Reference solution = " << reference << std::endl;
+//!   }
+//! 
+//!   return 0;
+//! }
+//! 
+//! \endcode

@@ -1,0 +1,30 @@
+
+@AutoWarning@
+
+#define TType1IsComplex @TType1IsComplex@
+#define TType2IsComplex @TType2IsComplex@
+
+#include "agile/gpu_config.hpp"
+#include "agile/gpu_type_traits.hpp"
+#include <cuda.h>
+
+#include "calc/postprocess.cpp"
+
+namespace agile
+{
+    template void PostProcess<@TType1@ ,@TType2@ >::calc_abs(const GPUMatrix<@TType1@ >* in_mat,
+            GPUMatrix<@TType2@ >& out_mat);
+
+    template void PostProcess<@TType1@ ,@TType2@ >::calc_phase(const GPUMatrix<@TType1@ >* in_mat,
+            GPUMatrix<@TType2@ >& out_mat);
+
+    template void PostProcess<@TType1@ ,@TType2@ >::calc_imag(const GPUMatrix<@TType1@ >* in_mat,
+            GPUMatrix<@TType2@ >& out_mat);
+
+    template void PostProcess<@TType1@ ,@TType2@ >::calc_real(const GPUMatrix<@TType1@ >* in_mat,
+            GPUMatrix<@TType2@ >& out_mat);
+
+    template void PostProcess<@TType1@ ,@TType2@ >::init();
+
+} // namespace agile
+

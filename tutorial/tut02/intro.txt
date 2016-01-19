@@ -1,0 +1,13 @@
+$Id: intro.txt 99 2009-03-18 11:49:11Z freiberger $
+\page tutorial02 Tutorial 2: Basic matrix-vector operations
+
+<abstract>
+In this step a dense matrix will be generated and basic matrix-vector products
+are demonstrated.
+</abstract>
+
+\section intro Introduction
+
+In the next step we are looking into basic matrix-vector operations on the GPU.
+
+End of $Id: intro.txt 99 2009-03-18 11:49:11Z freiberger $.

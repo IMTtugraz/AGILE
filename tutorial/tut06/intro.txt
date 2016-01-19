@@ -1,0 +1,16 @@
+$Id: intro.txt 191 2009-04-08 12:49:15Z freiberger $
+\page tutorial06 Tutorial 6: MPI goes GPU
+
+<abstract>
+In this tutorial we want to show how to combine the message
+passing interface (MPI) together with the GPU.
+</abstract>
+
+\section intro Introduction
+
+This tutorial enhances the previous one by using the parallel computation
+capabilities of the GPU together with the message passing interface (MPI).
+The main difference is the usage of a \p GPUCommunicator with replaces
+the ordinary \p Communicator.
+
+End of $Id: intro.txt 191 2009-04-08 12:49:15Z freiberger $.

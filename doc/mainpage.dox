@@ -1,0 +1,113 @@
+//! \mainpage
+//!
+//! \section build Building the library
+//!
+//! AGILE uses CMake in order to generate the Makefiles in a flexible manner.
+//! It is suggested to make an out-of-source build where the resultant object
+//! files, libraries and executables will be placed separated from the source
+//! files. This helps to keep the source directories clean.
+//! To build the library, create a new directory (e.g. <tt>build</tt>) and
+//! execute the \p cmake command in there providing the root directory of
+//! AGILE (which should be the current directory) as argument. Afterwards
+//! \p make can be executed in the build directory to generate the library.
+//! \code
+//! mkdir build
+//! cd build
+//! cmake ..
+//! make
+//! \endcode
+//! This will build the library which can be found in the sub-directory
+//! <tt>lib</tt> afterwards. When you want to rebuild the library, you only
+//! need to do:
+//! \code
+//! cd build
+//! make
+//! \endcode
+//! The \p make command will run \p cmake automatically, if this should be
+//! necessary.
+//!
+//! If CMake cannot determine the location of the CUDA toolkit, you have to
+//! provide an variable called \p CUDA_TOOLKIT_ROOT_DIR that is set to the root
+//! directory of the CUDA toolkit. Normally this is the parent directory
+//! of the directory in which nvcc, the CUDA compiler, resides in. The following
+//! commands can be used on a system where the full path to the CUDA compiler
+//! is <tt>/opt/cuda/bin/nvcc</tt>:
+//! \code
+//! mkdir build
+//! cd build
+//! cmake -DCUDA_TOOLKIT_ROOT_DIR=/opt/cuda ..
+//! make
+//! \endcode
+//!
+//! \section tutorials Tutorials
+//!
+//! In the sub-directory \p tutorial you can find some introductory material
+//! for the AGILE library. Every tutorial has its own \p CMakeLists.txt
+//! containing the rules for building the examples.
+//! To build a tutorial simply call \p make \p tutXX, where \p XX is the
+//! number of the tutorial. The instructions for running the first tutorial
+//! would be:
+//! \code
+//! cd build
+//! make tut01
+//! tutorial/tut01/tut01
+//! \endcode
+//! There is also an alternative method of running the tutorial. Every tutorial
+//! has its own \p tutXX-run target. This means in order to run (and build, if
+//! necessary) the first tutorial one can simply use:
+//! \code
+//! cd build
+//! make tut01-run
+//! \endcode
+//!
+//! The documentation for the tutorials can be found either in the program code
+//! or on a separate webpage. Follow the link to find a
+//! \subpage index_tutorial "list of tutorials" and the documentation.
+//!
+//!
+//! \section unittest Unit test
+//!
+//! Unit tests can be run with the help of the \p Makefile in the \p unittest
+//! subdirectory. Starting in the library's root directory type
+//! \code
+//! cd unittest
+//! make
+//! \endcode
+//! \htmlonly <span class="unittestlink">\endhtmlonly
+//! <span class="unittestexists" style="display:none;">The result can be found <a class="el" href="unittestreport.xml">here</a>.</span>
+//! <span class="unittestmissing" style="display:none;">Afterwards, the result can be found here.</span>
+//! \htmlonly </span> \endhtmlonly
+//!
+//! \section debug Enabeling debugging symbols
+//!
+//! If you want to build the AGILE library with debugging symbols, you have
+//! to supply the command line parameter \p --with-debug to \p configure. So
+//! the command sequence will look similar to
+//! \code
+//! ./configure --with-debug
+//! make
+//! \endcode
+//! This will build two versions of the library: an optimized one and one with
+//! additional debugging information. The latter one gets the suffix \p -dbg .
+//! When building and running the applications (for example in the \p test or
+//! the \p tutorial subdirectory) you can switch between the libraries via
+//! an additional parameter to the \p make command.
+//! To build the debug version of a program use
+//! \code
+//! make mode=dbg
+//! \endcode
+//! If you want to build and run the application simply type
+//! \code
+//! make mode=dbg run
+//! \endcode
+//! The optimized version can be built with one of the following commands:
+//! \code
+//! make mode=opt
+//! \endcode
+//! or
+//! \code
+//! make mode=opt run
+//! \endcode
+//! If the \p mode parameter is omitted, it will default to the optimized
+//! version.
+//!

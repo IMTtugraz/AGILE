@@ -1,0 +1,25 @@
+
+@AutoWarning@
+
+#define TType1IsComplex @TType1IsComplex@
+#define TType2IsComplex @TType2IsComplex@
+
+#include "agile/gpu_config.hpp"
+#include "agile/gpu_type_traits.hpp"
+#include <cuda.h>
+
+#include "calc/tvsolve.cpp"
+
+namespace agile
+{
+    template void TVSolve<@TType1@, @TType2@ >::Init();
+
+
+    //Pure Virtual Solve-Methode
+    template void  TVSolve<@TType1@ ,@TType2@ >::Solve(const GPUMatrix<@TType1@ >* u, const GPUMatrix<@TType1@ >* c,
+      const GPUMatrix<@TType1@ >* rhs, const GPUMatrix<@TType1@ >* u0,
+      unsigned maxits, @TType2@ alpha, @TType2@ beta,
+      GPUMatrix<@TType1@ >* du, GPUMatrix<@TType1@ >* dc);
+
+} // namespace agile
+

@@ -1,0 +1,49 @@
+
+@AutoWarning@
+
+#define TType1IsComplex @TType1IsComplex@
+#define TType2IsComplex @TType2IsComplex@
+
+#include "agile/gpu_config.hpp"
+#include "agile/gpu_type_traits.hpp"
+#include <cuda.h>
+
+#include "calc/fft.cpp"
+
+namespace agile
+{
+    template void FFT<@TType1@ >::setfftplan(
+    unsigned num_rows, unsigned num_columns);
+
+    template int FFT<@TType1@ >::CenterdIFFT(
+    const GPUMatrix<@TType1@ >& in_mat, GPUMatrix<@TType1@ >& out_mat);
+
+    template int FFT<@TType1@ >::CenterdFFT(
+    const GPUMatrix<@TType1@ >& in_mat, GPUMatrix<@TType1@ >& out_mat);
+    
+    template int FFT<@TType1@ >::CenterdIFFTpattern(
+    const GPUMatrix<@TType1@ >& in_mat, GPUMatrix<@TType1@ >& out_mat);
+
+    template int FFT<@TType1@ >::CenterdFFTpattern(
+    const GPUMatrix<@TType1@ >& in_mat, GPUMatrix<@TType1@ >& out_mat);
+
+    template void FFT<@TType1@ >::calc_pattern(
+    const GPUMatrix<@TType1@ >& in_mat);
+    
+    template int FFT<@TType1@ >::Forward(
+    const GPUVector<@TType1@ >& in_vec, GPUVector<@TType1@ >& out_vec, 
+    unsigned in_offset, unsigned out_offset);
+  
+    template int FFT<@TType1@ >::Inverse(
+    const GPUVector<@TType1@ >& in_vec, GPUVector<@TType1@ >& out_vec, 
+    unsigned in_offset, unsigned out_offset);
+    
+    template int FFT<@TType1@ >::CenteredForward(
+    const GPUVector<@TType1@ >& in_vec, GPUVector<@TType1@ >& out_vec, 
+    unsigned in_offset, unsigned out_offset);
+  
+    template int FFT<@TType1@ >::CenteredInverse(
+    const GPUVector<@TType1@ >& in_vec, GPUVector<@TType1@ >& out_vec, 
+    unsigned in_offset, unsigned out_offset);
+} // namespace agile
+

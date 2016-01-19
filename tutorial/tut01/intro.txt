@@ -1,0 +1,15 @@
+$Id: intro.txt 99 2009-03-18 11:49:11Z freiberger $
+\page tutorial01 Tutorial 1: A simple vector example
+
+<abstract>
+This tutorial describes how to initialize the GPU. A vector will be transfered
+from the host to the graphics card and basic vector-vector operations are
+performed then.
+</abstract>
+
+\section intro Introduction
+
+This tutorial describes how to generate two vectors on the GPU and perform
+some very basic operations with them.
+
+End of $Id: intro.txt 99 2009-03-18 11:49:11Z freiberger $.

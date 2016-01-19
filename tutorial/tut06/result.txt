@@ -1,0 +1,31 @@
+$Id: result.txt 191 2009-04-08 12:49:15Z freiberger $
+
+\section result Result
+
+The program will produce output that is similar to the one printed below and
+should be identical with the result from the previous tutorial (except the
+order of the lines which cannot be mixed up due to the parallel output).
+
+<code>
+Process 0 of 2 is running on gtx<BR>
+Process 1 of 2 is running on gtx<BR>
+Process 0 uses GPU no. 0<BR>
+Process 1 uses GPU no. 1<BR>
+Process 0 has got the local value 1<BR>
+Process 0 has got the global value 3<BR>
+Process 1 has got the local value 2<BR>
+Process 1 has got the global value 3<BR>
+Process 0: accumulated v_i: 0 2 4 6 8 10 12<BR>
+Process 1: accumulated v_i: 6 8 10 12 14 16 18<BR>
+Process 0: distributed v_i: 0 2 4 3 4 5 6<BR>
+Process 1: distributed v_i: 3 4 5 6 14 16 18<BR>
+Process 1: accumulated v_i: 6 8 10 12 14 16 18<BR>
+Process 0: accumulated v_i: 0 2 4 6 8 10 12<BR>
+Process 1: local scalar product = 948<BR>
+Process 0: local scalar product = 192<BR>
+Process 0: global scalar product = 1140<BR>
+Process 1: global scalar product = 1140<BR>
+Reference solution = 1140<BR>
+</code>
+
+End of $Id: result.txt 191 2009-04-08 12:49:15Z freiberger $
