@@ -58,17 +58,6 @@ link_libraries (${CUDA_CUBLAS_LIBRARIES})
 ###########################################################################
 ADD_DEFINITIONS(-DHAVE_CONFIG_H)
 
-SET(DCMTK_config_INCLUDE_DIR /usr/local/include/dcmtk/config)
-SET(DCMTK_ofstd_INCLUDE_DIR /usr/local/include/dcmtk/ofstd)
-SET(DCMTK_dcmdata_INCLUDE_DIR /usr/local/include/dcmtk/dcmdata)
-SET(DCMTK_dcmimgle_INCLUDE_DIR /usr/local/include/dcmtk/dcmimgle)
-
-#SET(DCMTK_config_INCLUDE_DIR /home/dieheart/workspace/dcmtk/config)
-#SET(DCMTK_ofstd_INCLUDE_DIR  /home/dieheart/workspace/dcmtk/ofstd)
-#SET(DCMTK_dcmdata_INCLUDE_DIR  /home/dieheart/workspace/dcmtk/dcmdata)
-#SET(DCMTK_dcmimgle_INCLUDE_DIR /home/dieheart/workspace/dcmtk/dcmimgle)
-
-
 find_package (DCMTK REQUIRED)
 if (DCMTK_FOUND)
   MESSAGE(STATUS "DCMTK_FOUND")
