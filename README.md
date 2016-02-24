@@ -2,7 +2,7 @@
 Environment for Linear and non-linear Image reconstruction using GPU Acceleration
 
 ## Contributors (sorted alphabetically):
-* [Kristian Bredies](http://www.uni-graz.at/~kbredies) (University of Graz) 
+* [Kristian Bredies](http://www.uni-graz.at/~bredies) (University of Graz) 
 * Gerald Buchgraber (Graz University of Technology, now at Datenkraft IT-Consulting)
 * [Manuel Freiberger](mailto:manuel.freiberger@gmx.at) (Graz University of Technology, now at Anton Paar)
 * Andreas Huber (Graz University of Technology)
