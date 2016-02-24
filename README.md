@@ -45,7 +45,6 @@ Copy/paste instructions for the lazy to be executed right in this directory:
  cmake ..
 ``` 
 
-
 At this step you need to set the path where you installed the CUDA SDK:
 ``` 
  ccmake .
