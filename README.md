@@ -2,7 +2,7 @@
 Environment for Linear and non-linear Image reconstruction using GPU Acceleration
 
 ## Contributors (sorted alphabetically):
-* [Kristian Bredies](www.uni-graz.at/~kbredies) (University of Graz) 
+* [Kristian Bredies](http://www.uni-graz.at/~kbredies) (University of Graz) 
 * Gerald Buchgraber (Graz University of Technology, now at Datenkraft IT-Consulting)
 * [Manuel Freiberger](mailto:manuel.freiberger@gmx.at) (Graz University of Technology, now at Anton Paar)
 * Andreas Huber (Graz University of Technology)
@@ -19,6 +19,9 @@ If you use this library or the provided data in your publications, please cite:
 Knoll, F.; Freiberger, M.; Bredies, K.; Stollberger, R.: AGILE: An open source library
 for image reconstruction using graphics card hardware acceleration. Proc. Intl. Soc. Mag.
 Reson. Med. 19:2554 (2011)
+
+This work is funded and supported by the Austrian Science Fund (FWF) in the context of project 'SFB F3209-19' (Mathematical Optimization and Applications in Biomedical Sciences)
+[MOBIS](http://math.uni-graz.at/mobis/)
 
 ## Build & Installation
 AGILE was developed and tested on Linux (OpenSUSE and Ubuntu) systems. It uses
@@ -109,7 +112,7 @@ Run 'make doc' in the build directory. Afterwards open the file
 
 If you are especially interested in iterative TGV based MR image
 reconstruction, please see Florian Knolls [AGILE-TGV](http://www.cai2r.net/resources/software/agile-gpu-image-reconstruction-library) implementation.
-An
+
 
 ## Version history
 * version 1.3: 01.01.2016: Included necessary extensions for dynamic MRI reconstrucion ([AVIONIC](https://github.com/IMTtugraz/AVIONIC)) by [Andreas Schwarzl](https://github.com/andyschwarzl)
