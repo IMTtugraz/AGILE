@@ -10,9 +10,6 @@ Knoll, F.; Freiberger, M.; Bredies, K.; Stollberger, R.: AGILE: An open source l
 for image reconstruction using graphics card hardware acceleration. Proc. Intl. Soc. Mag.
 Reson. Med. 19:2554 (2011)
 
-For any questions, comments or contributions, please contact
-Florian Knoll (florian.knoll@tugraz.at).
-
 ##Build & Installation
 
 AGILE was developed and tested on Linux (OpenSUSE and Ubuntu) systems. It uses
@@ -103,9 +100,16 @@ Run 'make doc' in the build directory. Afterwards open the file
 'doc/html/index.html' in your favourite browser and proceed to the tutorials.
 
 If you are especially interested in iterative TGV based MR image
-reconstruction, there is an additional readme file and testdata in the
-directory apps/tgv_radial_image_recon.
+reconstruction, please go to
+ http://www.cai2r.net/resources/software/agile-gpu-image-reconstruction-library
 
 ##Version history
+1.3: 01.01.2016: Included necessary extensions for dynamic MRI reconstrucion (AVIONIC: https://github.com/IMTtugraz/AVIONIC) by Andreas Schwarzl
+                 - Refactoring to support latest CUDA architecture
+                 – Finite forward and backward differences for 3-D data vectors
+                 – Forward and backward FFT operations for vector based data sets
+                 – Extended vector utilities (l1/l2-norm, min-max element computation, element-wise compare)
+                 – Extended thread assignment for large data sets
+1.2: 01.01.2014: Included IRGN-T(G)V for Cartesian image reconstruction (apps/imt_irgn) by Herbert Heigl
 1.1: 16.01.2012: Included CPU reference implementation for TGV.
 1.0: 28.07.2011: First release of AGILE.
