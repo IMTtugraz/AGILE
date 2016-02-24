@@ -104,12 +104,12 @@ reconstruction, please go to
  http://www.cai2r.net/resources/software/agile-gpu-image-reconstruction-library
 
 ##Version history
-1.3: 01.01.2016: Included necessary extensions for dynamic MRI reconstrucion (AVIONIC: https://github.com/IMTtugraz/AVIONIC) by Andreas Schwarzl
-                 - Refactoring to support latest CUDA architecture
-                 – Finite forward and backward differences for 3-D data vectors
-                 – Forward and backward FFT operations for vector based data sets
-                 – Extended vector utilities (l1/l2-norm, min-max element computation, element-wise compare)
-                 – Extended thread assignment for large data sets
-1.2: 01.01.2014: Included IRGN-T(G)V for Cartesian image reconstruction (apps/imt_irgn) by Herbert Heigl
-1.1: 16.01.2012: Included CPU reference implementation for TGV.
-1.0: 28.07.2011: First release of AGILE.
+* 1.3: 01.01.2016: Included necessary extensions for dynamic MRI reconstrucion ([AVIONIC](https://github.com/IMTtugraz/AVIONIC)) by Andreas Schwarzl
+                 * Refactoring to support latest CUDA architecture
+                 * Finite forward and backward differences for 3-D data vectors
+                 * Forward and backward FFT operations for vector based data sets
+                 * Extended vector utilities (l1/l2-norm, min-max element computation, element-wise compare)
+                 * Extended thread assignment for large data sets
+*1.2: 01.01.2014: Included IRGN-T(G)V for Cartesian image reconstruction (apps/imt_irgn) by Herbert Heigl
+*1.1: 16.01.2012: Included CPU reference implementation for TGV.
+*1.0: 28.07.2011: First release of AGILE.
