@@ -652,6 +652,47 @@ __global__ void diff3_GPU(const unsigned dim, const unsigned x_size, const unsig
   }
 }
 
+//! \brief Compute the difference (sym. boundary cond.) between each value in a GPU vector (GPU function)
+//! \brief considering a 3D data layout.
+//!
+//! y = diff(x)
+template <typename TType1>
+__global__ void diff3sym_GPU(const unsigned dim, const unsigned x_size, const unsigned y_size, const TType1* x, TType1* y, unsigned size)
+{
+  unsigned thread_id = blockDim.x * blockIdx.x + threadIdx.x;
+
+  while (thread_id < size)
+  {
+    int val = thread_id-size+x_size;
+    int N = x_size * y_size;
+    if (dim == 1)
+      if ( ((thread_id+1) % x_size ) != 0) //last values not reached
+        y[thread_id] = x[thread_id+1] - x[thread_id];
+      else
+        y[thread_id] = x[thread_id-1] - x[thread_id];
+
+    if (dim == 2)
+    {
+      int y_pos = (int)((thread_id - ((int)(thread_id / N))*N)/x_size)+1;
+      if (y_pos % y_size != 0) //last values not reached
+        y[thread_id] = x[thread_id+x_size] - x[thread_id];
+      else
+        y[thread_id] = x[thread_id-x_size] - x[thread_id];
+    }
+
+    if (dim == 3)
+    {
+      val = thread_id - size + N;
+      if ((val) < 0)
+        y[thread_id] = x[thread_id+N] - x[thread_id];
+      else
+        y[thread_id] = x[thread_id-N] - x[thread_id];
+    }
+
+    thread_id += blockDim.x*gridDim.x;
+  }
+}
+
 //! \brief Compute the backward difference between each value in a GPU vector (GPU function)
 //! \brief considering a 3D data layout.
 //!
@@ -707,6 +748,60 @@ __global__ void bdiff3_GPU(const unsigned dim, const unsigned x_size, const unsi
   }
 }
 
+//! \brief Compute the backward difference (sym. boundary cond.) between each value in a GPU vector (GPU function)
+//! \brief considering a 3D data layout.
+//!
+//! y = bdiff(x)
+//!
+//! basically bdiff3(x) = -diff3_trans(x)
+template <typename TType1>
+__global__ void bdiff3sym_GPU(const unsigned dim, const unsigned x_size, const unsigned y_size, const TType1* x, TType1* y, unsigned size)
+{
+  unsigned thread_id = blockDim.x * blockIdx.x + threadIdx.x;
+  int N = x_size * y_size;
+
+  while (thread_id < size)
+  {
+    if (dim == 1)
+    {
+      int xPos = ((thread_id+1) % x_size);
+      if (xPos == 0) // right border
+        y[thread_id] = x[thread_id-1] - x[thread_id];
+      else if (xPos == 1) // left border
+        y[thread_id] = -2.0 * x[thread_id];
+      else
+        y[thread_id] = x[thread_id] - x[thread_id-1];
+    }
+
+    if (dim == 2)
+    {
+      int yPos = (int)((thread_id - ((int)(thread_id / N))*N)/x_size)+1;
+      if (yPos % y_size == 0) // bottom border
+        y[thread_id] = x[thread_id-x_size] - x[thread_id];
+      else if (yPos % y_size == 1) //top border
+        y[thread_id] = -2.0 * x[thread_id];
+      else
+        y[thread_id] = x[thread_id] - x[thread_id-x_size];
+    }
+
+    if (dim == 3)
+    {
+      int zPos = (int)(thread_id/N);
+      int zSize = size / N;
+
+      if (zSize == 1)
+        y[thread_id] = 0;
+      else if (zPos == 0) // first slice
+        y[thread_id] = -2.0 * x[thread_id];
+      else if (zPos == (zSize-1)) // last slice
+        y[thread_id] = x[thread_id-N] - x[thread_id];
+      else
+        y[thread_id] = x[thread_id] - x[thread_id-N];
+    }
+
+    thread_id += blockDim.x*gridDim.x;
+  }
+}
 
 //! \brief Compute the difference between each value in a GPU vector (GPU function)
 //! \brief last (x_size) value with first value
@@ -1621,6 +1716,22 @@ namespace lowlevel
                   (typename substitute_gpu_complex<TType1>::type*) y, size, borderWrap);
   }
 
+  //! \brief Compute the difference (sym. boundary cond.) between each value in a GPU Vector considering a 3d data layout (host function)
+  template <typename TType1>
+  void diff3sym(const unsigned dim, const unsigned x_size, const unsigned y_size,
+           const TType1* x,
+                 TType1* y, unsigned size)
+  {
+    unsigned grid_size
+      = (size + GPUEnvironment::getMaxNumThreadsPerBlock() - 1)
+        / GPUEnvironment::getMaxNumThreadsPerBlock();
+    diff3sym_GPU<<<std::min(grid_size,65520u),GPUEnvironment::getMaxNumThreadsPerBlock()>>>(
+                  dim, x_size, y_size,
+                  (const typename substitute_gpu_complex<TType1>::type*) x,
+                  (typename substitute_gpu_complex<TType1>::type*) y, size);
+  }
+
+
   //! \brief Compute the difference between each value in a GPU Vector considering a transposed 3d data layout (host function)
   template <typename TType1>
   void diff3trans(const unsigned dim, const unsigned x_size, const unsigned y_size,
@@ -1649,6 +1760,21 @@ namespace lowlevel
                   dim, x_size, y_size,
                   (const typename substitute_gpu_complex<TType1>::type*) x,
                   (typename substitute_gpu_complex<TType1>::type*) y, size, borderWrap);
+  }
+
+  //! \brief Compute the backward difference between each value in a GPU Vector considering a 3d data layout (host function)
+  template <typename TType1>
+  void bdiff3sym(const unsigned dim, const unsigned x_size, const unsigned y_size,
+                 const TType1* x,
+                       TType1* y, unsigned size)
+  {
+    unsigned grid_size
+      = (size + GPUEnvironment::getMaxNumThreadsPerBlock() - 1)
+            / GPUEnvironment::getMaxNumThreadsPerBlock();
+    bdiff3sym_GPU<<<std::min(grid_size,65520u),GPUEnvironment::getMaxNumThreadsPerBlock()>>>(
+                         dim, x_size, y_size,
+                         (const typename substitute_gpu_complex<TType1>::type*) x,
+                         (typename substitute_gpu_complex<TType1>::type*) y, size);
   }
 
   //! \brief Compute the backward difference between each value in a GPU Vector considering a transposed 3d data layout (host function)

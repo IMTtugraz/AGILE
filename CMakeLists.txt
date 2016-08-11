@@ -7,6 +7,9 @@ project (AGILE CXX)
 
 # Set the minimum CMake version required
 cmake_minimum_required (VERSION 2.6)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_FORCE_INLINES")
+
+ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK) 
 
 ###########################################################################
 # Paths for out-of-source build.

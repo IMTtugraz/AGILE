@@ -311,6 +311,26 @@ namespace agile
     template <typename TType1>
     void diff3(const unsigned dim, const unsigned x_size, const unsigned y_size, const TType1* x, TType1* y, unsigned size, bool borderWrap);
 
+    //! \brief Compute the difference between each value in a GPU vector using symmetric boarder handling
+    //! \brief considering a 3D data layout (host function).
+    //!
+    //! if border has to be wrapped:
+    //!
+    //! dim 1: diff in first dimension: Last column with first column of the same slice
+    //! dim 2: diff in second dimension: Last row with first row of the same slice
+    //! dim 3: diff in third dimension: Last slice with first slice
+    //!
+    //! else border derivative is 0
+    //!
+    //! \param[in] x - The input vector.
+    //! \param[in] dim - dimension to be calculated (1...row, 2...column, 3...slice)
+    //! \param[in] x_size - x_dimension size of Matrix/Vector
+    //! \param[in] y_size - y_dimension size of Matrix/Vector
+    //! \param[out] y - The vector y[i] <- diff(x[i]).
+    template <typename TType1>
+    void diff3sym(const unsigned dim, const unsigned x_size, const unsigned y_size, const TType1* x, TType1* y, unsigned size);
+
+
     //! \brief Compute the difference between each value in a transposed GPU vector 
     //! \brief considering a 3D data layout (host function).
     //!
@@ -350,6 +370,25 @@ namespace agile
     //! \param[out] y - The vector y[i] <- diff(x[i]).
     template <typename TType1>
     void bdiff3(const unsigned dim, const unsigned x_size, const unsigned y_size, const TType1* x, TType1* y, unsigned size, bool borderWrap);
+
+    //! \brief Compute the backward difference between each value in a GPU vector using symmetric boarder handling
+    //! \brief considering a 3D data layout (host function).
+    //!
+    //! if border has to be wrapped:
+    //!
+    //! dim 1: diff in first dimension: Last column with first column of the same slice
+    //! dim 2: diff in second dimension: Last row with first row of the same slice
+    //! dim 3: diff in third dimension: Last slice with first slice
+    //!
+    //! else border derivative is 0
+    //!
+    //! \param[in] x - The input vector.
+    //! \param[in] dim - dimension to be calculated (1...row, 2...column, 3...slice)
+    //! \param[in] x_size - x_dimension size of Matrix/Vector
+    //! \param[in] y_size - y_dimension size of Matrix/Vector
+    //! \param[out] y - The vector y[i] <- diff(x[i]).
+    template <typename TType1>
+    void bdiff3sym(const unsigned dim, const unsigned x_size, const unsigned y_size, const TType1* x, TType1* y, unsigned size);
 
     //! \brief Compute the backward difference between each value in a transposed GPU vector 
     //! \brief considering a 3D data layout (host function).
