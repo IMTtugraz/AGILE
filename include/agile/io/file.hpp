@@ -234,7 +234,36 @@ namespace agile
     return true;
   }
 //<-added Heigl
+  
+  /*
+  //! \brief Load a REAL vector from a cfl file (real or complex).
+  //!
+  //! \param[in] file_name Name of cfl vector file to be read
+  //! \param[out] data List of values
+  template <typename TValueType>
+  bool readCflFile(const char* file_name, unsigned size,
+                      std::vector<TValueType>& data)
+  {
+    std::ifstream vec_file(file_name, std::ifstream::binary);
+    if (!vec_file.is_open()) {
+      std::cerr << "file not found: " << file_name << std::endl;
+      return false;
+    }
 
+    double tempd;
+    unsigned tempd_size = sizeof(tempd);
+
+    // read vector data
+    data.resize(size, TValueType(0));
+    for (unsigned counter = 0; counter < size; ++counter)
+    {
+      vec_file.read((char*)&tempd, tempd_size);
+      data[counter] = (TValueType)tempd;
+    }
+    vec_file.close();
+    return true;
+  }
+  */
 
   //! \brief Load a REAL vector from a binary file (real or complex).
   //!
@@ -272,6 +301,52 @@ namespace agile
     return true;
   }
 
+  /*
+  //! \brief Load a COMPLEX vector from a cfl file (real or complex).
+  //!
+  //! \param[in] file_name Name of cfl vector file to be read
+  //! \param[out] data List of values
+  template <typename TValueType>
+  bool readCflFile(const char* file_name, unsigned size,
+                      std::vector<std::complex<TValueType> >& data)
+  {
+    std::ifstream vec_file(file_name, std::ifstream::binary);
+    if (!vec_file.is_open()) {
+      std::cerr << "file not found: " << file_name << std::endl;
+      return false;
+    }
+
+    // read vector size
+    //unsigned size;
+    //vec_file.read((char*)&size, sizeof(size));
+
+    double tempd;
+    unsigned tempd_size = sizeof(tempd);
+
+    // read vector data
+    data.resize(size, std::complex<TValueType>(0));
+    if (AGILE_IO_FILE_FLAG_COMPLEX)
+    {
+      std::vector<TValueType> tmp_data(2 * size, TValueType(0));
+      for (unsigned counter = 0; counter < tmp_data.size(); ++counter)
+      {
+        vec_file.read((char*)&tempd, tempd_size);
+        tmp_data[counter] = (TValueType)tempd;
+      }
+      for (unsigned counter = 0; counter < size; ++counter)
+        data[counter] = std::complex<TValueType>(tmp_data[counter],
+                                                 tmp_data[size + counter]);
+    } else {
+      for (unsigned counter = 0; counter < size; ++counter)
+      {
+        vec_file.read((char*)&tempd, tempd_size);
+        data[counter] = (TValueType)tempd;
+      }
+    }
+    vec_file.close();
+    return true;
+  }
+ */
 
   //! \brief Load a COMPLEX vector from a binary file (real or complex).
   //!
@@ -321,7 +396,6 @@ namespace agile
     vec_file.close();
     return true;
   }
-
 
   //! \brief Writes a REAL std::vector to a binary file.
   //!
