@@ -1,0 +1,40 @@
+# $Id: CMakeLists.txt 476 2011-06-16 08:54:14Z freiberger $
+cmake_minimum_required (VERSION 2.8)
+
+
+find_package (CUDA 2.2 REQUIRED)
+set(CUDA_HOST_COMPILER ${CMAKE_C_COMPILER})
+include_directories (${CUDA_INCLUDE_DIRS})
+set(CUDA_LIBRARIES ${CUDA_LIBRARIES} cuda)
+link_libraries (${CUDA_LIBRARIES})
+
+set(ENABLE_GPU_DOUBLE ON CACHE BOOL "Set flag to enable double-precision data types on GPU")
+if(ENABLE_GPU_DOUBLE)
+  SET(CUDA_NVCC_FLAGS "-arch;sm_20")
+endif(ENABLE_GPU_DOUBLE)
+link_libraries (${CUDA_CUBLAS_LIBRARIES})
+
+# Dependencies 
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
+find_package (AGILE REQUIRED)
+include_directories(${AGILE_INCLUDE_DIRS})
+link_libraries (${AGILE_LIBRARIES})
+
+
+# The name of the current tutorial. This is simply the last part of the
+# current source directory (i.e. id should be one of tut01, tut02, tut03...).
+get_filename_component (TUTORIAL ${CMAKE_CURRENT_SOURCE_DIR} NAME)
+
+# List of source files which have to be compiled for this tutorial.
+set (SOURCES program.cpp)
+
+# The resulting executable.
+add_executable(${TUTORIAL} ${SOURCES})
+
+# A custom target to run the tutorial.
+add_custom_target(${TUTORIAL}-run ${TUTORIAL}
+DEPENDS ${TUTORIAL}
+WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
+
+# End of $Id: CMakeLists.txt 476 2011-06-16 08:54:14Z freiberger $.
+

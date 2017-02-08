@@ -1,0 +1,247 @@
+The system is: Linux - 3.16.7-21-desktop - x86_64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /usr/bin/cc 
+Build flags: 
+Id flags: 
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+
+The C compiler identification is GNU, found in "/home/dieheart/workspace/AGILE/tutorial/tut08/build/CMakeFiles/3.0.2/CompilerIdC/a.out"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: /usr/bin/c++ 
+Build flags: 
+Id flags: 
+
+The output was:
+0
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+
+The CXX compiler identification is GNU, found in "/home/dieheart/workspace/AGILE/tutorial/tut08/build/CMakeFiles/3.0.2/CompilerIdCXX/a.out"
+
+Determining if the C compiler works passed with the following output:
+Change Dir: /home/dieheart/workspace/AGILE/tutorial/tut08/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec2589507841/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec2589507841.dir/build.make CMakeFiles/cmTryCompileExec2589507841.dir/build
+gmake[1]: Entering directory '/home/dieheart/workspace/AGILE/tutorial/tut08/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/dieheart/workspace/AGILE/tutorial/tut08/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec2589507841.dir/testCCompiler.c.o
+/usr/bin/cc    -o CMakeFiles/cmTryCompileExec2589507841.dir/testCCompiler.c.o   -c /home/dieheart/workspace/AGILE/tutorial/tut08/build/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTryCompileExec2589507841
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2589507841.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTryCompileExec2589507841.dir/testCCompiler.c.o  -o cmTryCompileExec2589507841 -rdynamic 
+gmake[1]: Leaving directory '/home/dieheart/workspace/AGILE/tutorial/tut08/build/CMakeFiles/CMakeTmp'
+
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: /home/dieheart/workspace/AGILE/tutorial/tut08/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec4223316687/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec4223316687.dir/build.make CMakeFiles/cmTryCompileExec4223316687.dir/build
+gmake[1]: Entering directory '/home/dieheart/workspace/AGILE/tutorial/tut08/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/dieheart/workspace/AGILE/tutorial/tut08/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec4223316687.dir/CMakeCCompilerABI.c.o
+/usr/bin/cc    -o CMakeFiles/cmTryCompileExec4223316687.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake/Modules/CMakeCCompilerABI.c
+Linking C executable cmTryCompileExec4223316687
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec4223316687.dir/link.txt --verbose=1
+/usr/bin/cc     -v CMakeFiles/cmTryCompileExec4223316687.dir/CMakeCCompilerABI.c.o  -o cmTryCompileExec4223316687 -rdynamic  
+Using built-in specs.
+COLLECT_GCC=/usr/bin/cc
+COLLECT_LTO_WRAPPER=/usr/lib64/gcc/x86_64-suse-linux/4.8/lto-wrapper
+Target: x86_64-suse-linux
+Configured with: ../configure --prefix=/usr --infodir=/usr/share/info --mandir=/usr/share/man --libdir=/usr/lib64 --libexecdir=/usr/lib64 --enable-languages=c,c++,objc,fortran,obj-c++,java,ada --enable-checking=release --with-gxx-include-dir=/usr/include/c++/4.8 --enable-ssp --disable-libssp --disable-plugin --with-bugurl=http://bugs.opensuse.org/ --with-pkgversion='SUSE Linux' --disable-libgcj --disable-libmudflap --with-slibdir=/lib64 --with-system-zlib --enable-__cxa_atexit --enable-libstdcxx-allocator=new --disable-libstdcxx-pch --enable-version-specific-runtime-libs --enable-linker-build-id --enable-linux-futex --program-suffix=-4.8 --without-system-libunwind --with-arch-32=i586 --with-tune=generic --build=x86_64-suse-linux --host=x86_64-suse-linux
+Thread model: posix
+gcc version 4.8.3 20140627 [gcc-4_8-branch revision 212064] (SUSE Linux) 
+COMPILER_PATH=/usr/lib64/gcc/x86_64-suse-linux/4.8/:/usr/lib64/gcc/x86_64-suse-linux/4.8/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/4.8/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../x86_64-suse-linux/bin/
+LIBRARY_PATH=/usr/lib64/gcc/x86_64-suse-linux/4.8/:/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../x86_64-suse-linux/lib/:/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec4223316687' '-rdynamic' '-mtune=generic' '-march=x86-64'
+ /usr/lib64/gcc/x86_64-suse-linux/4.8/collect2 --build-id --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTryCompileExec4223316687 /usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../lib64/crt1.o /usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../lib64/crti.o /usr/lib64/gcc/x86_64-suse-linux/4.8/crtbegin.o -L/usr/lib64/gcc/x86_64-suse-linux/4.8 -L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../x86_64-suse-linux/lib -L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../.. CMakeFiles/cmTryCompileExec4223316687.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib64/gcc/x86_64-suse-linux/4.8/crtend.o /usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../lib64/crtn.o
+gmake[1]: Leaving directory '/home/dieheart/workspace/AGILE/tutorial/tut08/build/CMakeFiles/CMakeTmp'
+
+
+Parsed C implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/dieheart/workspace/AGILE/tutorial/tut08/build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command:"/usr/bin/gmake" "cmTryCompileExec4223316687/fast"]
+  ignore line: [/usr/bin/gmake -f CMakeFiles/cmTryCompileExec4223316687.dir/build.make CMakeFiles/cmTryCompileExec4223316687.dir/build]
+  ignore line: [gmake[1]: Entering directory '/home/dieheart/workspace/AGILE/tutorial/tut08/build/CMakeFiles/CMakeTmp']
+  ignore line: [/usr/bin/cmake -E cmake_progress_report /home/dieheart/workspace/AGILE/tutorial/tut08/build/CMakeFiles/CMakeTmp/CMakeFiles 1]
+  ignore line: [Building C object CMakeFiles/cmTryCompileExec4223316687.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/usr/bin/cc    -o CMakeFiles/cmTryCompileExec4223316687.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake/Modules/CMakeCCompilerABI.c]
+  ignore line: [Linking C executable cmTryCompileExec4223316687]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec4223316687.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/cc     -v CMakeFiles/cmTryCompileExec4223316687.dir/CMakeCCompilerABI.c.o  -o cmTryCompileExec4223316687 -rdynamic  ]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/usr/bin/cc]
+  ignore line: [COLLECT_LTO_WRAPPER=/usr/lib64/gcc/x86_64-suse-linux/4.8/lto-wrapper]
+  ignore line: [Target: x86_64-suse-linux]
+  ignore line: [Configured with: ../configure --prefix=/usr --infodir=/usr/share/info --mandir=/usr/share/man --libdir=/usr/lib64 --libexecdir=/usr/lib64 --enable-languages=c,c++,objc,fortran,obj-c++,java,ada --enable-checking=release --with-gxx-include-dir=/usr/include/c++/4.8 --enable-ssp --disable-libssp --disable-plugin --with-bugurl=http://bugs.opensuse.org/ --with-pkgversion='SUSE Linux' --disable-libgcj --disable-libmudflap --with-slibdir=/lib64 --with-system-zlib --enable-__cxa_atexit --enable-libstdcxx-allocator=new --disable-libstdcxx-pch --enable-version-specific-runtime-libs --enable-linker-build-id --enable-linux-futex --program-suffix=-4.8 --without-system-libunwind --with-arch-32=i586 --with-tune=generic --build=x86_64-suse-linux --host=x86_64-suse-linux]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 4.8.3 20140627 [gcc-4_8-branch revision 212064] (SUSE Linux) ]
+  ignore line: [COMPILER_PATH=/usr/lib64/gcc/x86_64-suse-linux/4.8/:/usr/lib64/gcc/x86_64-suse-linux/4.8/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/4.8/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../x86_64-suse-linux/bin/]
+  ignore line: [LIBRARY_PATH=/usr/lib64/gcc/x86_64-suse-linux/4.8/:/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../x86_64-suse-linux/lib/:/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec4223316687' '-rdynamic' '-mtune=generic' '-march=x86-64']
+  link line: [ /usr/lib64/gcc/x86_64-suse-linux/4.8/collect2 --build-id --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTryCompileExec4223316687 /usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../lib64/crt1.o /usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../lib64/crti.o /usr/lib64/gcc/x86_64-suse-linux/4.8/crtbegin.o -L/usr/lib64/gcc/x86_64-suse-linux/4.8 -L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../x86_64-suse-linux/lib -L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../.. CMakeFiles/cmTryCompileExec4223316687.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib64/gcc/x86_64-suse-linux/4.8/crtend.o /usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../lib64/crtn.o]
+    arg [/usr/lib64/gcc/x86_64-suse-linux/4.8/collect2] ==> ignore
+    arg [--build-id] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf_x86_64] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTryCompileExec4223316687] ==> ignore
+    arg [/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../lib64/crt1.o] ==> ignore
+    arg [/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../lib64/crti.o] ==> ignore
+    arg [/usr/lib64/gcc/x86_64-suse-linux/4.8/crtbegin.o] ==> ignore
+    arg [-L/usr/lib64/gcc/x86_64-suse-linux/4.8] ==> dir [/usr/lib64/gcc/x86_64-suse-linux/4.8]
+    arg [-L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../lib64] ==> dir [/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../lib64]
+    arg [-L/lib/../lib64] ==> dir [/lib/../lib64]
+    arg [-L/usr/lib/../lib64] ==> dir [/usr/lib/../lib64]
+    arg [-L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../x86_64-suse-linux/lib] ==> dir [/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../x86_64-suse-linux/lib]
+    arg [-L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../..] ==> dir [/usr/lib64/gcc/x86_64-suse-linux/4.8/../../..]
+    arg [CMakeFiles/cmTryCompileExec4223316687.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [-lgcc] ==> lib [gcc]
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--no-as-needed] ==> ignore
+    arg [-lc] ==> lib [c]
+    arg [-lgcc] ==> lib [gcc]
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--no-as-needed] ==> ignore
+    arg [/usr/lib64/gcc/x86_64-suse-linux/4.8/crtend.o] ==> ignore
+    arg [/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../lib64/crtn.o] ==> ignore
+  remove lib [gcc]
+  remove lib [gcc_s]
+  remove lib [gcc]
+  remove lib [gcc_s]
+  collapse library dir [/usr/lib64/gcc/x86_64-suse-linux/4.8] ==> [/usr/lib64/gcc/x86_64-suse-linux/4.8]
+  collapse library dir [/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../lib64] ==> [/usr/lib64]
+  collapse library dir [/lib/../lib64] ==> [/lib64]
+  collapse library dir [/usr/lib/../lib64] ==> [/usr/lib64]
+  collapse library dir [/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../x86_64-suse-linux/lib] ==> [/usr/x86_64-suse-linux/lib]
+  collapse library dir [/usr/lib64/gcc/x86_64-suse-linux/4.8/../../..] ==> [/usr/lib64]
+  implicit libs: [c]
+  implicit dirs: [/usr/lib64/gcc/x86_64-suse-linux/4.8;/usr/lib64;/lib64;/usr/x86_64-suse-linux/lib]
+  implicit fwks: []
+
+
+Determining if the CXX compiler works passed with the following output:
+Change Dir: /home/dieheart/workspace/AGILE/tutorial/tut08/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec1696395017/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec1696395017.dir/build.make CMakeFiles/cmTryCompileExec1696395017.dir/build
+gmake[1]: Entering directory '/home/dieheart/workspace/AGILE/tutorial/tut08/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/dieheart/workspace/AGILE/tutorial/tut08/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec1696395017.dir/testCXXCompiler.cxx.o
+/usr/bin/c++     -o CMakeFiles/cmTryCompileExec1696395017.dir/testCXXCompiler.cxx.o -c /home/dieheart/workspace/AGILE/tutorial/tut08/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX executable cmTryCompileExec1696395017
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1696395017.dir/link.txt --verbose=1
+/usr/bin/c++        CMakeFiles/cmTryCompileExec1696395017.dir/testCXXCompiler.cxx.o  -o cmTryCompileExec1696395017 -rdynamic 
+gmake[1]: Leaving directory '/home/dieheart/workspace/AGILE/tutorial/tut08/build/CMakeFiles/CMakeTmp'
+
+
+Detecting CXX compiler ABI info compiled with the following output:
+Change Dir: /home/dieheart/workspace/AGILE/tutorial/tut08/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec3984389838/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3984389838.dir/build.make CMakeFiles/cmTryCompileExec3984389838.dir/build
+gmake[1]: Entering directory '/home/dieheart/workspace/AGILE/tutorial/tut08/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/dieheart/workspace/AGILE/tutorial/tut08/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec3984389838.dir/CMakeCXXCompilerABI.cpp.o
+/usr/bin/c++     -o CMakeFiles/cmTryCompileExec3984389838.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp
+Linking CXX executable cmTryCompileExec3984389838
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3984389838.dir/link.txt --verbose=1
+/usr/bin/c++      -v CMakeFiles/cmTryCompileExec3984389838.dir/CMakeCXXCompilerABI.cpp.o  -o cmTryCompileExec3984389838 -rdynamic  
+Using built-in specs.
+COLLECT_GCC=/usr/bin/c++
+COLLECT_LTO_WRAPPER=/usr/lib64/gcc/x86_64-suse-linux/4.8/lto-wrapper
+Target: x86_64-suse-linux
+Configured with: ../configure --prefix=/usr --infodir=/usr/share/info --mandir=/usr/share/man --libdir=/usr/lib64 --libexecdir=/usr/lib64 --enable-languages=c,c++,objc,fortran,obj-c++,java,ada --enable-checking=release --with-gxx-include-dir=/usr/include/c++/4.8 --enable-ssp --disable-libssp --disable-plugin --with-bugurl=http://bugs.opensuse.org/ --with-pkgversion='SUSE Linux' --disable-libgcj --disable-libmudflap --with-slibdir=/lib64 --with-system-zlib --enable-__cxa_atexit --enable-libstdcxx-allocator=new --disable-libstdcxx-pch --enable-version-specific-runtime-libs --enable-linker-build-id --enable-linux-futex --program-suffix=-4.8 --without-system-libunwind --with-arch-32=i586 --with-tune=generic --build=x86_64-suse-linux --host=x86_64-suse-linux
+Thread model: posix
+gcc version 4.8.3 20140627 [gcc-4_8-branch revision 212064] (SUSE Linux) 
+COMPILER_PATH=/usr/lib64/gcc/x86_64-suse-linux/4.8/:/usr/lib64/gcc/x86_64-suse-linux/4.8/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/4.8/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../x86_64-suse-linux/bin/
+LIBRARY_PATH=/usr/lib64/gcc/x86_64-suse-linux/4.8/:/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../x86_64-suse-linux/lib/:/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec3984389838' '-rdynamic' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib64/gcc/x86_64-suse-linux/4.8/collect2 --build-id --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTryCompileExec3984389838 /usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../lib64/crt1.o /usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../lib64/crti.o /usr/lib64/gcc/x86_64-suse-linux/4.8/crtbegin.o -L/usr/lib64/gcc/x86_64-suse-linux/4.8 -L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../x86_64-suse-linux/lib -L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../.. CMakeFiles/cmTryCompileExec3984389838.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib64/gcc/x86_64-suse-linux/4.8/crtend.o /usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../lib64/crtn.o
+gmake[1]: Leaving directory '/home/dieheart/workspace/AGILE/tutorial/tut08/build/CMakeFiles/CMakeTmp'
+
+
+Parsed CXX implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/dieheart/workspace/AGILE/tutorial/tut08/build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command:"/usr/bin/gmake" "cmTryCompileExec3984389838/fast"]
+  ignore line: [/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3984389838.dir/build.make CMakeFiles/cmTryCompileExec3984389838.dir/build]
+  ignore line: [gmake[1]: Entering directory '/home/dieheart/workspace/AGILE/tutorial/tut08/build/CMakeFiles/CMakeTmp']
+  ignore line: [/usr/bin/cmake -E cmake_progress_report /home/dieheart/workspace/AGILE/tutorial/tut08/build/CMakeFiles/CMakeTmp/CMakeFiles 1]
+  ignore line: [Building CXX object CMakeFiles/cmTryCompileExec3984389838.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/usr/bin/c++     -o CMakeFiles/cmTryCompileExec3984389838.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Linking CXX executable cmTryCompileExec3984389838]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3984389838.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/c++      -v CMakeFiles/cmTryCompileExec3984389838.dir/CMakeCXXCompilerABI.cpp.o  -o cmTryCompileExec3984389838 -rdynamic  ]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/usr/bin/c++]
+  ignore line: [COLLECT_LTO_WRAPPER=/usr/lib64/gcc/x86_64-suse-linux/4.8/lto-wrapper]
+  ignore line: [Target: x86_64-suse-linux]
+  ignore line: [Configured with: ../configure --prefix=/usr --infodir=/usr/share/info --mandir=/usr/share/man --libdir=/usr/lib64 --libexecdir=/usr/lib64 --enable-languages=c,c++,objc,fortran,obj-c++,java,ada --enable-checking=release --with-gxx-include-dir=/usr/include/c++/4.8 --enable-ssp --disable-libssp --disable-plugin --with-bugurl=http://bugs.opensuse.org/ --with-pkgversion='SUSE Linux' --disable-libgcj --disable-libmudflap --with-slibdir=/lib64 --with-system-zlib --enable-__cxa_atexit --enable-libstdcxx-allocator=new --disable-libstdcxx-pch --enable-version-specific-runtime-libs --enable-linker-build-id --enable-linux-futex --program-suffix=-4.8 --without-system-libunwind --with-arch-32=i586 --with-tune=generic --build=x86_64-suse-linux --host=x86_64-suse-linux]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 4.8.3 20140627 [gcc-4_8-branch revision 212064] (SUSE Linux) ]
+  ignore line: [COMPILER_PATH=/usr/lib64/gcc/x86_64-suse-linux/4.8/:/usr/lib64/gcc/x86_64-suse-linux/4.8/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/4.8/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../x86_64-suse-linux/bin/]
+  ignore line: [LIBRARY_PATH=/usr/lib64/gcc/x86_64-suse-linux/4.8/:/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../x86_64-suse-linux/lib/:/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec3984389838' '-rdynamic' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  link line: [ /usr/lib64/gcc/x86_64-suse-linux/4.8/collect2 --build-id --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTryCompileExec3984389838 /usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../lib64/crt1.o /usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../lib64/crti.o /usr/lib64/gcc/x86_64-suse-linux/4.8/crtbegin.o -L/usr/lib64/gcc/x86_64-suse-linux/4.8 -L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../x86_64-suse-linux/lib -L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../.. CMakeFiles/cmTryCompileExec3984389838.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib64/gcc/x86_64-suse-linux/4.8/crtend.o /usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../lib64/crtn.o]
+    arg [/usr/lib64/gcc/x86_64-suse-linux/4.8/collect2] ==> ignore
+    arg [--build-id] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf_x86_64] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTryCompileExec3984389838] ==> ignore
+    arg [/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../lib64/crt1.o] ==> ignore
+    arg [/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../lib64/crti.o] ==> ignore
+    arg [/usr/lib64/gcc/x86_64-suse-linux/4.8/crtbegin.o] ==> ignore
+    arg [-L/usr/lib64/gcc/x86_64-suse-linux/4.8] ==> dir [/usr/lib64/gcc/x86_64-suse-linux/4.8]
+    arg [-L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../lib64] ==> dir [/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../lib64]
+    arg [-L/lib/../lib64] ==> dir [/lib/../lib64]
+    arg [-L/usr/lib/../lib64] ==> dir [/usr/lib/../lib64]
+    arg [-L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../x86_64-suse-linux/lib] ==> dir [/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../x86_64-suse-linux/lib]
+    arg [-L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../..] ==> dir [/usr/lib64/gcc/x86_64-suse-linux/4.8/../../..]
+    arg [CMakeFiles/cmTryCompileExec3984389838.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [-lstdc++] ==> lib [stdc++]
+    arg [-lm] ==> lib [m]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-lgcc] ==> lib [gcc]
+    arg [-lc] ==> lib [c]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-lgcc] ==> lib [gcc]
+    arg [/usr/lib64/gcc/x86_64-suse-linux/4.8/crtend.o] ==> ignore
+    arg [/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../lib64/crtn.o] ==> ignore
+  remove lib [gcc_s]
+  remove lib [gcc]
+  remove lib [gcc_s]
+  remove lib [gcc]
+  collapse library dir [/usr/lib64/gcc/x86_64-suse-linux/4.8] ==> [/usr/lib64/gcc/x86_64-suse-linux/4.8]
+  collapse library dir [/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../lib64] ==> [/usr/lib64]
+  collapse library dir [/lib/../lib64] ==> [/lib64]
+  collapse library dir [/usr/lib/../lib64] ==> [/usr/lib64]
+  collapse library dir [/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../x86_64-suse-linux/lib] ==> [/usr/x86_64-suse-linux/lib]
+  collapse library dir [/usr/lib64/gcc/x86_64-suse-linux/4.8/../../..] ==> [/usr/lib64]
+  implicit libs: [stdc++;m;c]
+  implicit dirs: [/usr/lib64/gcc/x86_64-suse-linux/4.8;/usr/lib64;/lib64;/usr/x86_64-suse-linux/lib]
+  implicit fwks: []
+
+

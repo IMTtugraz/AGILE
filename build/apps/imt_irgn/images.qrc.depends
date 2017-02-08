@@ -1,0 +1,6 @@
+<!DOCTYPE RCC><RCC version="1.0">
+ <qresource>
+     <file>images/wappen.png</file>
+     <file>images/icon24x24.png</file>
+ </qresource>
+ </RCC>

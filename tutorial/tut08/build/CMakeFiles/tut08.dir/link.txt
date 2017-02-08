@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/tut08.dir/program.cpp.o  -o tut08 -rdynamic /usr/local/cuda/lib64/libcudart.so -lcuda /usr/local/cuda/lib64/libcublas.so /usr/local/lib/libagile.a -Wl,-rpath,/usr/local/cuda/lib64 

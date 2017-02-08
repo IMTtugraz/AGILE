@@ -26,8 +26,8 @@
 #include <cuComplex.h>
 
 #if __CUDA_ARCH__ >= 130
-//#include <sm_13_double_functions.h>
-#include <device_double_functions.h>
+#include <sm_13_double_functions.h>
+//#include <device_double_functions.h>
 #endif
 
 namespace agile

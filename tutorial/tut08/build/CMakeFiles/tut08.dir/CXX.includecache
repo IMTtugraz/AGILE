@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/dieheart/workspace/AGILE/tutorial/tut08/program.cpp
+agile/gpu_environment.hpp
+/home/dieheart/workspace/AGILE/tutorial/tut08/agile/gpu_environment.hpp
+agile/gpu_vector.hpp
+/home/dieheart/workspace/AGILE/tutorial/tut08/agile/gpu_vector.hpp
+agile/gpu_matrix_pitched.hpp
+/home/dieheart/workspace/AGILE/tutorial/tut08/agile/gpu_matrix_pitched.hpp
+agile/operator/forward_operator.hpp
+/home/dieheart/workspace/AGILE/tutorial/tut08/agile/operator/forward_operator.hpp
+agile/operator/jacobi.hpp
+/home/dieheart/workspace/AGILE/tutorial/tut08/agile/operator/jacobi.hpp
+agile/operator/pcg.hpp
+/home/dieheart/workspace/AGILE/tutorial/tut08/agile/operator/pcg.hpp
+agile/network/gpu_communicator.hpp
+/home/dieheart/workspace/AGILE/tutorial/tut08/agile/network/gpu_communicator.hpp
+iostream
+-
+

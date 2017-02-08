@@ -3,8 +3,8 @@
 #include <math.h>
 //#include <cutil.h>
 #include <math_constants.h>
-//#include <sm_11_atomic_functions.h>
-#include <device_atomic_functions.h>
+#include <sm_11_atomic_functions.h>
+//#include <device_atomic_functions.h>
 #include <cufft.h>
 #include <stdio.h>
 

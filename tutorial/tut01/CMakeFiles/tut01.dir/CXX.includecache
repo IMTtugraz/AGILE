@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/dieheart/workspace/AGILE/tutorial/tut01/program.cpp
+agile/gpu_environment.hpp
+/home/dieheart/workspace/AGILE/tutorial/tut01/agile/gpu_environment.hpp
+agile/gpu_vector.hpp
+/home/dieheart/workspace/AGILE/tutorial/tut01/agile/gpu_vector.hpp
+iostream
+-
+
