@@ -123,6 +123,14 @@ namespace lowlevel
   template void bdiff3trans<@TType1@ >(
     const unsigned dim, const unsigned x_size, const unsigned y_size, const @TType1@* x, @TType1@* y, unsigned size, bool borderWrap);
 
+  template void diff4<@TType1@ >(
+   const unsigned dim, const unsigned x_size, const unsigned y_size, const unsigned z_size, const @TType1@* x, @TType1@* y,
+   unsigned size, bool borderWrap);
+
+  template void bdiff4<@TType1@ >(
+      const unsigned dim, const unsigned x_size, const unsigned y_size, const unsigned z_size, const @TType1@* x, @TType1@* y,
+      unsigned size, bool borderWrap);
+
   template void sqrt<@TType1@ >(const @TType1@* x, @TType1@* y, unsigned size);
 
   template void expand_rowdim<@TType1@ >(const @TType1@* x_data, const @TType1@* delta_o, const @TType1@* delta_u,
@@ -181,6 +189,10 @@ namespace lowlevel
   template void scale<@TType1@, @TType2@ >(
     const @TType1@& alpha, const @TType2@* x,
     typename promote<@TType1@, @TType2@ >::type* y, unsigned size);
+
+//  template void averVector<@TType1@ >(
+//    const @TType1@* x,
+//    typename promote<@TType1@ >::type* z, unsigned size, unsigned aver);
     
   template void subVector<@TType1@, @TType2@ >(
     const @TType1@* x, const @TType2@* y,

@@ -337,6 +337,30 @@ __global__ void sqrt_GPU(
 //    y[thread_id] = sqrt(TType2(x[thread_id]));
 }
 
+/*
+//! \brief Compute Average over last dimension
+//!
+//! z = mean(x,dim)
+template <typename TType1, typename TType2>
+__global__ void averVector_GPU(const TType1* x,
+                                  TType2* z, unsigned size, unsigned aver)
+{
+  unsigned thread_id = blockDim.x * blockIdx.x + threadIdx.x;
+  unsigned img_id = size / aver;
+  unsigned idx = 0;
+  float tmp = 0.0;
+  if (thread_id < img_id)
+  {
+    for(int idx = 0; idx < aver-1; idx++)
+    {
+      tmp += x[img_id + idx*img_id]; 
+    }
+    z[thread_id] = tmp / aver;
+    thread_id += blockDim.x*gridDim.x;
+  }
+}
+*/
+
 //! \brief Subtract two vectors (GPU function).
 //!
 //! z <- x - y
@@ -928,6 +952,120 @@ __global__ void bdiff3trans_GPU(const unsigned dim, const unsigned x_size, const
   }
 }
 
+//! \brief Compute the difference between each value in a GPU vector (GPU function)
+//! \brief considering a 4D data layout
+template <typename TType1>
+__global__ void diff4_GPU(const unsigned dim, const unsigned x_size, const unsigned y_size, const unsigned z_size, const TType1* x, TType1* y, unsigned size, bool borderWrap)
+{
+  //blockDim.x number of threads in a block
+  //blockIdx.x number of blocks in a grid
+  //blockIdx.x index of threads in a block
+  unsigned thread_id = blockDim.x * blockIdx.x + threadIdx.x;
+
+  while (thread_id < size)
+  {
+    int val = thread_id-size+x_size;
+    int Nxy = x_size * y_size;
+    int Nxyz = x_size * y_size * z_size;
+    if (dim == 1)
+      if ( ((thread_id+1) % x_size ) != 0) //last values not reached
+        y[thread_id] = x[thread_id+1] - x[thread_id];
+      else
+        y[thread_id] = borderWrap ? x[thread_id+1-x_size] - x[thread_id] : 0;
+
+    if (dim == 2)
+    {
+      int y_pos = (int)((thread_id - ((int)(thread_id / Nxy))*Nxy)/x_size)+1;
+      if (y_pos % y_size != 0) //last values not reached
+        y[thread_id] = x[thread_id+x_size] - x[thread_id];
+      else
+        y[thread_id] = borderWrap ? x[thread_id-Nxy+x_size] - x[thread_id] : 0;
+    }
+
+    if (dim == 3)
+    {
+      int z_pos = (int)((thread_id - ((int)(thread_id / Nxyz))*Nxyz)/Nxy)+1;
+      if (z_pos % z_size != 0)
+        y[thread_id] = x[thread_id+Nxy] - x[thread_id];
+      else
+        y[thread_id] = borderWrap ? x[thread_id-Nxyz+Nxy] - x[thread_id] : 0;
+    }
+
+    if (dim == 4)
+    {
+      val = thread_id - size + Nxyz;
+      if ((val) < 0)
+        y[thread_id] = x[thread_id+Nxyz] - x[thread_id];
+      else
+        y[thread_id] = borderWrap ? x[thread_id-size+Nxyz] - x[thread_id] : 0;
+    }
+
+
+    thread_id += blockDim.x*gridDim.x; // gives the number of threads in a grid
+  }
+
+}
+
+//! \brief Compute the backward difference between each value in a GPU vector (GPU function)
+//! \brief considering a 4D data layout.
+//!
+//! y = bdiff(x)
+//!
+//! basically bdiff4(x) = -diff4_trans(x)
+//! 1, width, height, depth, data_gpu[0].data(), gradient[0].data(), N, false);
+template <typename TType1>
+__global__ void bdiff4_GPU(const unsigned dim, const unsigned x_size, const unsigned y_size, const unsigned z_size, const TType1* x, TType1* y, unsigned size, bool borderWrap)
+{
+  unsigned thread_id = blockDim.x * blockIdx.x + threadIdx.x;
+  int Nxy = x_size * y_size;
+  int Nxyz = x_size * y_size * z_size;
+
+  if (dim == 1)
+  {
+    int xPos = ((thread_id+1) % x_size);
+    if (xPos == 0) // right border
+      y[thread_id] = (borderWrap ? x[thread_id]: 0) - x[thread_id-1];
+    else if (xPos == 1) // left border
+      y[thread_id] = x[thread_id] - (borderWrap ? x[thread_id+x_size-1]: 0);
+    else
+      y[thread_id] = x[thread_id] - x[thread_id-1];
+  }
+  if (dim == 2)
+  {
+    int yPos = (int)((thread_id - ((int)(thread_id / Nxy))*Nxy)/x_size)+1;
+    if (yPos % y_size == 0) // bottom border
+      y[thread_id] = (borderWrap ? x[thread_id]: 0) - x[thread_id-x_size];
+    else if (yPos % y_size == 1) //top border
+      y[thread_id] = x[thread_id] - (borderWrap ? x[thread_id+(x_size*(y_size-1))]: 0);
+    else
+      y[thread_id] = x[thread_id] - x[thread_id-x_size];
+  }
+  if (dim == 3)
+  {
+    int zPos = (int)((thread_id - ((int)(thread_id / Nxyz))*Nxyz)/Nxy)+1;
+    if (zPos % z_size == 0) // last slice
+      y[thread_id] = (borderWrap ? x[thread_id]: 0) - x[thread_id-Nxy];
+    else if (zPos % z_size == 1) // first slice
+      y[thread_id] = x[thread_id] - (borderWrap ? x[thread_id+(Nxy*(z_size-1))]: 0);
+    else
+      y[thread_id] = x[thread_id] - x[thread_id - Nxy];
+  }
+  if (dim == 4)
+  {
+    int tPos = (int)(thread_id/Nxyz);
+    int tSize = size / Nxyz;
+
+    if (tSize == 1) // only one dimesion no gradient calculation possible
+      y[thread_id] = 0;
+    else if (tPos == 0) // first timeframe
+      y[thread_id] = x[thread_id] - (borderWrap ? x[thread_id + size - Nxyz] : 0);
+    else if (tPos == (tSize-1)) // last timeframe
+      y[thread_id] = (borderWrap ? x[thread_id] : 0) - x[thread_id - Nxyz];
+    else
+      y[thread_id] = x[thread_id] - x[thread_id - Nxyz];
+  }
+}
+
 //! \brief generate max-value vector of two vector (elementwise).    (GPU function)
 //! \brief z = abs(x1)>abs(x1 ? x1 : x2;
 template <typename TTypeFloat, typename TType1, typename TType2, typename TType3>
@@ -1501,6 +1639,24 @@ namespace lowlevel
         (typename substitute_gpu_complex<TType1>::type*)y, size);
   }
 
+  /*
+  //! \brief compute average over last dimension (host function).
+  template <typename TType1>
+  void averVector(const TType1* x,
+                 typename promote<TType1>::type* z, unsigned size, unsigned aver)
+  {
+    unsigned grid_size
+      = (size + GPUEnvironment::getMaxNumThreadsPerBlock() - 1)
+        / GPUEnvironment::getMaxNumThreadsPerBlock();
+    averVector_GPU<<<std::min(grid_size,65520u),
+                    GPUEnvironment::getMaxNumThreadsPerBlock()>>>(
+      (const typename substitute_gpu_complex<TType1>::type*)x,
+      (typename substitute_gpu_complex<
+         typename promote<TType1>::type>::type*)z,
+      size, aver);
+  }
+*/
+
   //! \brief Subtract two vectors (host function).
   template <typename TType1, typename TType2>
   void subVector(const TType1* x, const TType2* y,
@@ -1788,6 +1944,34 @@ namespace lowlevel
         / GPUEnvironment::getMaxNumThreadsPerBlock();
     bdiff3trans_GPU<<<std::min(grid_size,65520u),GPUEnvironment::getMaxNumThreadsPerBlock()>>>(
                   dim, x_size, y_size,
+                  (const typename substitute_gpu_complex<TType1>::type*) x,
+                  (typename substitute_gpu_complex<TType1>::type*) y, size, borderWrap);
+  }
+
+  //! \brief Compute the difference between each value in a GPU Vector considering a 4d data layout (host function)
+  template <typename TType1>
+  void diff4(const unsigned dim, const unsigned x_size, const unsigned y_size, const unsigned z_size,
+                 const TType1* x, TType1* y, unsigned size, bool borderWrap)
+  {
+    unsigned grid_size
+      = (size + GPUEnvironment::getMaxNumThreadsPerBlock() - 1)
+        / GPUEnvironment::getMaxNumThreadsPerBlock();
+    diff4_GPU<<<std::min(grid_size,65520u),GPUEnvironment::getMaxNumThreadsPerBlock()>>>(
+                  dim, x_size, y_size, z_size,
+                  (const typename substitute_gpu_complex<TType1>::type*) x,
+                  (typename substitute_gpu_complex<TType1>::type*) y, size, borderWrap);
+  }
+
+  //! \brief Compute the backward difference between each value in a GPU Vector considering a 4d data layout (host function)
+  template <typename TType1>
+  void bdiff4(const unsigned dim, const unsigned x_size, const unsigned y_size, const unsigned z_size,
+                  const TType1* x, TType1* y, unsigned size, bool borderWrap)
+  {
+    unsigned grid_size
+      = (size + GPUEnvironment::getMaxNumThreadsPerBlock() - 1)
+        / GPUEnvironment::getMaxNumThreadsPerBlock();
+    bdiff4_GPU<<<std::min(grid_size,65520u),GPUEnvironment::getMaxNumThreadsPerBlock()>>>(
+                  dim, x_size, y_size, z_size,
                   (const typename substitute_gpu_complex<TType1>::type*) x,
                   (typename substitute_gpu_complex<TType1>::type*) y, size, borderWrap);
   }

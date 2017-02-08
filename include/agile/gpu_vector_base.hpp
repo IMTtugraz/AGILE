@@ -351,6 +351,29 @@ namespace agile
     template <typename TType1>
     void diff3trans(const unsigned dim, const unsigned x_size, const unsigned y_size, const TType1* x, TType1* y, unsigned size, bool borderWrap);
 
+
+    //! \brief Compute the difference between each value in a transposed GPU vector
+    //! \brief considering a 4D data layout (host function).
+    //!
+    //! if border has to be wrapped:
+    //!
+    //! dim 1: diff in first dimension: Last column with first column of the same slice
+    //! dim 2: diff in second dimension: Last row with first row of the same slice
+    //! dim 3: diff in third dimension: Last slice with first slice
+    //! dim 4: ...
+    //!
+    //! else border derivative is 0
+    //!
+    //! \param[in] x - The input vector.
+    //! \param[in] dim - dimension to be calculated (1...row, 2...column, 3...slice, 4 ...time)
+    //! \param[in] x_size - x_dimension size of Matrix/Vector
+    //! \param[in] y_size - y_dimension size of Matrix/Vector
+    //! \param[in] borderWrap - true if border has to be wrapped in the required dimension
+    //! \param[out] y - The vector y[i] <- diff(x[i]).
+    template <typename TType1>
+    void diff4(const unsigned dim, const unsigned x_size, const unsigned y_size, const unsigned z_size, const TType1* x, TType1* y, unsigned size, bool borderWrap);
+
+
     //! \brief Compute the backward difference between each value in a GPU vector 
     //! \brief considering a 3D data layout (host function).
     //!
@@ -409,6 +432,28 @@ namespace agile
     //! \param[out] y - The vector y[i] <- diff(x[i]).
     template <typename TType1>
     void bdiff3trans(const unsigned dim, const unsigned x_size, const unsigned y_size, const TType1* x, TType1* y, unsigned size, bool borderWrap);
+
+    //! \brief Compute the difference between each value in a GPU vector
+    //! \brief considering a 4D data layout (host function).
+    //!
+    //! if border has to be wrapped:
+    //!
+    //! dim 1: diff in first dimension: Last column with first column of the same slice
+    //! dim 2: diff in second dimension: Last row with first row of the same slice
+    //! dim 3: diff in third dimension: Last slice with first slice
+    //! dim 4: diff in fourth dimension: Last time-frame with first time-frame
+    //!
+    //! else border derivative is 0
+    //!
+    //! \param[in] x - The input vector.
+    //! \param[in] dim - dimension to be calculated (1...row, 2...column, 3...slice)
+    //! \param[in] x_size - x_dimension size of Matrix/Vector
+    //! \param[in] y_size - y_dimension size of Matrix/Vector
+    //! \param[in] borderWrap - true if border has to be wrapped in the required dimension
+    //! \param[out] y - The vector y[i] <- diff(x[i]).
+    template <typename TType1>
+    void bdiff4(const unsigned dim, const unsigned x_size, const unsigned y_size, const unsigned z_size, const TType1* x, TType1* y, unsigned size, bool borderWrap);
+
 
     //! \brief generate max-value vector of two vector (elementwise).
     //! \brief y = max(x1,x2); checks only for real values
