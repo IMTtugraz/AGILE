@@ -99,6 +99,8 @@ namespace lowlevel
   template void pattern<@TType1@ >(
       const @TType1@* x, typename to_real_type<@TType1@ >::type* z, unsigned size);
 
+  template void simoExpand<@TType1@ >(@TType1@* x, @TType1@* y, unsigned size, unsigned frames);
+
   template void diff<@TType1@ >(
     const unsigned dim, const unsigned x_size, const @TType1@* x, @TType1@* y, unsigned size);
   
@@ -189,6 +191,11 @@ namespace lowlevel
   template void scale<@TType1@, @TType2@ >(
     const @TType1@& alpha, const @TType2@* x,
     typename promote<@TType1@, @TType2@ >::type* y, unsigned size);
+
+  template void scale2<@TType1@, @TType2@ >(
+    const @TType1@& alpha, const @TType2@* x,
+    typename promote<@TType1@, @TType2@ >::type* y, unsigned size);
+
 
 //  template void averVector<@TType1@ >(
 //    const @TType1@* x,

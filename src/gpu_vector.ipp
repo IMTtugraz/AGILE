@@ -26,6 +26,22 @@
 #include <stdio.h>
 #include <math.h>
 
+//! \brief expand vector size XxYxZ --> XxYxZxt
+//!
+//! Z = repmat(x,frames)
+template <typename TType1>
+__global__ void simoExpand_GPU(const TType1* x,
+                               TType1* y, unsigned size, unsigned frames)
+{
+  unsigned thread_id = blockDim.x * blockIdx.x + threadIdx.x;
+  if(thread_id < (size*frames))
+  {
+    y[thread_id] = x[thread_id % size];
+    thread_id += blockDim.x*gridDim.x;
+  //blub da dub
+  }
+}
+
 
 //! \brief Add a scaled GPU vector to another GPU vector (GPU function).
 //!
@@ -296,6 +312,20 @@ __global__ void scale_GPU(
   }
 }
 
+template <typename TType1, typename TType2, typename TType3>
+__global__ void scale2_GPU(
+  const TType1 alpha, const TType2* x, TType3* y, unsigned size)
+{
+  unsigned thread_id = blockDim.x * blockIdx.x + threadIdx.x;
+
+  while (thread_id < size)
+  {
+    y[thread_id] = alpha * x[thread_id];
+    thread_id += blockDim.x*gridDim.x;
+  }
+}
+
+
 //! \brief Set every vector element to a constant (GPU function).
 //!
 //! x[i] <- value
@@ -360,6 +390,24 @@ __global__ void averVector_GPU(const TType1* x,
   }
 }
 */
+
+//! \brief expand vector size XxYxZ --> XxYxZxt
+//!
+//! Z = repmat(x,frames)
+//template <typename TType1>
+//__global__ void simoExpand_GPU(const TType1* x,
+//                               TType1* y, unsigned size, unsigned frames)
+//{
+//  unsigned thread_id = blockDim.x * blockIdx.x + threadIdx.x;
+//  if(thread_id < (size*frames))
+//  {
+//    y[thread_id] = x[thread_id % size];
+//    thread_id += blockDim.x*gridDim.x;
+  //blub da dub
+//  }
+//}
+
+
 
 //! \brief Subtract two vectors (GPU function).
 //!
@@ -1548,6 +1596,18 @@ namespace lowlevel
     return sum;
   }
 
+
+  //! \brief Simo Expand vector
+  template <typename TType1>
+  void simoExpand(TType1* x, TType1* y, unsigned size, unsigned frames)
+  {
+    unsigned grid_size
+      = ((size*frames) + GPUEnvironment::getMaxNumThreadsPerBlock() - 1)
+        / GPUEnvironment::getMaxNumThreadsPerBlock();
+    simoExpand_GPU<<<std::min(grid_size,65520u),GPUEnvironment::getMaxNumThreadsPerBlock()>>>((const typename substitute_gpu_complex<TType1>::type*) x,
+         (typename substitute_gpu_complex<TType1>::type*) y, size, frames);
+  }  
+
   //! \brief Compute the l2-norm of a GPU vector (host function).
   template <typename TType1>
   typename to_real_type<TType1>::type norm2(const TType1* x, unsigned size)
@@ -1610,6 +1670,23 @@ namespace lowlevel
          typename promote<TType1, TType2>::type>::type*)y,
       size);
   }
+
+  template <typename TType1, typename TType2>
+  void scale2(const TType1& alpha, const TType2* x,
+             typename promote<TType1, TType2>::type* y, unsigned size)
+  {
+    unsigned grid_size
+      = (size + GPUEnvironment::getMaxNumThreadsPerBlock() - 1)
+        / GPUEnvironment::getMaxNumThreadsPerBlock();
+    scale2_GPU<<<std::min(grid_size,65520u),
+                GPUEnvironment::getMaxNumThreadsPerBlock()>>>(
+      *(const typename substitute_gpu_complex<TType1>::type*)(&alpha),
+      (const typename substitute_gpu_complex<TType2>::type*)x,
+      (typename substitute_gpu_complex<
+         typename promote<TType1, TType2>::type>::type*)y,
+      size);
+  }
+
   
   //! \brief Set every vector element to a constant (host function).
   template <typename TType>

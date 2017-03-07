@@ -96,7 +96,9 @@ namespace agile
     void fftshift(TType1* x, unsigned rows, unsigned cols);
     template <typename TType1>
     void ifftshift(TType1* x, unsigned rows, unsigned cols);
-
+    
+    template <typename TType1>
+    void simoExpand(TType1* x, TType1* y, unsigned size, unsigned frames);
 
     //! \brief Compute the bilinear form of two vectors (host function).
     //!
@@ -184,6 +186,11 @@ namespace agile
     template <typename TType1, typename TType2>
     void scale(const TType1& alpha, const TType2* x,
                typename promote<TType1, TType2>::type* y, unsigned size);
+
+    template <typename TType1, typename TType2>
+    void scale2(const TType1& alpha, const TType2* x,
+               typename promote<TType1, TType2>::type* y, unsigned size);
+
 
     //! \brief Set all elements of a GPU vector to a constant (host function).
     //!
