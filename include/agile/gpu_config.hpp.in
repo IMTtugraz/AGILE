@@ -36,7 +36,7 @@ namespace agile
   //! device. This constant can be used inside kernels, where it is not
   //! possible to allocate memory dynamically. GPUEnvironment ensures to
   //! limit the maximum amount of threads per block to this constant.
-  const unsigned MAX_NUM_THREADS_PER_BLOCK = 512;
+  const unsigned MAX_NUM_THREADS_PER_BLOCK = 512; //1024;
 
   //! This is the same constant as \p MAX_NUM_THREADS_PER_BLOCK except that
   //! it applies to two dimensions. \p MAX_NUM_THREADS_PER_BLOCK_DIM2 is set
