@@ -1,9 +1,5 @@
 PROJECT(IMT_IRGN)
 
-###########################################################################
-# added by A. Huber
-# for CUDA, CUBLAS, DCMTK functionality
-###########################################################################
 FIND_PACKAGE(CUDA)
 if(NOT CUDA_FOUND)
  message("CUDA not found!")
@@ -15,21 +11,6 @@ link_libraries (${CUDA_CUBLAS_LIBRARIES})
 
 # dependencies
 FIND_PACKAGE(Qt4 REQUIRED)
-
-# for DCMTK - Dicom ToolKit
-ADD_DEFINITIONS(-DHAVE_CONFIG_H)
-
-SET(DCMTK_config_INCLUDE_DIR /usr/local/include/dcmtk/config)
-SET(DCMTK_ofstd_INCLUDE_DIR /usr/local/include/dcmtk/ofstd)
-SET(DCMTK_dcmdata_INCLUDE_DIR /usr/local/include/dcmtk/dcmdata)
-SET(DCMTK_dcmimgle_INCLUDE_DIR /usr/local/include/dcmtk/dcmimgle)
-
-find_package (DCMTK REQUIRED)
-if (DCMTK_FOUND)
-  MESSAGE(STATUS "DCMTK_FOUND")
-endif()
-
-LINK_LIBRARIES(${DCMTK_LIBRARIES} oflog ofstd pthread z)
 
 # source definitions
 INCLUDE_DIRECTORIES( ${CMAKE_SOURCE_DIR}
@@ -67,7 +48,7 @@ SET(IMT_IRGN_SRCS_CXX
   gui/widgets/fileblock.cpp
 
   #irgn/irgn_all.hpp
-
+  imt_mrcmd.cpp
   main.cpp
 )
 
