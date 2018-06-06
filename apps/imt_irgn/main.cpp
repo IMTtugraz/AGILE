@@ -135,6 +135,7 @@ int main(int argc, char *argv[])
     //------------------------------
     unsigned format = 2;        //abs
     bool startGUI = false;
+    bool showHelp = false;
 
 
     argc-=(argc>0); argv+=(argc>0); // skip program name argv[0] if present
@@ -162,7 +163,8 @@ int main(int argc, char *argv[])
         int columns = getenv("COLUMNS")? atoi(getenv("COLUMNS")) : 80;
         option::printUsage(fwrite, stdout, usage, columns);
 
-        startGUI = true;
+	if(!options[HELP])
+       	  startGUI = true;
     }
 
     for (int i = 0; i < parse.optionsCount(); ++i)
@@ -215,8 +217,11 @@ int main(int argc, char *argv[])
             case MAXIT:
                 maxit = (unsigned int)strtoul(opt.arg, &endptr, 10);
             break;
-            case HELP:
-            // not possible, because handled further above and exits the program
+            case HELP:	
+		startGUI = false;
+		showHelp = true;
+	    break;
+
             case UNKNOWN:
                 std::cout<<std::endl<<"UNKNOWN----";
             // not possible because Arg::Unknown returns ARG_ILLEGAL
@@ -249,7 +254,7 @@ int main(int argc, char *argv[])
 
         a.exec();
     }
-    else
+    else if(!showHelp)
     {
 
         std::cout<<std::endl<<"Configuration:";
