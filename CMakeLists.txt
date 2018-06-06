@@ -45,7 +45,7 @@ link_libraries (${CUDA_LIBRARIES})
 set(ENABLE_GPU_DOUBLE ON CACHE BOOL "Set flag to enable double-precision data types on GPU")
 
 if(ENABLE_GPU_DOUBLE)
-  SET(CUDA_NVCC_FLAGS "-arch;sm_20")
+  SET(CUDA_NVCC_FLAGS "-arch;sm_30")
 endif(ENABLE_GPU_DOUBLE)
 
 ###########################################################################
@@ -66,7 +66,7 @@ if (DCMTK_FOUND)
   MESSAGE(STATUS "DCMTK_FOUND")
 endif()
 
-LINK_LIBRARIES(${DCMTK_LIBRARIES} oflog ofstd pthread z)
+LINK_LIBRARIES(${DCMTK_LIBRARIES})
 
 ###########################################################################
 # try to locate the MPI library
