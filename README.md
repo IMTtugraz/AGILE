@@ -112,14 +112,21 @@ Run 'make doc' in the build directory. Afterwards open the file
 If you are especially interested in iterative TGV based MR image
 reconstruction, please see Florian Knolls [AGILE-TGV](http://www.cai2r.net/resources/software/agile-gpu-image-reconstruction-library) implementation.
 
+IRGN-T(G)V for Cartesian image reconstruction:
+The IRGN executable is available in the 'bin' folder.
+Type './IMT_IRGN --help' to see all available command line options.
+Example:
+./IMT_IRGN --input=braindata.bin --output=recon.dcm --format=2 --calc=1
+
 
 ## Version history
+* version 1.4: 06.06.2018: Added command line functionality for imt_irgn application
 * version 1.3: 01.01.2016: Included necessary extensions for dynamic MRI reconstrucion ([AVIONIC](https://github.com/IMTtugraz/AVIONIC)) by [Andreas Schwarzl](https://github.com/andyschwarzl)
   * Refactoring to support latest CUDA architecture
   * Finite forward and backward differences for 3-D data vectors
   * Forward and backward FFT operations for vector based data sets
   * Extended vector utilities (l1/l2-norm, min-max element computation, element-wise compare)
   * Extended thread assignment for large data sets
-* version 1.2: 01.01.2014: Included IRGN-T(G)V for Cartesian image reconstruction (apps/imt_irgn) by Herbert Heigl
+* version 1.2: 01.01.2014: Included IRGN-T(G)V for Cartesian image reconstruction (apps/imt_irgn) by [Herbert Heigl](https://github.com/hheigl)
 * version 1.1: 16.01.2012: Included CPU reference implementation for TGV.
 * version 1.0: 28.07.2011: First release of AGILE.

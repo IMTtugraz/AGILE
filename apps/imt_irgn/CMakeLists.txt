@@ -83,3 +83,9 @@ TARGET_LINK_LIBRARIES(IMT_IRGN ${QT_LIBRARIES})
 
 cuda_add_cufft_to_target (IMT_IRGN)
 
+#copy executable to defined path
+add_custom_command(TARGET IMT_IRGN 
+                   POST_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:IMT_IRGN> "${AGILE_SOURCE_DIR}/bin")
+
+
