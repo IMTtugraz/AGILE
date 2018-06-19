@@ -121,6 +121,9 @@ namespace lowlevel
   
   template void bdiff3sym<@TType1@ >(
       const unsigned dim, const unsigned x_size, const unsigned y_size, const @TType1@* x, @TType1@* y, unsigned size);
+	  
+  template void bdiff3sym_mbh<@TType1@ >(
+      const unsigned dim, const unsigned x_size, const unsigned y_size, const @TType1@* x, @TType1@* y, unsigned size);
 
   template void bdiff3trans<@TType1@ >(
     const unsigned dim, const unsigned x_size, const unsigned y_size, const @TType1@* x, @TType1@* y, unsigned size, bool borderWrap);
