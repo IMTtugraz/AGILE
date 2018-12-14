@@ -17,6 +17,6 @@ add_subdirectory (imt_irgn)
 
 if(ENABLE_GPU_DOUBLE)
   add_subdirectory (tgv_radial_image_recon)
-endif(ENABLE_GPU_DOUBLE)
+  endif(ENABLE_GPU_DOUBLE)
 
 # End of $Id: CMakeLists.txt 506 2011-07-27 10:17:40Z freiberger $.

@@ -45,7 +45,7 @@ link_libraries (${CUDA_LIBRARIES})
 set(ENABLE_GPU_DOUBLE ON CACHE BOOL "Set flag to enable double-precision data types on GPU")
 
 if(ENABLE_GPU_DOUBLE)
-  SET(CUDA_NVCC_FLAGS "-arch;sm_30")
+  SET(CUDA_NVCC_FLAGS "-arch;sm_30 --expt-relaxed-constexpr")
 endif(ENABLE_GPU_DOUBLE)
 
 ###########################################################################
