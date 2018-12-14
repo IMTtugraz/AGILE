@@ -7,7 +7,7 @@ project (AGILE CXX)
 
 # Set the minimum CMake version required
 cmake_minimum_required (VERSION 2.6)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_FORCE_INLINES")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_FORCE_INLINES -std=c++11")
 
 ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK) 
 
@@ -64,9 +64,9 @@ ADD_DEFINITIONS(-DHAVE_CONFIG_H)
 find_package (DCMTK REQUIRED)
 if (DCMTK_FOUND)
   MESSAGE(STATUS "DCMTK_FOUND")
+  include_directories(${DCMTK_INCLUDE_DIRS})
+  link_libraries(${DCMTK_LIBRARIES})
 endif()
-
-LINK_LIBRARIES(${DCMTK_LIBRARIES})
 
 ###########################################################################
 # try to locate the MPI library
