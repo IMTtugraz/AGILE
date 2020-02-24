@@ -88,6 +88,7 @@ add_subdirectory (src)
 add_subdirectory (test)
 add_subdirectory (tutorial)
 add_subdirectory (apps)
-add_subdirectory (unittest)
+# add_subdirectory (unittest) Temporary commented due to linker errors with new
+# boost versions and new gcc
 
 # End of $Id: CMakeLists.txt 494 2011-07-26 10:55:57Z huber $.
