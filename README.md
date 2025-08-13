@@ -1,3 +1,5 @@
+**The main repository has moved to: https://gitlab.tugraz.at/ibi/mrirecon/software/AGILE**
+
 # AGILE
 Environment for Linear and non-linear Image reconstruction using GPU Acceleration
 
@@ -130,3 +132,4 @@ Example:
 * version 1.2: 01.01.2014: Included IRGN-T(G)V for Cartesian image reconstruction (apps/imt_irgn) by [Herbert Heigl](https://github.com/hheigl)
 * version 1.1: 16.01.2012: Included CPU reference implementation for TGV.
 * version 1.0: 28.07.2011: First release of AGILE.
+
